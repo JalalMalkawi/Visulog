@@ -19,12 +19,12 @@ public class CLILauncher {
         if (config.isPresent()) {
             var analyzer = new Analyzer(config.get());
             var results = analyzer.computeResults();
-            makeFileOfRes(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
+            makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
             System.out.println(results.toHTML());
         } else displayHelpAndExit();
     }
 
-    public static void makeFileOfRes(String s) throws IOException {
+    public static void makeFileOfResAndOpenIt(String s) throws IOException {
         ProcessBuilder builder =
                 new ProcessBuilder("echo", "\"" +s + "\" > result.html");
         builder.start();
@@ -32,6 +32,9 @@ public class CLILauncher {
         fos.write(s.getBytes());
         fos.flush();
         fos.close();
+        ProcessBuilder builder1 =
+                new ProcessBuilder("open", "result.html");
+        builder1.start();
     }
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
