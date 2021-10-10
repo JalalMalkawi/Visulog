@@ -4,20 +4,39 @@ import up.visulog.analyzer.Analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.config.PluginConfig;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Optional;
 
 public class CLILauncher {
 
-    public static void main(String[] args) {
-        /*var config = makeConfigFromCommandLineArgs(args); 
+
+    public static void main(String[] args) throws IOException {
+        var config = makeConfigFromCommandLineArgs(args);
         if (config.isPresent()) {
             var analyzer = new Analyzer(config.get());
             var results = analyzer.computeResults();
+            makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
             System.out.println(results.toHTML());
-        } else displayHelpAndExit();*/
+        } else displayHelpAndExit();
         
+    }
+
+    public static void makeFileOfResAndOpenIt(String s) throws IOException {
+        ProcessBuilder builder =
+                new ProcessBuilder("echo", "\"" +s + "\" > result.html");
+        builder.start();
+        FileOutputStream fos = new FileOutputStream("result.html");
+        fos.write(s.getBytes());
+        fos.flush();
+        fos.close();
+        ProcessBuilder builder1 =
+                new ProcessBuilder("open", "result.html");
+        builder1.start();
     }
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
