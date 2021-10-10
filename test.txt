@@ -1,0 +1,210 @@
+commit 638b44aaf02a25ff89388754188d3e5f061f96b9
+Author: Jalal_Malkawi <jalal.malkawi02@yahoo.fr>
+Date:   2021-10-05 10:17:30
+
+    changed public fields to private
+
+commit 2c1c6436c6de71e1a61b216281ec5e8bd5e87d65
+Merge: e622d77 9aba47d
+Author: Albert Nguyen <anguyen1@x11.script.univ-paris-diderot.fr>
+Date:   2021-09-21 10:05:34
+
+    message
+
+commit e622d778b5126110f3f0dce6180ea0a17bf5952d
+Author: Albert Nguyen <anguyen1@x11.script.univ-paris-diderot.fr>
+Date:   2021-09-21 10:01:57
+
+    contacts
+
+commit 9aba47d592d51942816cb42fe3b9e7c1c0472e50
+Merge: 638e8c4 1b09f34
+Author: Cyprien Chauveau <cyprien@MacBookPro-2013.local>
+Date:   2021-09-21 10:01:20
+
+    contacts.txt
+
+commit 638e8c498757bbfe1a0740a69fe18d57f5130745
+Merge: ac70420 6373576
+Author: Cyprien Chauveau <cyprien@MacBookPro-2013.local>
+Date:   2021-09-21 09:57:06
+
+    contacts.txt
+
+commit 1b09f3499bc4ef778df1419eb44c1d274ddf87af
+Merge: 6883b80 8041775
+Author: Jalal_Malkawi <jalal.malkawi02@yahoo.fr>
+Date:   2021-09-21 09:54:20
+
+    contacts.txt
+
+commit faf35788fa0358b48972cb61e23d65c76e052921
+Author: Albert Nguyen <anguyen1@x11.script.univ-paris-diderot.fr>
+Date:   2021-09-21 09:52:05
+
+    contacts
+
+commit 6883b8035454943680bfeb1afbf030a8085d58d9
+Author: Jalal_Malkawi <jalal.malkawi02@yahoo.fr>
+Date:   2021-09-21 09:51:49
+
+    contacts.txt
+
+commit 80417750f8422e30a7a1fc7381da1fbe9e8aceb6
+Merge: a84e899 6373576
+Author: lne.h <hu@MacBook-Pro-de-HU.local>
+Date:   2021-09-21 09:35:30
+
+    contact
+
+commit a84e8991bdcaa35316842fbb57b66c8e31a5e757
+Author: lne.h <hu@MacBook-Pro-de-HU.local>
+Date:   2021-09-21 09:33:19
+
+    contact
+
+commit ac70420449924a1af6e7d9877167a64af502a60e
+Author: Cyprien Chauveau <cyprien@MacBookPro-2013.local>
+Date:   2021-09-21 09:27:08
+
+    contact_upgrade
+
+commit 637357673d1a702e3cba657a83b23be454302978
+Author: JSB <JSB@MacBook-Air-de-JSB.local>
+Date:   2021-09-21 09:24:06
+
+    Ajout de mes contacts
+
+commit ac4ead707779a8e46321cb15d7411270740c9d62
+Author: JSB <JSB@MacBook-Air-de-JSB.local>
+Date:   2021-09-21 09:18:13
+
+    Ajout de contacts.txt
+
+commit d2ba6a5004ef05ad3116f28c29028eb7f6e0ff32
+Merge: 7fa1a62 a105be5
+Author: Xavier Denis <xldenis@gmail.com>
+Date:   2020-11-10 11:58:25
+
+    Merge branch 'add-gitignore' into 'develop'
+    
+    Ignore build artifacts in git
+    
+    See merge request adegorre/visulog!14
+
+commit a105be53f68b7ba2c93cf3486f80e04b965cb81d
+Author: Xavier Denis <xldenis@gmail.com>
+Date:   2020-11-10 11:57:58
+
+    Ignore build artifacts in git
+
+commit 7fa1a620338aec79ade8c77c2edfeba64cfad393
+Merge: f6dfc6f dc58f07
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-09-13 23:19:11
+
+    Merge branch '18-exception-when-parsing-a-merge-commit' into 'develop'
+    
+    Resolve "Exception when parsing a merge commit"
+    
+    Closes #18
+    
+    See merge request adegorre/visulog!6
+
+commit dc58f07c46052f46b5ce07c09a0b8a572bb084a2
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-09-11 10:27:57
+
+    Made commit parsing more robust:
+    - uses a Commit builder for more flexibility
+    - a missing field does not prevent building the commit (only a field will be null). It is possible to change this behavior later on and consider that some fields are needed.
+    - unknown fields are just ignored and should not crash the parser
+    - tests were updated so they still pass (but should be completed by feeding the parser with different sort of commit messages with more fields or missing fields)
+
+commit f6dfc6f165aa1581968f984b9a7f8b951a39578f
+Merge: 09f9cbd 1329241
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-09-13 20:32:51
+
+    Merge branch 'make-it-work-at-SCRIPT' into 'develop'
+    
+    Fixes proxy and truststore for SCRIPT
+    
+    Closes #20
+    
+    See merge request adegorre/visulog!8
+
+commit 1329241dbcf7eae478c33c11032a0138d767731a
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-09-11 20:39:40
+
+    Fixes proxy and truststore for SCRIPT
+
+commit 09f9cbd706f22ba417b31dba74e5d9d2e3b7c6a5
+Merge: fb7ec21 85cddd6
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-09-11 20:43:08
+
+    Merge branch 'JDK10-for-gradle' into 'develop'
+    
+    Downgrade to JDK10 (gradle)
+    
+    Closes #16
+    
+    See merge request adegorre/visulog!7
+
+commit 85cddd65295dc2563f108078e44b571893707574
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-09-11 13:31:03
+
+    Downgrade to JDK10
+
+commit fb7ec21799d59fdf6e6d69c85f052223bd310e13
+Merge: 9e74f15 8f836af
+Author: Colin Gonzalez <colin@nomadic-labs.com>
+Date:   2020-09-09 15:11:35
+
+    Merge branch 'tracer-bullet-code' into 'develop'
+    
+    Tracer bullet code
+    
+    Closes #3
+    
+    See merge request adegorre/visulog!4
+
+commit 8f836af1a4db16d43b09106f0216b2648edeea0e
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-09-09 15:11:35
+
+    Runnable code!
+    (Now we can start talking about improving things!)
+
+commit 9e74f1581f23aaad21e2b936091d3ce371336e22
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-08-31 11:28:28
+
+    Update README.md - more modules
+
+commit 7484b0cb7b4e69e09c82ed38549750fa2a77f50c
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-08-27 00:35:19
+
+    Update README.md - translation...
+
+commit 9aaf6e09cc30909b32c68b4d5bf4ac50f95ecb93
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-08-27 00:33:46
+
+    Update README.md - some title left untranslated
+
+commit 969e2247156f27f27fec57b13faf6097bf4e2757
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-08-27 00:32:47
+
+    Update README.md -> in English, with some more details
+
+commit 486d76dbfd24ac65eeeeb16e57ae4fd68c8ecb1c
+Author: Aldric Degorre <adegorre@irif.fr>
+Date:   2020-08-27 00:02:55
+
+    Ajout de README.md avec définition des grandes lignes du sujet.
