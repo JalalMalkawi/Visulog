@@ -32,8 +32,8 @@ public class Commit {
         Process process;
         try {
             process = builder.start();
-        } catch (IOException e) {
-            throw new RuntimeException("Error running \"git log\".", e);
+        } catch (IOException e) { // IOException : exception relative aux erreurs d'entrée et sortie
+            throw new RuntimeException("Error running \"git log\".", e); // thorw: lance une nouvelle exception
         }
         InputStream is = process.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -78,7 +78,8 @@ public class Commit {
                     case "Date":
                         builder.setDate(fieldContent);
                         break;
-                    default: // TODO: warn the user that some field was ignored
+                    default:
+                        throw new RuntimeException(("Some field was ignored"));
                 }
                 line = input.readLine(); //prepare next iteration
                 if (line == null) parseError(); // end of stream is not supposed to happen now (commit data incomplete)
