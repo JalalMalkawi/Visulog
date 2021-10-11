@@ -4,3 +4,5 @@ build/
 .project
 bin/
 .gradle/
+.idea/
+*.DS_Store
