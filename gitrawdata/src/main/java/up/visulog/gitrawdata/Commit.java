@@ -84,7 +84,8 @@ public class Commit {
                     case "Date":
                         builder.setDate(fieldContent);
                         break;
-                    default: System.out.println("Some arguments are missing");
+                    default:
+                        throw new RuntimeException("Some field was ignored");
                 }
                 line = input.readLine(); //prepare next iteration
                 if (line == null) parseError(); // end of stream is not supposed to happen now (commit data incomplete)
