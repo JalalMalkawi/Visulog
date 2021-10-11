@@ -15,18 +15,18 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         this.configuration = generalConfiguration;
     }
 
-    static Result processLog(List<Commit> gitLog) {
+    public static Result processLog(List<Commit> gitLog) { 
         var result = new Result();
         for (var commit : gitLog) {
-            var nb = result.commitsPerAuthor.getOrDefault(commit.author, 0);
-            result.commitsPerAuthor.put(commit.author, nb + 1);
+            var nb = result.commitsPerAuthor.getOrDefault(commit.getAuthor(), 0);
+            result.commitsPerAuthor.put(commit.getAuthor(), nb + 1);
         }
         return result;
     }
 
     @Override
     public void run() {
-        result = processLog(Commit.parseLogFromCommand(configuration.getGitPath()));
+        result = processLog(Commit.parseLogFromCommand(configuration.getGitPath(),"log")); 
     }
 
     @Override
