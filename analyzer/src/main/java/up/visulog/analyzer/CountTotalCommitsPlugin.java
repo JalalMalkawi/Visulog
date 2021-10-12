@@ -20,8 +20,6 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
         int c = 0;
         for (var commit : gitLog) {
             c++;
-            //var nb = result.commitsPerAuthor.getOrDefault(commit.getAuthor(), 0);
-            //result.commitsPerAuthor.put(commit.getAuthor(), nb + 1);
         }
         result.sum = c;
         return result;
@@ -48,9 +46,8 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            String html = "<div>Total commits: " + getResultAsString() +
+            return "<div>Total commits: " + getResultAsString() +
                     "</div>";
-            return html;
         }
     }
 }
