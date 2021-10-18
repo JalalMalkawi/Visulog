@@ -17,11 +17,7 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
 
     public static CountTotalCommitsPlugin.Result processLog(List<Commit> gitLog) {
         var result = new CountTotalCommitsPlugin.Result();
-        int c = 0;
-        for (var commit : gitLog) {
-            c++;
-        }
-        result.sum = c;
+        result.sum = gitLog.size();;
         return result;
     }
 
