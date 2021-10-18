@@ -51,7 +51,7 @@ public class CLILauncher {
                     String pValue = parts[1];
                     switch (pName) {
                         case "--addPlugin":
-                            // TODO: parse argument and make an instance of PluginConfig
+                            //TODO: parse argument and make an instance of PluginConfig
 
                             // Let's just trivially do this, before the TODO is fixed:
 
