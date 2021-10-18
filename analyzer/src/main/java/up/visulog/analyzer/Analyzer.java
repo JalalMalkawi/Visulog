@@ -6,6 +6,7 @@ import up.visulog.config.PluginConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Analyzer {
@@ -41,5 +42,17 @@ public class Analyzer {
             default : return Optional.empty();
         }
     }
+    //Overloading
+    //Première tentative de ne pas mettre en code dur.
+    public Optional<AnalyzerPlugin> makePlugin(PluginConfig pluginConfig) {
+        Scanner sc = new Scanner(System.in);
+        String pluginName = sc.nextLine();
+        switch (pluginName) {
+            case "countCommits" : return Optional.of(new CountCommitsPerAuthorPlugin(config));
+            case "countTotalCommits" : return Optional.of(new CountTotalCommitsPlugin(config));
+            default : return Optional.empty();
+        }
+    }
+
 
 }
