@@ -27,9 +27,6 @@ public class CLILauncher {
     }
 
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
-        ProcessBuilder builder2 =
-                new ProcessBuilder("touch", "result.html");
-        builder2.start();
         ProcessBuilder builder =
                 new ProcessBuilder("echo", "\"" +s + "\" > result.html");
         builder.start();
@@ -37,9 +34,9 @@ public class CLILauncher {
         fos.write(s.getBytes());
         fos.flush();
         fos.close();
-        //ProcessBuilder builder1 =
-        //        new ProcessBuilder("open", "result.html");
-        //builder1.start();
+        ProcessBuilder builder1 =
+                new ProcessBuilder("open", "result.html");
+        builder1.start();
     }
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
@@ -59,8 +56,6 @@ public class CLILauncher {
                             // Let's just trivially do this, before the TODO is fixed:
 
                             if (pValue.equals("countCommits")) plugins.put("countCommits", new PluginConfig() {
-                            });
-                            if (pValue.equals("countTotalCommits")) plugins.put("countTotalCommits", new PluginConfig() {
                             });
 
                             break;

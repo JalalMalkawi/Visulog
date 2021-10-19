@@ -8,32 +8,38 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 public class Commit {
-    // FIXME: (some of) these fields could have more specialized types than String
-    public final String id;
-    public final String date;
-    public final String author;
-    public final String description;
-    public final String mergedFrom;
 
+    // FIXME: (some of) these fields could have more specialized types than String
+    private final String id;
+    private final String date;
+    private final String author;
+    private final String description;
+    private final String mergedFrom;
+
+    
     public Commit(String id, String author, String date, String description, String mergedFrom) {
         this.id = id;
         this.author = author;
-        this.date = date;
+        this.date = date; 
         this.description = description;
         this.mergedFrom = mergedFrom;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
     // TODO: factor this out (similar code will have to be used for all git commands)
-    public static List<Commit> parseLogFromCommand(Path gitPath) {
-        ProcessBuilder builder =
-                new ProcessBuilder("git", "log").directory(gitPath.toFile());
+    public static List<Commit> parseLogFromCommand(Path gitPath, String command) {
+        ProcessBuilder builder = new ProcessBuilder("git", command).directory(gitPath.toFile());
         Process process;
         try {
             process = builder.start();
         } catch (IOException e) {
-            throw new RuntimeException("Error running \"git log\".", e);
+            throw new RuntimeException("Error running git "+ command+". ", e);
         }
         InputStream is = process.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -54,9 +60,9 @@ public class Commit {
      * Parses a log item and outputs a commit object. Exceptions will be thrown in case the input does not have the proper format.
      * Returns an empty optional if there is nothing to parse anymore.
      */
+
     public static Optional<Commit> parseCommit(BufferedReader input) {
         try {
-
             var line = input.readLine();
             if (line == null) return Optional.empty(); // if no line can be read, we are done reading the buffer
             var idChunks = line.split(" ");
@@ -78,7 +84,8 @@ public class Commit {
                     case "Date":
                         builder.setDate(fieldContent);
                         break;
-                    default: // TODO: warn the user that some field was ignored
+                    default:
+                        throw new RuntimeException("Some field was ignored");
                 }
                 line = input.readLine(); //prepare next iteration
                 if (line == null) parseError(); // end of stream is not supposed to happen now (commit data incomplete)
