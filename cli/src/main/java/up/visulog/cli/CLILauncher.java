@@ -4,6 +4,7 @@ import up.visulog.analyzer.Analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.config.PluginConfig;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class CLILauncher {
         fos.write(s.getBytes());
         fos.flush();
         fos.close();
+        File htmlFile = new File("result.html");
+        Desktop.getDesktop().browse(htmlFile.toURI());
         //ProcessBuilder builder1 =
         //        new ProcessBuilder("open", "result.html");
         //builder1.start();
