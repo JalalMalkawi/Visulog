@@ -27,6 +27,9 @@ public class CLILauncher {
     }
 
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
+        ProcessBuilder builder2 =
+                new ProcessBuilder("touch", "result.html");
+        builder2.start();
         ProcessBuilder builder =
                 new ProcessBuilder("echo", "\"" +s + "\" > result.html");
         builder.start();
