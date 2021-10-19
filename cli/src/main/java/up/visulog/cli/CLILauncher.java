@@ -23,7 +23,6 @@ public class CLILauncher {
             makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
             System.out.println(results.toHTML());
         } else displayHelpAndExit();
-        
     }
 
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
