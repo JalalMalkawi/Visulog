@@ -37,9 +37,9 @@ public class CLILauncher {
         fos.write(s.getBytes());
         fos.flush();
         fos.close();
-        ProcessBuilder builder1 =
-                new ProcessBuilder("open", "result.html");
-        builder1.start();
+        //ProcessBuilder builder1 =
+        //        new ProcessBuilder("open", "result.html");
+        //builder1.start();
     }
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
