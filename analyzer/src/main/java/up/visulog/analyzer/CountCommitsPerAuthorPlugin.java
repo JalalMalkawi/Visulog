@@ -15,7 +15,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         this.configuration = generalConfiguration;
     }
 
-    public static Result processLog(List<Commit> gitLog) { 
+    public static Result processLog(List<Commit> gitLog) {
         var result = new Result();
         for (var commit : gitLog) {
             var nb = result.commitsPerAuthor.getOrDefault(commit.getAuthor(), 0);
@@ -49,7 +49,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div>Commits per author: <ul>");
+            StringBuilder html = new StringBuilder("<div>Number of authors: <ul>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
