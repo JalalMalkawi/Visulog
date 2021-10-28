@@ -21,14 +21,18 @@ public class Analyzer {
     public AnalyzerResult computeResults() {
         List<AnalyzerPlugin> plugins = new ArrayList<>();
         for (var pluginConfigEntry: config.getPluginConfigs().entrySet()) {
-            var pluginName = pluginConfigEntry.getKey();
-            var pluginConfig = pluginConfigEntry.getValue();
-            var plugin = makePlugin(pluginName, pluginConfig);
+            String pluginName = pluginConfigEntry.getKey();
+            PluginConfig pluginConfig = pluginConfigEntry.getValue();
+            Optional<AnalyzerPlugin> plugin = makePlugin(pluginName, pluginConfig);
             plugin.ifPresent(plugins::add);
         }
         // run all the plugins
         // TODO: try running them in parallel
-        for (var plugin: plugins) plugin.run();
+        for (AnalyzerPlugin plugin: plugins) {
+            //plugin.run();
+            Thread t1 = new Thread(plugin);
+            t1.start();
+        }
 
         // store the results together in an AnalyzerResult instance and return it
         return new AnalyzerResult(plugins.stream().map(AnalyzerPlugin::getResult).collect(Collectors.toList()));
@@ -43,17 +47,4 @@ public class Analyzer {
             default : return Optional.empty();
         }
     }
-    //Overloading
-    //Première tentative de ne pas mettre en code dur.
-    public Optional<AnalyzerPlugin> makePlugin(PluginConfig pluginConfig) {
-        Scanner sc = new Scanner(System.in);
-        String pluginName = sc.nextLine();
-        switch (pluginName) {
-            case "countCommits" : return Optional.of(new CountCommitsPerAuthorPlugin(config));
-            case "countTotalCommits" : return Optional.of(new CountTotalCommitsPlugin(config));
-            default : return Optional.empty();
-        }
-    }
-
-
 }

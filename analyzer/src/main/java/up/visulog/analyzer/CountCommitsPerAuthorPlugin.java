@@ -55,7 +55,6 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
                 String nom = nom_mail.split("<")[0];
                 String mail = nom_mail.split("<")[1].replaceAll(">"," ");
                 //html.append("<li>").append(item.getKey()).append(": ").append(item.getValue()).append("</li>");
-                //html.append("<li>").append(nom).append("<a href='https://example.com>").append(mail).append("</a>; ").append(": ").append(item.getValue()).append("</li>");
                 html.append("<li>").append(nom).append(" &lt;").append(mail).append("&gt; ").append(": ").append(item.getValue()).append("</li>");
             }
             html.append("</ul></div>");

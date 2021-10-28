@@ -2,7 +2,7 @@ package up.visulog.analyzer;
 
 import java.lang.module.Configuration;
 
-public interface AnalyzerPlugin {
+public interface AnalyzerPlugin extends Runnable {
     interface Result {
         String getResultAsString();
         String getResultAsHtmlDiv();
