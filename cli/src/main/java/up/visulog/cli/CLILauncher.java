@@ -68,10 +68,11 @@ public class CLILauncher {
                             });
                             if (pValue.equals("countTotalCommits")) plugins.put("countTotalCommits", new PluginConfig() {
                             });
-
+                            if (pValue.equals("countAuthor")) plugins.put("countAuthor", new PluginConfig() {
+                            });
                             break;
                         case "--loadConfigFile":
-                            // TODO (load options from a file)
+                            // TODO (load options froadd m a file)
                             break;
                         case "--justSaveConfigFile":
                             // TODO (save command line options to a file instead of running the analysis)
