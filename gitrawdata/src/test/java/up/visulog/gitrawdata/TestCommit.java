@@ -28,7 +28,7 @@ public class TestCommit {
         var uri = getClass().getClassLoader().getResource("git.log").toURI();
         try (var reader = Files.newBufferedReader(Paths.get(uri))) {
             var log = Commit.parseLog(reader);
-//            System.out.println(log);
+            System.out.println(log);
             assertEquals(expected, log.toString());
         }
     }
