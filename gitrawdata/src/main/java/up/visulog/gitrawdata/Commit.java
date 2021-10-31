@@ -32,6 +32,10 @@ public class Commit {
         return author;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     // TODO: factor this out (similar code will have to be used for all git commands)
     public static List<Commit> parseLogFromCommand(Path gitPath, String command) {
         ProcessBuilder builder = new ProcessBuilder("git", command).directory(gitPath.toFile());
