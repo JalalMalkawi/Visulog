@@ -31,6 +31,13 @@ public class CLILauncher {
 
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
 
+        ProcessBuilder builder2 =
+                new ProcessBuilder("touch", "result.html");
+        builder2.start();
+        FileOutputStream fos = new FileOutputStream("result.html");
+        fos.write(s.getBytes());
+        fos.flush();
+        fos.close();
         File htmlFile = new File("result.html");
         Desktop.getDesktop().browse(htmlFile.toURI());
     }
