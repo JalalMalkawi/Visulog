@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
-    //  log --date=local --pretty=format:%ad | cut -d\  -f4 | cut -d\: -f1 | sort | uniq -c
     private final Configuration configuration;
     private Result result;
 
@@ -20,33 +19,37 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
 
     @Override
     public void run() {
-        // FIXME : Doublon à la sortie…
+        result =  aux();
+    }
+
+    private Result aux(){
+        Result r0 = new Result();
+        // On execute étape par étape la commande :
+        // git log --date=local --pretty=format:%ad | cut -d\  -f4 | cut -d\: -f1 | sort | uniq -c
         var output = new GetGitCommandOutput(configuration.getGitPath(),
                 "log --pretty=format:%ad"
         );
         try {
-            result = new Result();
-            result.commitsPerHour = new LinkedList<String>();
+            r0.commitsPerHour = new LinkedList<String>();
             LinkedList<Integer> list_temp = new LinkedList<>();
             var getting = output.getOutput();
 
             String s = "";
             while ((s = getting.readLine()) != null) {
-                String[] cut1 = s.split(" ");
-                String cut2 = cut1[3].split(":")[0];
-                System.out.println(cut2);
+                String[] cut1 = s.split(" "); // premier cut
+                String cut2 = cut1[3].split(":")[0]; // second cut
                 list_temp.add(Integer.parseInt(cut2));
             }
-            Collections.sort(list_temp);
+            Collections.sort(list_temp); // sort
             String st = "";
-            for(int i = 0 ; i < list_temp.size() ; i++) {
+            for(int i = 0 ; i < list_temp.size() ; i++) { // uniq + count
                 if(!st.contains(list_temp.get(i).toString())) {
                     int c = 0;
                     st += list_temp.get(i);
                     for (Integer integer : list_temp) {
                         if (list_temp.get(i).intValue() == integer.intValue()) c++;
                     }
-                    result.commitsPerHour.add(c + " " + list_temp.get(i).toString());
+                    r0.commitsPerHour.add(c + " " + list_temp.get(i).toString());
                 }
             }
             getting.close();
@@ -54,6 +57,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
             // TODO : gérer exception
             e.printStackTrace();
         }
+        return r0;
     }
 
     @Override
@@ -77,13 +81,13 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         @Override
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div>Commits Per Hour");
-            if(commitsPerHour.isEmpty() || commitsPerHour==null) return html.append(" : Aucun commit</div>").toString();
-            html.append(" <table><tbody><thead><tr><th>Heure</th><th>Nombre de commits</th></thead>");
+            if(commitsPerHour.isEmpty()) return html.append(" : No commit</div>").toString();
+            html.append(" <table><tbody><thead><tr><th>Hour</th><th>Commits count</th></thead>");
             for (String item : commitsPerHour) {
                 if(item!=null) {
                     html.append("<tr>");
                     String howMany = item.split(" ")[0];
-                    String when = item.split(" ")[1];
+                    String when = item.split(" ")[1]+" h";
                     html.append("<td>").append(when).append("</td>");
                     html.append("<td>").append(howMany).append("</td>");
                     html.append("</tr>");
