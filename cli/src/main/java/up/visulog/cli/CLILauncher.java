@@ -1,5 +1,8 @@
 package up.visulog.cli;
 
+import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import up.visulog.analyzer.Analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.config.PluginConfig;
@@ -9,7 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -22,27 +25,14 @@ public class CLILauncher {
             var analyzer = new Analyzer(config.get());
             var results = analyzer.computeResults();
             makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
-            System.out.println(results.toHTML());
         } else displayHelpAndExit();
         
     }
 
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
-        ProcessBuilder builder2 =
-                new ProcessBuilder("touch", "result.html");
-        builder2.start();
-        ProcessBuilder builder =
-                new ProcessBuilder("echo", "\"" +s + "\" > result.html");
-        builder.start();
-        FileOutputStream fos = new FileOutputStream("result.html");
-        fos.write(s.getBytes());
-        fos.flush();
-        fos.close();
+
         File htmlFile = new File("result.html");
         Desktop.getDesktop().browse(htmlFile.toURI());
-        //ProcessBuilder builder1 =
-        //        new ProcessBuilder("open", "result.html");
-        //builder1.start();
     }
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
@@ -65,10 +55,13 @@ public class CLILauncher {
                             });
                             if (pValue.equals("countTotalCommits")) plugins.put("countTotalCommits", new PluginConfig() {
                             });
-
+                            if (pValue.equals("countAuthor")) plugins.put("countAuthor", new PluginConfig() {
+                            });
+                            if (pValue.equals("countCommitsPerDay")) plugins.put("countCommitsPerDay", new PluginConfig() {
+                            });
                             break;
                         case "--loadConfigFile":
-                            // TODO (load options from a file)
+                            // TODO (load options froadd m a file)
                             break;
                         case "--justSaveConfigFile":
                             // TODO (save command line options to a file instead of running the analysis)
@@ -78,10 +71,32 @@ public class CLILauncher {
                     }
                 }
             } else {
-                gitPath = FileSystems.getDefault().getPath(arg);
+                // COMMAND DE TEST : ./gradlew run --args="--addPlugin=countTotalCommits https://gitlab.com/edouardklein/falsisign"
+                // TODO : Vérifier que le lien en arg est bien valide
+                CLILauncher c = new CLILauncher();
+                try {
+                    FileUtils.deleteDirectory(new File("../dataFromGit"));
+                } catch (IOException e) {
+                    //e.printStackTrace();
+                }
+                c.CloneRep(arg);
+                gitPath = Paths.get("../dataFromGit");
+                // TODO : Cas par défaut si pas de chemin d'accès ou non valide
+                //gitPath = FileSystems.getDefault().getPath(arg);
             }
         }
         return Optional.of(new Configuration(gitPath, plugins));
+    }
+    public void CloneRep(String s){
+        String cloneDirectoryPath = "../dataFromGit";
+        try {
+            Git.cloneRepository()
+                    .setURI(s)
+                    .setDirectory(Paths.get(cloneDirectoryPath).toFile())
+                    .call();
+        } catch (GitAPIException e) {
+            //TODO : Gérer l'exception
+        }
     }
 
     private static void displayHelpAndExit() {

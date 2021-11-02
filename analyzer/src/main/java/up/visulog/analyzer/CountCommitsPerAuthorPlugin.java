@@ -15,7 +15,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         this.configuration = generalConfiguration;
     }
 
-    public static Result processLog(List<Commit> gitLog) { 
+    public static Result processLog(List<Commit> gitLog) {
         var result = new Result();
         for (var commit : gitLog) {
             var nb = result.commitsPerAuthor.getOrDefault(commit.getAuthor(), 0);
@@ -49,13 +49,12 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div>Commits per author: <ul>");
+            StringBuilder html = new StringBuilder("<div>Number of authors: <ul>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
                 String mail = nom_mail.split("<")[1].replaceAll(">"," ");
-                //html.append("<li>").append(item.getKey()).append(": ").append(item.getValue()).append("</li>");
-                html.append("<li>").append(nom).append(" &lt;").append(mail).append("&gt; ").append(": ").append(item.getValue()).append("</li>");
+                html.append(String.format("<li> %s &lt; %s &gt; : %s </li>",nom,mail,item.getValue()));
             }
             html.append("</ul></div>");
             return html.toString();
