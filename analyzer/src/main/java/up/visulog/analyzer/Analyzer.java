@@ -44,6 +44,7 @@ public class Analyzer {
             case "countCommits" : return Optional.of(new CountCommitsPerAuthorPlugin(config));
             case "countTotalCommits" : return Optional.of(new CountTotalCommitsPlugin(config));
             case "countAuthor" : return Optional.of(new CountAuthorPlugin(config));
+            case "countCommitsPerDay" : return Optional.of(new CountCommitsPerDayPlugin(config));
             default : return Optional.empty();
         }
     }

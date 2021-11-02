@@ -30,7 +30,9 @@ public class TestCommit {
             var log = Commit.parseLog(reader);
             System.out.println(log);
             assertEquals(expected, log.toString());
+            System.out.print(this.getClass().getClassLoader().getResource("git.log").toURI());
         }
+
     }
 
 }
