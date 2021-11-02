@@ -1,0 +1,26 @@
+h1
+{
+	font-size: 20px;
+	text-decoration: underline;
+}
+ul
+{
+	border: 3px black inset;
+	border-radius: 5px;
+	box-shadow:6px 6px 6px black;
+	margin: 100px;
+	width : 40%;
+}
+
+
+li
+{
+	font-family: Verdana, Arial, Georgia, Times New Roman;
+	font-size: 14px;
+	margin: 10px;
+}
+
+li:hover
+{
+	color : blue;
+}
