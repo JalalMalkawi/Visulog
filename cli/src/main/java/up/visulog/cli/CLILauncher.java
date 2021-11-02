@@ -25,27 +25,14 @@ public class CLILauncher {
             var analyzer = new Analyzer(config.get());
             var results = analyzer.computeResults();
             makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
-            System.out.println(results.toHTML());
         } else displayHelpAndExit();
         
     }
 
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
-        ProcessBuilder builder2 =
-                new ProcessBuilder("touch", "result.html");
-        builder2.start();
-        ProcessBuilder builder =
-                new ProcessBuilder("echo", "\"" +s + "\" > result.html");
-        builder.start();
-        FileOutputStream fos = new FileOutputStream("result.html");
-        fos.write(s.getBytes());
-        fos.flush();
-        fos.close();
+
         File htmlFile = new File("result.html");
         Desktop.getDesktop().browse(htmlFile.toURI());
-        //ProcessBuilder builder1 =
-        //        new ProcessBuilder("open", "result.html");
-        //builder1.start();
     }
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
