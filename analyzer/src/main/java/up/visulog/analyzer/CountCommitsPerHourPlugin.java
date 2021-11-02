@@ -4,6 +4,7 @@ import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
@@ -19,22 +20,36 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
 
     @Override
     public void run() {
+        // FIXME : Doublon à la sortie…
         var output = new GetGitCommandOutput(configuration.getGitPath(),
-                "log --pretty=format:%ad | cut -d\\  -f4 | cut -d\\: -f1 | sort | uniq -c | sed 's/^ *//'"
+                "log --pretty=format:%ad"
         );
         try {
-
             result = new Result();
-            result.commitsPerHour = new LinkedList<>();
-            var getting = output.getOutput(); // .getOutputStream();
+            result.commitsPerHour = new LinkedList<String>();
+            LinkedList<Integer> list_temp = new LinkedList<>();
+            var getting = output.getOutput();
 
-
-
-            String s ="";
+            String s = "";
             while ((s = getting.readLine()) != null) {
-                System.out.println(s);
-                result.commitsPerHour.add(s);
+                String[] cut1 = s.split(" ");
+                String cut2 = cut1[3].split(":")[0];
+                System.out.println(cut2);
+                list_temp.add(Integer.parseInt(cut2));
             }
+            Collections.sort(list_temp);
+            String st = "";
+            for(int i = 0 ; i < list_temp.size() ; i++) {
+                if(!st.contains(list_temp.get(i).toString())) {
+                    int c = 0;
+                    st += list_temp.get(i);
+                    for (Integer integer : list_temp) {
+                        if (list_temp.get(i).intValue() == integer.intValue()) c++;
+                    }
+                    result.commitsPerHour.add(c + " " + list_temp.get(i).toString());
+                }
+            }
+            getting.close();
         } catch (IOException e) {
             // TODO : gérer exception
             e.printStackTrace();
@@ -62,7 +77,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         @Override
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div>Commits Per Hour");
-            if(commitsPerHour.isEmpty()) return html.append(" : Aucun commit</div>").toString();
+            if(commitsPerHour.isEmpty() || commitsPerHour==null) return html.append(" : Aucun commit</div>").toString();
             html.append(" <table><tbody><thead><tr><th>Heure</th><th>Nombre de commits</th></thead>");
             for (String item : commitsPerHour) {
                 if(item!=null) {
