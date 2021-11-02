@@ -57,6 +57,8 @@ public class CLILauncher {
                             });
                             if (pValue.equals("countAuthor")) plugins.put("countAuthor", new PluginConfig() {
                             });
+                            if (pValue.equals("countCommitsPerDay")) plugins.put("countCommitsPerDay", new PluginConfig() {
+                            });
                             break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
