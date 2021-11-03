@@ -12,7 +12,22 @@ public class GetGitCommandOutput
 
     public GetGitCommandOutput(Path gitPath, String command)
     {
-        this.builder = new ProcessBuilder("git", command).directory(gitPath.toFile());
+        if(!command.contains("|")){
+            if(!command.contains("-")) {
+                this.builder = new ProcessBuilder("git ", command).directory(gitPath.toFile());
+            }else{
+                command = "git "+command;
+                String[] splited = command.split(" ");
+                this.builder = new ProcessBuilder(splited).directory(gitPath.toFile());
+            }
+        }
+        else{
+            String[] cmd = {
+                    "/bin/sh", "-c",    // invoke shell and then run inside it
+                    "git "+ command
+            };
+            this.builder = new ProcessBuilder(cmd).directory(gitPath.toFile());
+        }
         this.command = command;
     }
 

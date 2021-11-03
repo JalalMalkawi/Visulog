@@ -6,7 +6,6 @@ import up.visulog.config.PluginConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Analyzer {
@@ -45,6 +44,7 @@ public class Analyzer {
             case "countTotalCommits" : return Optional.of(new CountTotalCommitsPlugin(config));
             case "countAuthor" : return Optional.of(new CountAuthorPlugin(config));
             case "countCommitsPerDay" : return Optional.of(new CountCommitsPerDayPlugin(config));
+            case "countCommitsPerHour" : return Optional.of(new CountCommitsPerHourPlugin(config));
             default : return Optional.empty();
         }
     }

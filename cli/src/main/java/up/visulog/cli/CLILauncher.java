@@ -81,6 +81,8 @@ FileUtils.writeStringToFile(newHtmlFile, htmlString);
                             });
                             if (pValue.equals("countCommitsPerDay")) plugins.put("countCommitsPerDay", new PluginConfig() {
                             });
+                            if (pValue.equals("countCommitsPerHour")) plugins.put("countCommitsPerHour", new PluginConfig() {
+                            });
                             break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
