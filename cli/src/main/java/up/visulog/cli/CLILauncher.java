@@ -11,6 +11,10 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -29,11 +33,22 @@ public class CLILauncher {
         
     }
 
+    /*
+    File htmlTemplateFile = new File("path/template.html");
+String htmlString = FileUtils.readFileToString(htmlTemplateFile);
+String title = "New Page";
+String body = "This is Body";
+htmlString = htmlString.replace("$title", title);
+htmlString = htmlString.replace("$body", body);
+File newHtmlFile = new File("path/new.html");
+FileUtils.writeStringToFile(newHtmlFile, htmlString);
+   */
+
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
 
-        ProcessBuilder builder2 =
-                new ProcessBuilder("touch", "result.html");
-        builder2.start();
+
+        ProcessBuilder builder = new ProcessBuilder("touch", "result.html");
+        builder.start();
         FileOutputStream fos = new FileOutputStream("result.html");
         fos.write(s.getBytes());
         fos.flush();
@@ -42,7 +57,7 @@ public class CLILauncher {
         Desktop.getDesktop().browse(htmlFile.toURI());
     }
 
-    static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
+    static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) throws IOException {
         var gitPath = FileSystems.getDefault().getPath(".");
         var plugins = new HashMap<String, PluginConfig>();
         for (var arg : args) {
@@ -77,23 +92,49 @@ public class CLILauncher {
                             return Optional.empty();
                     }
                 }
-            } else {
+            } else { // arg est ici le lien d'un repo git
                 // COMMAND DE TEST : ./gradlew run --args="--addPlugin=countTotalCommits https://gitlab.com/edouardklein/falsisign"
-                // TODO : Vérifier que le lien en arg est bien valide
-                CLILauncher c = new CLILauncher();
-                try {
-                    FileUtils.deleteDirectory(new File("../dataFromGit"));
-                } catch (IOException e) {
-                    //e.printStackTrace();
+                if (isValidGitUrl(arg)){
+                    CLILauncher c = new CLILauncher();
+                    try {
+                        FileUtils.deleteDirectory(new File("../dataFromGit"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    c.CloneRep(arg);
+                    gitPath = Paths.get("../dataFromGit");
                 }
-                c.CloneRep(arg);
-                gitPath = Paths.get("../dataFromGit");
-                // TODO : Cas par défaut si pas de chemin d'accès ou non valide
-                //gitPath = FileSystems.getDefault().getPath(arg);
             }
         }
         return Optional.of(new Configuration(gitPath, plugins));
     }
+
+    public static int getResponseCode(String urlString) throws IOException {
+        URL u = new URL(urlString);
+        HttpURLConnection huc =  (HttpURLConnection)  u.openConnection();
+        huc.setRequestMethod("GET");
+        huc.connect();
+        return huc.getResponseCode();
+    }
+
+    public static void CheckUrl(String url) {
+        try {
+            new URL(url).toURI();
+        }
+        catch (MalformedURLException | URISyntaxException e) {
+            System.out.print("An error occurred with git-repo link : please check if you typed it correctly");
+        }
+    }
+
+    public static boolean isValidGitUrl(String url) throws IOException  {
+        if(url.contains("gitlab.com") || url.contains("github.com") || url.contains("gaufre.informatique.univ-paris-diderot.fr") && getResponseCode(url) != 404){
+            CheckUrl(url);
+            return true;
+        }
+        return false;
+    }
+
+
     public void CloneRep(String s){
         String cloneDirectoryPath = "../dataFromGit";
         try {
@@ -102,7 +143,8 @@ public class CLILauncher {
                     .setDirectory(Paths.get(cloneDirectoryPath).toFile())
                     .call();
         } catch (GitAPIException e) {
-            //TODO : Gérer l'exception
+            System.out.println("An error occurred while cloning repository");
+            e.printStackTrace();
         }
     }
 

@@ -15,7 +15,7 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
     }
 
     public static CountAuthorPlugin.Result processLog(List<Commit> gitLog) {
-        var result = new Result();
+        var result = new CountAuthorPlugin.Result();
         LinkedList<String> listAuthor= new LinkedList<String>();
         for (var commit : gitLog) {
            if(!listAuthor.contains(commit.getAuthor())) listAuthor.add(commit.getAuthor());
