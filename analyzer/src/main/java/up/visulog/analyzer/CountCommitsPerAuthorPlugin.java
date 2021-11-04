@@ -54,10 +54,19 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
                 String mail = nom_mail.split("<")[1].replaceAll(">"," ");
-                html.append(String.format("<li><a href=\"mailto:"+mail+"\"> "+nom+"</a> : "+item.getValue()+"</li>"));
+                html.append(String.format("<li><a> href=\"mailto:"+mail+"\"> "+nom+"</a> : "+item.getValue()+"</li>"));
             }
             html.append("</ul></div>");
             return html.toString();
+        }
+        
+        public void getResultAsTxt(){
+            PrintWriter writer = new PrintWriter(result.txt, UTF-8);
+            for (var item : commitsPerAuthor.entrySet()){
+                String nom = item.getKey().split("<")[0];
+                writer.println(nom +" "+ item.getValue());
+                }
+            writer.close();
         }
     }
 }
