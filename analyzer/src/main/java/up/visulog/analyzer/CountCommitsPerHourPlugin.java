@@ -29,8 +29,8 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         var output = new GetGitCommandOutput(configuration.getGitPath(),
                 "log --pretty=format:%ad"
         );
+        r0.commitsPerHour = new LinkedList<String>();
         try {
-            r0.commitsPerHour = new LinkedList<String>();
             LinkedList<Integer> list_temp = new LinkedList<>();
             var getting = output.getOutput();
 
@@ -53,9 +53,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
                 }
             }
             getting.close();
-        } catch (IOException e) {
-            // TODO : gérer exception
-            e.printStackTrace();
+        } catch (IOException ignored) { // ignored car rendra une liste null
         }
         return r0;
     }
