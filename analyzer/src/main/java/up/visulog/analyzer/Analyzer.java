@@ -46,6 +46,7 @@ public class Analyzer {
             case "countCommitsPerDay" : return Optional.of(new CountCommitsPerDayPlugin(config));
             case "countCommitsPerHour" : return Optional.of(new CountCommitsPerHourPlugin(config));
             case "countCommitsPerMonth" : return Optional.of(new CountCommitsPerMonthPlugin(config));
+            case "countMergeCommits" : return Optional.of(new CountMergeCommitsPlugin(config));
             default : return Optional.empty();
         }
     }

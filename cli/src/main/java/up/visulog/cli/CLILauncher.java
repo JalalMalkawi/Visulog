@@ -76,6 +76,8 @@ public class CLILauncher {
                             });
                             if (pValue.equals("countCommitsPerMonth")) plugins.put("countCommitsPerMonth", new PluginConfig() {
                             });
+                            if (pValue.equals("countMergeCommits")) plugins.put("countMergeCommits", new PluginConfig() {
+                            });
                             break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
