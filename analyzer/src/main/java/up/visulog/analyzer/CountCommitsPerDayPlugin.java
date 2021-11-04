@@ -1,13 +1,13 @@
 package up.visulog.analyzer;
 
 import up.visulog.config.Configuration;
-import up.visulog.gitrawdata.Commit;
+import up.visulog.gitrawdata.GetGitCommandOutput;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
 
-public class CountCommitsPerDayPlugin implements AnalyzerPlugin {
+public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
 
@@ -15,30 +15,56 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin {
         this.configuration = generalConfiguration;
     }
 
-    public static CountCommitsPerDayPlugin.Result processLog(List<Commit> gitLog) {
-        var result = new CountCommitsPerDayPlugin.Result();
-        for (var commit : gitLog) {
-            var nb = result.commitsPerDay.getOrDefault(commit.getDate(), 0);
-            result.commitsPerDay.put(commit.getDate(), nb + 1);
-        }
-        return result;
-    }
+
 
     @Override
     public void run() {
-        result = processLog(Commit.parseLogFromCommand(configuration.getGitPath(),"log"));
+        result =  aux();
+    }
+
+    private Result aux(){
+        Result r0 = new Result();
+        // On execute étape par étape la commande :
+        // git log --date=short --pretty=format:%ad | sort | uniq -c
+        var output = new GetGitCommandOutput(configuration.getGitPath(),
+                "log --date=short --pretty=format:%ad"
+        );
+        r0.commitsPerDay = new LinkedList<String>();
+        try {
+            LinkedList<String> list_temp = new LinkedList<>();
+            var getting = output.getOutput();
+            String s = "";
+            while ((s = getting.readLine()) != null) {
+                list_temp.add(s);
+            }
+            Collections.sort(list_temp); // sort
+            String st = "";
+            for(int i = 0 ; i < list_temp.size() ; i++) { // uniq + count
+                if(!st.contains(list_temp.get(i).toString())) {
+                    int c = 0;
+                    st += list_temp.get(i);
+                    for (String str : list_temp) {
+                        if (list_temp.get(i).equals(str)) c++;
+                    }
+                    r0.commitsPerDay.add(c + " " + list_temp.get(i).toString());
+                }
+            }
+            getting.close();
+        } catch (IOException ignored) { // ignored car rendra une liste null
+        }
+        return r0;
     }
 
     @Override
-    public CountCommitsPerDayPlugin.Result getResult() {
+    public Result getResult() {
         if (result == null) run();
         return result;
     }
 
     public static class Result implements AnalyzerPlugin.Result {
-        private final Map<String, Integer> commitsPerDay = new HashMap<>();
+        private LinkedList<String> commitsPerDay = new LinkedList<>();
 
-        public Map<String, Integer> getCommitsPerDay() {
+        public LinkedList<String> getCommitsPerDay() {
             return commitsPerDay;
         }
 
@@ -49,14 +75,20 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div>Commits Per Date <ul>");
-            for (var item : commitsPerDay.entrySet()) {
-                String date = item.getKey();
-                String dateF = date.split("<")[0];
-                //html.append("<li>").append(item.getKey()).append(": ").append(item.getValue()).append("</li>");
-                html.append("<li>").append(dateF).append(" &lt;").append("&gt; ").append(": ").append(item.getValue()).append("</li>");
+            StringBuilder html = new StringBuilder("<div>Commits Per Day");
+            if(commitsPerDay.isEmpty()) return html.append(" : No commit</div>").toString();
+            html.append(" <table><tbody><thead><tr><th>Day </th><th>Commits count</th></thead>");
+            for (String item : commitsPerDay) {
+                if(item!=null) {
+                    html.append("<tr>");
+                    String howMany = item.split(" ")[0];
+                    String when = item.split(" ")[1];
+                    html.append("<td>").append(when).append("</td>");
+                    html.append("<td>").append(howMany).append("</td>");
+                    html.append("</tr>");
+                }
             }
-            html.append("</ul></div>");
+            html.append("</tbody></table></div>");
             return html.toString();
         }
     }
