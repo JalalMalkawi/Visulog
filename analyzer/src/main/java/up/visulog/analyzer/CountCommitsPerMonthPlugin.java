@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
+public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
 
-    public CountCommitsPerDayPlugin(Configuration generalConfiguration) {
+    public CountCommitsPerMonthPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
     }
 
@@ -25,11 +25,11 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
     private Result aux(){
         Result r0 = new Result();
         // On execute étape par étape la commande :
-        // git log --date=short --pretty=format:%ad | sort | uniq -c
+        // git log --date=format:'%Y-%m'  --pretty=format:%ad | sort | uniq -c
         var output = new GetGitCommandOutput(configuration.getGitPath(),
-                "log --date=short --pretty=format:%ad"
+                "log --date=format:%Y-%m --pretty=format:%ad "
         );
-        r0.commitsPerDay = new LinkedList<String>();
+        r0.commitsPerMonth = new LinkedList<String>();
         try {
             LinkedList<String> list_temp = new LinkedList<>();
             var getting = output.getOutput();
@@ -46,7 +46,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                     for (String str : list_temp) {
                         if (list_temp.get(i).equals(str)) c++;
                     }
-                    r0.commitsPerDay.add(c + " " + list_temp.get(i).toString());
+                    r0.commitsPerMonth.add(c + " " + list_temp.get(i).toString());
                 }
             }
             getting.close();
@@ -62,23 +62,23 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
     }
 
     public static class Result implements AnalyzerPlugin.Result {
-        private LinkedList<String> commitsPerDay = new LinkedList<>();
+        private LinkedList<String> commitsPerMonth = new LinkedList<>();
 
-        public LinkedList<String> getCommitsPerDay() {
-            return commitsPerDay;
+        public LinkedList<String> getCommitsPerMonth() {
+            return commitsPerMonth;
         }
 
         @Override
         public String getResultAsString() {
-            return commitsPerDay.toString();
+            return commitsPerMonth.toString();
         }
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div>Commits Per Day");
-            if(commitsPerDay.isEmpty()) return html.append(" : No commit</div>").toString();
-            html.append(" <table><tbody><thead><tr><th>Day </th><th>Commits count</th></thead>");
-            for (String item : commitsPerDay) {
+            StringBuilder html = new StringBuilder("<div>Commits Per Month");
+            if(commitsPerMonth.isEmpty()) return html.append(" : No commit</div>").toString();
+            html.append(" <table><tbody><thead><tr><th>Month </th><th>Commits count</th></thead>");
+            for (String item : commitsPerMonth) {
                 if(item!=null) {
                     html.append("<tr>");
                     String howMany = item.split(" ")[0];

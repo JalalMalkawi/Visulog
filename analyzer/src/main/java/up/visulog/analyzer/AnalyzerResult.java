@@ -2,6 +2,7 @@ package up.visulog.analyzer;
 
 import java.util.List;
 
+
 public class AnalyzerResult {
     public List<AnalyzerPlugin.Result> getSubResults() {
         return subResults;
@@ -21,4 +22,5 @@ public class AnalyzerResult {
     public String toHTML() { // insertion de l'invocation du code css
         return "<html><head><link rel=\"stylesheet\" href=\"result.css\" /><head><body>"+subResults.stream().map(AnalyzerPlugin.Result::getResultAsHtmlDiv).reduce("", (acc, cur) -> acc + cur) + "</body></html>";
     }
+
 }
