@@ -74,6 +74,8 @@ public class CLILauncher {
                             });
                             if (pValue.equals("countCommitsPerHour")) plugins.put("countCommitsPerHour", new PluginConfig() {
                             });
+                            if (pValue.equals("dailyAverage")) plugins.put("dailyAverage", new PluginConfig() {
+                            });
                             break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
