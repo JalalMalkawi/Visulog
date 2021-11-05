@@ -49,7 +49,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div> <h1>Number of authors:</h1> <ul>");
+            StringBuilder html = new StringBuilder("<div> <h1>Number of commits per author:</h1> <ul>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
@@ -58,6 +58,16 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             }
             html.append("</ul></div>");
             return html.toString();
+        }
+
+        public String getRtxt(){
+            StringBuilder R_txt = new StringBuilder();
+            for (var item : commitsPerAuthor.entrySet()) {
+                String nom_mail = item.getKey();
+                String nom = nom_mail.split("<")[0];
+                R_txt.append(String.format(nom + " " + item.getValue()));
+            }
+            return R_txt.toString();
         }
     }
 }
