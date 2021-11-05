@@ -37,9 +37,7 @@ public class CLILauncher {
 
     public static void makeFileOfResAndOpenIt(String s) throws IOException {
 
-
-        ProcessBuilder builder = new ProcessBuilder("touch", "result.html");
-        builder.start();
+        FileUtils.writeStringToFile(new File("result.html"), "");
         FileOutputStream fos = new FileOutputStream("result.html");
         fos.write(s.getBytes());
         fos.flush();
@@ -142,8 +140,8 @@ public class CLILauncher {
                     .setDirectory(Paths.get(cloneDirectoryPath).toFile())
                     .call();
         } catch (GitAPIException e) {
-            System.out.println("An error occurred while cloning repository");
-            e.printStackTrace();
+            System.out.println("An error occurred while cloning repository, please check your internet connexion");
+            System.exit(0);
         }
     }
 
