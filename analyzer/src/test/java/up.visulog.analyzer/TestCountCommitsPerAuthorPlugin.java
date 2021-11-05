@@ -20,9 +20,21 @@ public class TestCountCommitsPerAuthorPlugin {
             log.add(new CommitBuilder("").setAuthor(authors[i % 3]).createCommit());
         }
         var res = CountCommitsPerAuthorPlugin.processLog(log);
+        //System.out.println(res.getRtxt());
         assertEquals(authors.length, res.getCommitsPerAuthor().size());
         var sum = res.getCommitsPerAuthor().values()
                 .stream().reduce(0, Integer::sum);
         assertEquals(entries, sum.longValue());
+    }
+
+    public static void main(String[] args) {
+        var log = new ArrayList<Commit>();
+        String[] authors = {"foo", "bar", "baz"};
+        var entries = 20;
+        for (int i = 0; i < entries; i++) {
+            log.add(new CommitBuilder("").setAuthor(authors[i % 3]).createCommit());
+        }
+        var res = CountCommitsPerAuthorPlugin.processLog(log);
+        System.out.println(res.getRtxt());
     }
 }
