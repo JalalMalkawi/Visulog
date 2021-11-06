@@ -50,11 +50,11 @@ public class CLILauncher {
         var plugins = new HashMap<String, PluginConfig>();
         String[] s = {"countCommits","countTotalCommits","countAuthor","countCommitsPerDay",
                 "countCommitsPerHour","dailyAverage","countCommitsPerMonth","countMergeCommits"};
-        if(args.length==0){
-            for(String st : s) plugins.put(st, new PluginConfig() {});
-        }
+        if(args.length==0) for(String st : s) plugins.put(st, new PluginConfig() {});
+        boolean opt=false;
         for (var arg : args) {
             if (arg.startsWith("--")) {
+                opt=true;
                 String[] parts = arg.split("=");
                 if (parts.length != 2) return Optional.empty();
                 else {
@@ -75,7 +75,11 @@ public class CLILauncher {
                             return Optional.empty();
                     }
                 }
-            } else { // arg est ici le lien d'un repo git
+            } else {
+                if(!opt){
+                    for(String st : s) plugins.put(st, new PluginConfig() {});
+                }
+                // arg est ici le lien d'un repo git
                 // COMMAND DE TEST : ./gradlew run --args="--addPlugin=countTotalCommits https://gitlab.com/edouardklein/falsisign"
                 if (isValidGitUrl(arg)){
                     CLILauncher c = new CLILauncher();
