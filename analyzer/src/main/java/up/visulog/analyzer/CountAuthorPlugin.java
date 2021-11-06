@@ -3,6 +3,8 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -46,6 +48,16 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             return "<div>Number of authors: " + getResultAsString() +
                     "</div>";
+        }
+
+        @Override
+        public String getRData() {
+            return null;
+        }
+
+        @Override
+        public File createRtxt(String s) throws IOException {
+            return null;
         }
     }
 }

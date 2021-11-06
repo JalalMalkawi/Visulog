@@ -35,6 +35,6 @@ public class TestCountCommitsPerAuthorPlugin {
             log.add(new CommitBuilder("").setAuthor(authors[i % 3]).createCommit());
         }
         var res = CountCommitsPerAuthorPlugin.processLog(log);
-        System.out.println(res.getRtxt());
+        System.out.println(res.getRData());
     }
 }

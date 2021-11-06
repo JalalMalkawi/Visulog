@@ -3,6 +3,7 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -90,6 +91,16 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
             }
             html.append("</tbody></table></div>");
             return html.toString();
+        }
+
+        @Override
+        public String getRData() {
+            return null;
+        }
+
+        @Override
+        public File createRtxt(String s) throws IOException {
+            return null;
         }
     }
 }
