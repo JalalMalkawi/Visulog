@@ -1,7 +1,6 @@
 package up.visulog.analyzer;
 
 import org.junit.Test;
-import up.visulog.analyzer.*;
 import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.CommitBuilder;
 
@@ -39,6 +38,6 @@ public class TestCountCommitsPerAuthorPlugin {
         var res = CountCommitsPerAuthorPlugin.processLog(log);
         //System.out.println(res.getRData());
         Desktop desktop = Desktop.getDesktop();
-        desktop.open(res.createRtxt(res.getRData()));
+        desktop.open(res.getRtxt(res.getRData()));
     }
 }

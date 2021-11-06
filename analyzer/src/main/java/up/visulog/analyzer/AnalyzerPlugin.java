@@ -9,7 +9,7 @@ public interface AnalyzerPlugin extends Runnable {
         String getResultAsString();
         String getResultAsHtmlDiv();
         String getRData();
-        File createRtxt(String s) throws IOException;
+        File getRtxt(String s) throws IOException;
     }
 
     /**

@@ -68,7 +68,7 @@ public class CountMergeCommitsPlugin implements AnalyzerPlugin {
         }
 
         @Override
-        public File createRtxt(String s) throws IOException {
+        public File getRtxt(String s) throws IOException {
             return null;
         }
 
