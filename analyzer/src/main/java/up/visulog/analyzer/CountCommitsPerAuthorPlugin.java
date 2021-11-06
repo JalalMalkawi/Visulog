@@ -3,6 +3,7 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
     @Override
     public void run() {
-        result = processLog(Commit.parseLogFromCommand(configuration.getGitPath(),"log")); 
+        result = processLog(Commit.parseLogFromCommand(configuration.getGitPath(), "log"));
     }
 
     @Override
@@ -49,15 +50,36 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div> <h1>Number of authors:</h1> <ul>");
+            StringBuilder html = new StringBuilder("<div> <h1>Number of commits per author:</h1> <ul>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
-                String mail = nom_mail.split("<")[1].replaceAll(">"," ");
-                html.append(String.format("<li><a href=\"mailto:"+mail+"\"> "+nom+"</a> : "+item.getValue()+"</li>"));
+                String mail = nom_mail.split("<")[1].replaceAll(">", " ");
+                html.append(String.format("<li><a href=\"mailto:" + mail + "\"> " + nom + "</a> : " + item.getValue() + "</li>"));
             }
             html.append("</ul></div>");
             return html.toString();
         }
+
+        public String getRData() {
+            StringBuilder R_txt = new StringBuilder();
+            for (var item : commitsPerAuthor.entrySet()) {
+                String nom_mail = item.getKey();
+                String nom = nom_mail.split("<")[0];
+                R_txt.append(String.format(nom + " " + item.getValue() + "\n"));
+            }
+            return R_txt.toString();
+        }
+
+        public File getRtxt(String s) throws IOException {
+                File txt = new File("commitsPA.txt");
+                boolean append = txt.exists() ? false : true;
+                FileOutputStream fos = new FileOutputStream(txt, append);
+                fos.write(s.getBytes());
+                fos.close();
+                return txt;
+        }
+
     }
 }
+

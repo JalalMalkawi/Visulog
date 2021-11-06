@@ -3,6 +3,7 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -64,6 +65,16 @@ public class CountMergeCommitsPlugin implements AnalyzerPlugin {
         public String getResultAsHtmlDiv() {
             return "<div>Number of merge commits: " + getResultAsString() +
                     "</div>";
+        }
+
+        @Override
+        public File getRtxt(String s) throws IOException {
+            return null;
+        }
+
+        @Override
+        public String getRData() {
+            return null;
         }
     }
 }

@@ -4,6 +4,8 @@ import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
 //import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 //import java.util.Map;
 
@@ -44,6 +46,16 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             return "<div><h1>Total commits: " + getResultAsString() +
                     "</h1></div>";
+        }
+
+        @Override
+        public String getRData() {
+            return null;
+        }
+
+        @Override
+        public File getRtxt(String s) throws IOException {
+            return null;
         }
     }
 }

@@ -3,6 +3,8 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -135,7 +137,16 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
             return html.toString();
 
         }
-    
+
+        @Override
+        public File getRtxt(String s) throws IOException {
+            return null;
+        }
+
+        @Override
+        public String getRData() {
+            return null;
+        }
     }
     
 }

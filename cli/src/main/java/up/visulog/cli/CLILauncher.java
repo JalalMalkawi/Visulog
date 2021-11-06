@@ -30,7 +30,6 @@ public class CLILauncher {
             var results = analyzer.computeResults();
             makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
         } else displayHelpAndExit();
-        
     }
 
 
