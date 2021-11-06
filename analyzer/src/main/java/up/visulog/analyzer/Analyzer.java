@@ -21,8 +21,7 @@ public class Analyzer {
         List<AnalyzerPlugin> plugins = new ArrayList<>();
         for (var pluginConfigEntry: config.getPluginConfigs().entrySet()) {
             String pluginName = pluginConfigEntry.getKey();
-            PluginConfig pluginConfig = pluginConfigEntry.getValue();
-            Optional<AnalyzerPlugin> plugin = makePlugin(pluginName, pluginConfig);
+            Optional<AnalyzerPlugin> plugin = makePlugin(pluginName);
             plugin.ifPresent(plugins::add);
         }
         // run all the plugins
@@ -38,7 +37,7 @@ public class Analyzer {
     }
 
     // TODO: find a way so that the list of plugins is not hardcoded in this factory
-    private Optional<AnalyzerPlugin> makePlugin(String pluginName, PluginConfig pluginConfig) {
+    private Optional<AnalyzerPlugin> makePlugin(String pluginName) {
         switch (pluginName) {
             case "countCommits" : return Optional.of(new CountCommitsPerAuthorPlugin(config));
             case "countTotalCommits" : return Optional.of(new CountTotalCommitsPlugin(config));
