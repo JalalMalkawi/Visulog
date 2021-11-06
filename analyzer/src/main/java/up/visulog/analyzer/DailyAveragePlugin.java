@@ -88,7 +88,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         var result = new Result();
 
         for (var commit:commitsPerAuthor.entrySet())
-            result.dailyAverage.put(commit.getKey(), calculAverage(commit.getValue(), commit.getKey())); 
+            result.dailyAverage.put(commit.getKey(), calculAverage(commit.getValue(), commit.getKey()));
 
         return result;
 
