@@ -50,14 +50,16 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div> <h1>Number of commits per author:</h1> <ul>");
+            // <div><h1 onclick=\"toggle()\">Number of authors:</h1><div id=\"showDiv\">" + getResultAsString() +
+            //                    "</div></div>
+            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1><div id=\"showDiv2\"><ul>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
                 String mail = nom_mail.split("<")[1].replaceAll(">", " ");
                 html.append(String.format("<li><a href=\"mailto:" + mail + "\"> " + nom + "</a> : " + item.getValue() + "</li>"));
             }
-            html.append("</ul></div>");
+            html.append("</ul></div></div>");
             return html.toString();
         }
 

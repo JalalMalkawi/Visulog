@@ -5,13 +5,7 @@ import up.visulog.gitrawdata.Commit;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import java.text.DecimalFormat;
+import java.util.*;
 
 public class DailyAveragePlugin implements AnalyzerPlugin{
 
@@ -124,7 +118,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         @Override
         public String getResultAsHtmlDiv(){
 
-            StringBuilder html=new StringBuilder("<div> <h1>Daily Average Per Author:</h1> <ul>");
+            StringBuilder html=new StringBuilder("<div> <h1 onclick=\"toggle('showDiv3')\">Daily Average Per Author:</h1> <div id=\"showDiv3\"><ul>");
 
             for (var item : dailyAverage.entrySet()) {
                 String nom_mail = item.getKey();
@@ -132,7 +126,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
                 String mail = nom_mail.split("<")[1].replaceAll(">"," ");
                 html.append(String.format("<li><a href=\"mailto:"+mail+"\"> "+nom+"</a> : "+item.getValue()+"</li>"));
             }
-            html.append("</ul></div>");
+            html.append("</ul></div></div>");
 
             return html.toString();
 

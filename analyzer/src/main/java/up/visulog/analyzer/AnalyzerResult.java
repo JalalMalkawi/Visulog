@@ -20,7 +20,17 @@ public class AnalyzerResult {
     }
 
     public String toHTML() { // insertion de l'invocation du code css
-        return "<html><head><link rel=\"stylesheet\" href=\"result.css\" /><head><body>"+subResults.stream().map(AnalyzerPlugin.Result::getResultAsHtmlDiv).reduce("", (acc, cur) -> acc + cur) + "</body></html>";
+        return "<html><head><link rel=\"stylesheet\" href=\"result.css\" /><head><body>"+subResults.stream().map(AnalyzerPlugin.Result::getResultAsHtmlDiv).reduce("", (acc, cur) -> acc + cur) + "<script>\n" +
+                "function toggle(w) {\n" +
+                "  var x = document.getElementById(w);\n" +
+                "  if (x.style.display === \"none\") {\n" +
+                "    x.style.display = \"block\";\n" +
+                "  } else {\n" +
+                "    x.style.display = \"none\";\n" +
+                "  }\n" +
+                "}\n" +
+                "</script>\n" +
+                "\n</body></html>";
     }
 
 }

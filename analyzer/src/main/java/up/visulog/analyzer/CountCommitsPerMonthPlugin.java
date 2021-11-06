@@ -76,9 +76,9 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div>Commits Per Month");
-            if(commitsPerMonth.isEmpty()) return html.append(" : No commit</div>").toString();
-            html.append(" <table><tbody><thead><tr><th>Month </th><th>Commits count</th></thead>");
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv4')\">Commits Per Month :</h1>");
+            if(commitsPerMonth.isEmpty()) return html.append(" No commit</div>").toString();
+            html.append(" <div id=\"showDiv4\"><table><tbody><thead><tr><th>Month </th><th>Commits count</th></thead>");
             for (String item : commitsPerMonth) {
                 if(item!=null) {
                     html.append("<tr>");
@@ -89,7 +89,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
                     html.append("</tr>");
                 }
             }
-            html.append("</tbody></table></div>");
+            html.append("</tbody></table></div></div>");
             return html.toString();
         }
 

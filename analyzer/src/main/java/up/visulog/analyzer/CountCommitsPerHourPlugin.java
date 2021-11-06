@@ -79,9 +79,9 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div>Commits Per Hour");
-            if(commitsPerHour.isEmpty()) return html.append(" : No commit</div>").toString();
-            html.append(" <table><tbody><thead><tr><th>Hour</th><th>Commits count</th></thead>");
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv5')\">Commits Per Hour : </h1>");
+            if(commitsPerHour.isEmpty()) return html.append("No commit</div>").toString();
+            html.append(" <div id=\"showDiv5\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th></thead>");
             for (String item : commitsPerHour) {
                 if(item!=null) {
                     html.append("<tr>");
@@ -92,7 +92,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
                     html.append("</tr>");
                 }
             }
-            html.append("</tbody></table></div>");
+            html.append("</tbody></table></div></div>");
             return html.toString();
         }
 

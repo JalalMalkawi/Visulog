@@ -76,9 +76,9 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div>Commits Per Day");
-            if(commitsPerDay.isEmpty()) return html.append(" : No commit</div>").toString();
-            html.append(" <table><tbody><thead><tr><th>Day </th><th>Commits count</th></thead>");
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day :</h1>");
+            if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
+            html.append("<div id=\"showDiv1\"> <table><tbody><thead><tr><th>Day </th><th>Commits count</th></thead>");
             for (String item : commitsPerDay) {
                 if(item!=null) {
                     html.append("<tr>");
@@ -89,7 +89,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                     html.append("</tr>");
                 }
             }
-            html.append("</tbody></table></div>");
+            html.append("</tbody></table></div></div>");
             return html.toString();
         }
 

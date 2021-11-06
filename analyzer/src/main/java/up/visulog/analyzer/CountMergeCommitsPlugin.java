@@ -5,7 +5,6 @@ import up.visulog.gitrawdata.GetGitCommandOutput;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.LinkedList;
 
 public class CountMergeCommitsPlugin implements AnalyzerPlugin {
@@ -63,7 +62,7 @@ public class CountMergeCommitsPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            return "<div>Number of merge commits: " + getResultAsString() +
+            return "<div><h1>Number of merge commits:</h1>" + getResultAsString() +
                     "</div>";
         }
 

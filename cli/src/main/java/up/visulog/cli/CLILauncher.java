@@ -48,6 +48,11 @@ public class CLILauncher {
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) throws IOException {
         var gitPath = FileSystems.getDefault().getPath(".");
         var plugins = new HashMap<String, PluginConfig>();
+        String[] s = {"countCommits","countTotalCommits","countAuthor","countCommitsPerDay",
+                "countCommitsPerHour","dailyAverage","countCommitsPerMonth","countMergeCommits"};
+        if(args.length==0){
+            for(String st : s) plugins.put(st, new PluginConfig() {});
+        }
         for (var arg : args) {
             if (arg.startsWith("--")) {
                 String[] parts = arg.split("=");
@@ -58,25 +63,7 @@ public class CLILauncher {
                     switch (pName) {
                         case "--addPlugin":
                             // TODO: parse argument and make an instance of PluginConfig
-
-                            // Let's just trivially do this, before the TODO is fixed:
-
-                            if (pValue.equals("countCommits")) plugins.put("countCommits", new PluginConfig() {
-                            });
-                            if (pValue.equals("countTotalCommits")) plugins.put("countTotalCommits", new PluginConfig() {
-                            });
-                            if (pValue.equals("countAuthor")) plugins.put("countAuthor", new PluginConfig() {
-                            });
-                            if (pValue.equals("countCommitsPerDay")) plugins.put("countCommitsPerDay", new PluginConfig() {
-                            });
-                            if (pValue.equals("countCommitsPerHour")) plugins.put("countCommitsPerHour", new PluginConfig() {
-                            });
-                            if (pValue.equals("dailyAverage")) plugins.put("dailyAverage", new PluginConfig() {                                
-                            });
-                            if (pValue.equals("countCommitsPerMonth")) plugins.put("countCommitsPerMonth", new PluginConfig() {
-                            });
-                            if (pValue.equals("countMergeCommits")) plugins.put("countMergeCommits", new PluginConfig() {
-                            });
+                            for(String st : s) if(pValue.equals(st)) plugins.put(st, new PluginConfig() {});
                             break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
