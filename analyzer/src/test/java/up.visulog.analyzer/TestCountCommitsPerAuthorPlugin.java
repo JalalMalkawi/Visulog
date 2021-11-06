@@ -5,6 +5,8 @@ import up.visulog.analyzer.*;
 import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.CommitBuilder;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +29,7 @@ public class TestCountCommitsPerAuthorPlugin {
         assertEquals(entries, sum.longValue());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         var log = new ArrayList<Commit>();
         String[] authors = {"foo", "bar", "baz"};
         var entries = 20;
@@ -35,6 +37,8 @@ public class TestCountCommitsPerAuthorPlugin {
             log.add(new CommitBuilder("").setAuthor(authors[i % 3]).createCommit());
         }
         var res = CountCommitsPerAuthorPlugin.processLog(log);
-        System.out.println(res.getRData());
+        //System.out.println(res.getRData());
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(res.createRtxt(res.getRData()));
     }
 }
