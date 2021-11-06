@@ -42,6 +42,10 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
             return String.valueOf(sum);
         }
 
+        public int getSum() {
+            return sum;
+        }
+
         @Override
         public String getResultAsHtmlDiv() {
             return "<div><h1>Total commits: </h1>" + getResultAsString() +

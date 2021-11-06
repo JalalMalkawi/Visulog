@@ -16,8 +16,6 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         this.configuration = generalConfiguration;
     }
 
-
-
     @Override
     public void run() {
         result =  aux();
@@ -59,6 +57,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         return r0;
     }
 
+
     @Override
     public Result getResult() {
         if (result == null) run();
@@ -81,7 +80,11 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv5')\">Commits Per Hour : </h1>");
             if(commitsPerHour.isEmpty()) return html.append("No commit</div>").toString();
-            html.append(" <div id=\"showDiv5\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th></thead>");
+            html.append(" <div id=\"showDiv5\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th><th>Proportion</th></thead>");
+            int c = 0;
+            for(String item : commitsPerHour) {
+                c+=Integer.parseInt(item.split(" ")[0]);
+            }
             for (String item : commitsPerHour) {
                 if(item!=null) {
                     html.append("<tr>");
@@ -89,6 +92,10 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
                     String when = item.split(" ")[1]+" h";
                     html.append("<td>").append(when).append("</td>");
                     html.append("<td>").append(howMany).append("</td>");
+                    double percent =(double)Integer.parseInt(howMany)/c*100;
+                    int rounded = (int)percent;
+                    if(Math.abs(percent-(int)percent)>0.5) rounded=(int)percent+1;
+                    html.append("<td>").append(rounded).append(" %</td>");
                     html.append("</tr>");
                 }
             }
