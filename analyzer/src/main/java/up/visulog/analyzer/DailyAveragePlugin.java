@@ -82,8 +82,9 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         var result = new Result();
 
         for (var commit:commitsPerAuthor.entrySet())
-            result.dailyAverage.put(commit.getKey(), Double.valueOf(commit.getValue()/totalTime.remove(0)));
-        
+            result.dailyAverage.put(commit.getKey(), Double.valueOf(commit.getValue()/totalTime.remove(0))); // FIXME : souci à l'execution de :
+                                                                                // ./gradlew run --args="https://github.com/sherlock-project/sherlock"
+                                                                                //  Index 0 out of bounds for length 0
 
         return result;
 
