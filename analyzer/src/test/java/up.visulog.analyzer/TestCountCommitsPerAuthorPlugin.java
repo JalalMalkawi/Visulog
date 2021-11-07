@@ -5,12 +5,14 @@ import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.CommitBuilder;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestCountCommitsPerAuthorPlugin {
+
     /* Let's check whether the number of authors is preserved and that the sum of the commits of each author is equal to the total number of commits */
     @Test
     public void checkCommitSum() {
@@ -37,7 +39,7 @@ public class TestCountCommitsPerAuthorPlugin {
         }
         var res = CountCommitsPerAuthorPlugin.processLog(log);
         //System.out.println(res.getRData());
-        Desktop desktop = Desktop.getDesktop();
-        desktop.open(res.getRtxt(res.getRData()));
+        BufferedReader b = new BufferedReader(res.getRtxt(res.getRData()));
+        System.out.println(b);
     }
 }

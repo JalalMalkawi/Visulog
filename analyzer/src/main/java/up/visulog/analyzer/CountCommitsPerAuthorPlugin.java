@@ -73,13 +73,14 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             return R_txt.toString();
         }
 
-        public File getRtxt(String s) throws IOException {
+        public FileReader getRtxt(String s) throws IOException {
                 File txt = new File("commitsPA.txt");
                 boolean append = txt.exists() ? false : true;
                 FileOutputStream fos = new FileOutputStream(txt, append);
                 fos.write(s.getBytes());
                 fos.close();
-                return txt;
+                FileReader readerTxt = new FileReader(txt);
+                return readerTxt;
         }
 
     }

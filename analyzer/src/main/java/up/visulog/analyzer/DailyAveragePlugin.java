@@ -4,6 +4,7 @@ import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
@@ -134,7 +135,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         }
 
         @Override
-        public File getRtxt(String s) throws IOException {
+        public FileReader getRtxt(String s) throws IOException {
             return null;
         }
 
