@@ -39,7 +39,10 @@ public class TestCountCommitsPerAuthorPlugin {
         }
         var res = CountCommitsPerAuthorPlugin.processLog(log);
         //System.out.println(res.getRData());
+        String line;
         BufferedReader b = new BufferedReader(res.getRtxt(res.getRData()));
-        System.out.println(b);
+        while((line = b.readLine()) != null){
+            System.out.println(line);
+        }
     }
 }
