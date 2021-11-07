@@ -1,5 +1,5 @@
 package up.visulog.analyzer;
-
+import java.io.IOException;
 import java.util.List;
 
 
@@ -31,6 +31,11 @@ public class AnalyzerResult {
                 "}\n" +
                 "</script>\n" +
                 "\n</body></html>";
+    }
+    
+    
+    public static void runWithR(String nomFichier)throws IOException{
+        Process process = new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
     }
 
 }
