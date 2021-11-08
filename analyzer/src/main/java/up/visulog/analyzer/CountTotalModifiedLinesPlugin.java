@@ -30,7 +30,7 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
             id1 = gitLog.get(i+1).getId();
             id2 = gitLog.get(i).getId();
             
-            res.average += this.getLineDifference(id1, id2);
+            res.sum += this.getLineDifference(id1, id2);
         }
         return res;
     }
@@ -80,12 +80,12 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
 
     public static class Result implements AnalyzerPlugin.Result
     {
-        private int average;
+        private int sum;
 
         @Override
         public String getResultAsString() 
         {
-            return String.valueOf(average);
+            return String.valueOf(sum);
         }
 
         @Override

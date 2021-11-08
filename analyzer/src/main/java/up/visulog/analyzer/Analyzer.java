@@ -49,6 +49,7 @@ public class Analyzer {
             case "countMergeCommits" : return Optional.of(new CountMergeCommitsPlugin(config));
             case "countModifiedLinesPerAuthor" : return Optional.of(new CountModifiedLinesPerAuthorPlugin(config));
             case "countTotalModifiedLines" : return Optional.of(new CountTotalModifiedLinesPlugin(config));
+            case "countModifiedLinesPerDay" : return Optional.of(new CountModifiedLinesPerDayPlugin(config));
             default : return Optional.empty();
         }
     }

@@ -51,7 +51,7 @@ public class CLILauncher {
         String[] s = {"countCommits","countTotalCommits","countAuthor",
                       "countCommitsPerDay","countCommitsPerHour","dailyAverage",
                       "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
-                      "countTotalModifiedLines"};
+                      "countTotalModifiedLines","countModifiedLinesPerDay"};
         if(args.length==0) for(String st : s) plugins.put(st, new PluginConfig() {});
         boolean opt=false;
         for (var arg : args) {
