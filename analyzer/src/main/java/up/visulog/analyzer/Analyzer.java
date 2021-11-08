@@ -48,6 +48,7 @@ public class Analyzer {
             case "countCommitsPerMonth" : return Optional.of(new CountCommitsPerMonthPlugin(config));
             case "countMergeCommits" : return Optional.of(new CountMergeCommitsPlugin(config));
             case "countModifiedLinesPerAuthor" : return Optional.of(new CountModifiedLinesPerAuthorPlugin(config));
+            case "countTotalModifiedLines" : return Optional.of(new CountTotalModifiedLinesPlugin(config));
             default : return Optional.empty();
         }
     }

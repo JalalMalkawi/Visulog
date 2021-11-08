@@ -48,8 +48,10 @@ public class CLILauncher {
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) throws IOException {
         var gitPath = FileSystems.getDefault().getPath(".");
         var plugins = new HashMap<String, PluginConfig>();
-        String[] s = {"countCommits","countTotalCommits","countAuthor","countCommitsPerDay",
-                "countCommitsPerHour","dailyAverage","countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor"};
+        String[] s = {"countCommits","countTotalCommits","countAuthor",
+                      "countCommitsPerDay","countCommitsPerHour","dailyAverage",
+                      "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
+                      "countTotalModifiedLines"};
         if(args.length==0) for(String st : s) plugins.put(st, new PluginConfig() {});
         boolean opt=false;
         for (var arg : args) {
