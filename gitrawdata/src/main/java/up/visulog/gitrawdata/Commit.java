@@ -32,6 +32,11 @@ public class Commit {
         return author;
     }
 
+    public String getId()
+    {
+        return this.id;
+    }
+
     public String getDate() {
         return date;
     }

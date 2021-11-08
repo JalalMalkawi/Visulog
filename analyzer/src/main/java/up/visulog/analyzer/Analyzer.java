@@ -47,6 +47,7 @@ public class Analyzer {
             case "dailyAverage" : return Optional.of(new DailyAveragePlugin(config));
             case "countCommitsPerMonth" : return Optional.of(new CountCommitsPerMonthPlugin(config));
             case "countMergeCommits" : return Optional.of(new CountMergeCommitsPlugin(config));
+            case "countModifiedLinesPerAuthor" : return Optional.of(new CountModifiedLinesPerAuthorPlugin(config));
             default : return Optional.empty();
         }
     }
