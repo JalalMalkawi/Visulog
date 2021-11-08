@@ -1,6 +1,6 @@
 # get data from file
 # column 1 is labels (row names)
-x <- read.table("../commitsPA.txt", header = FALSE, row.names = 1)
+x <- read.table("./visulog/commitsPA.txt", header = FALSE, row.names = 1)
 colnames(x) <- "nb"
 attach(x)
 
@@ -10,7 +10,7 @@ tofile <- TRUE # set to FALSE to print in RStudio
 
 nbauth <- data.frame(table(nb))
 
-#nbauth
+nbauth
 
 pct <- 100*nb/sum(nb) # normalize to empirical probabilities (%)
 # build colors from %

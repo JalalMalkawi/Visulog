@@ -1,12 +1,14 @@
 # get data from file
 # column 1 is labels (row names)
-x <- read.table("../commitsPA.txt", header = FALSE, row.names = 1)
+
+
+x <- read.table("./visulog/commitsPA.txt", header = FALSE, row.names = 1)
 colnames(x) <- "nb"
 attach(x)
 
 ## SETTINGS:
 prob <- FALSE # set to TRUE if barplot(%) desired
-tofile <- TRUE # set to FALSE to print in RStudio
+tofile <- FALSE # set to FALSE to print in RStudio
 
 
 
