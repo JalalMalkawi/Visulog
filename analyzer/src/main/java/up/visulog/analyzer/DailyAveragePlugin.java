@@ -13,7 +13,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
 
-    private static List<Long> totalTime=new ArrayList<>();
+    private static Map<String, Long> totalTime=new HashMap<>();
 
     public DailyAveragePlugin(Configuration generalConfiguration){
 
@@ -70,11 +70,17 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
         for (var commit:gitLog) {
             var nb=aux.getOrDefault(commit.getAuthor(), 0);
-            if(nb==0) totalTime.add(timeFormFirstCommit(commit));
+            if(nb==0) totalTime.put(commit.getAuthor(), timeFormFirstCommit(commit));
             aux.put(commit.getAuthor(), nb+1);
         }
 
         return aux;
+
+    }
+
+    public static double calculAverage(int commits, String key){
+
+        return Double.valueOf(commits/totalTime.get(key));
 
     }
 
@@ -83,9 +89,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         var result = new Result();
 
         for (var commit:commitsPerAuthor.entrySet())
-            result.dailyAverage.put(commit.getKey(), Double.valueOf(commit.getValue()/totalTime.remove(0))); // FIXME : souci à l'execution de :
-                                                                                // ./gradlew run --args="https://github.com/sherlock-project/sherlock"
-                                                                                //  Index 0 out of bounds for length 0
+            result.dailyAverage.put(commit.getKey(), calculAverage(commit.getValue(), commit.getKey())); 
 
         return result;
 
