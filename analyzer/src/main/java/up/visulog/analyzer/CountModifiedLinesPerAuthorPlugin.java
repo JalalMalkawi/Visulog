@@ -106,6 +106,11 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
     {
         private final HashMap<String,Integer[]> modifiedLinesPerAuthor = new HashMap<>();
 
+        public HashMap<String,Integer[]> getResultAsHashMap()
+        {
+            return modifiedLinesPerAuthor;
+        }
+
         public String getResultAsString()
         {
             String res = "";

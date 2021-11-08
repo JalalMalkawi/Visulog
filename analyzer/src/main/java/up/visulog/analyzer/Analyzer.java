@@ -50,6 +50,7 @@ public class Analyzer {
             case "countModifiedLinesPerAuthor" : return Optional.of(new CountModifiedLinesPerAuthorPlugin(config));
             case "countTotalModifiedLines" : return Optional.of(new CountTotalModifiedLinesPlugin(config));
             case "countModifiedLinesPerDay" : return Optional.of(new CountModifiedLinesPerDayPlugin(config));
+            case "countModifiedLinesPerAuthorPerDay" : return Optional.of(new CountModifiedLinesPerAuthorPerDayPlugin(config));
             default : return Optional.empty();
         }
     }
