@@ -66,7 +66,7 @@ public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
 
     public static class Result implements AnalyzerPlugin.Result
     {
-        private HashMap<String,Double> modifiedLinesPerAuthor;
+        private HashMap<String,Double> modifiedLinesPerAuthor = new HashMap<String,Double>();
 
         @Override
         public String getResultAsString() 
