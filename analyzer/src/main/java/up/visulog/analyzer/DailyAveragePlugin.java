@@ -6,6 +6,7 @@ import up.visulog.gitrawdata.Commit;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class DailyAveragePlugin implements AnalyzerPlugin{
@@ -60,7 +61,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         Calendar calFirstCom=Calendar.getInstance();
         calFirstCom.set(Integer.valueOf(date[4]), stringToMonth(date[1]), Integer.valueOf(date[2]));
 
-        return daysBetween(calCurrent, calFirstCom);
+        return Math.abs(daysBetween(calCurrent, calFirstCom));
 
     }
 
@@ -78,9 +79,11 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
     }
 
-    public static double calculAverage(int commits, String key){
+    public static BigDecimal calculAverage(int commits, String key){
 
-        return Double.valueOf(commits/totalTime.get(key));
+        BigDecimal bd1=new BigDecimal(commits);
+        BigDecimal bd2=new BigDecimal(totalTime.get(key));
+        return bd1.divide(bd2, 3, BigDecimal.ROUND_HALF_UP);
 
     }
 
@@ -112,7 +115,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
     public static class Result implements AnalyzerPlugin.Result {
 
-        private final Map<String, Double> dailyAverage=new HashMap<>();
+        private final Map<String, BigDecimal> dailyAverage=new HashMap<>();
 
         @Override
         public String getResultAsString(){
