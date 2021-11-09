@@ -1,5 +1,6 @@
 package up.visulog.cli;
 
+import error.CustomError;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -9,6 +10,7 @@ import up.visulog.config.PluginConfig;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -23,7 +25,7 @@ import java.util.Optional;
 public class CLILauncher {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         var config = makeConfigFromCommandLineArgs(args);
         if (config.isPresent()) {
             var analyzer = new Analyzer(config.get());
@@ -34,18 +36,34 @@ public class CLILauncher {
 
 
 
-    public static void makeFileOfResAndOpenIt(String s) throws IOException {
+    public static void makeFileOfResAndOpenIt(String s) {
 
-        FileUtils.writeStringToFile(new File("result.html"), "");
-        FileOutputStream fos = new FileOutputStream("result.html");
-        fos.write(s.getBytes());
-        fos.flush();
-        fos.close();
+        try {
+            FileUtils.writeStringToFile(new File("result.html"), "");
+        } catch (IOException ignored) { // result.html always exists
+        }
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("result.html");
+        } catch (FileNotFoundException ignored) { // same
+        }
+        try {
+            fos.write(s.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (IOException ignored) { // results.toHTML() never null/empty
+        }
         File htmlFile = new File("result.html");
-        Desktop.getDesktop().browse(htmlFile.toURI());
+        try {
+            Desktop.getDesktop().browse(htmlFile.toURI());
+        } catch (IOException e) {
+            CustomError err = new CustomError("An error occurred while creating the error page, your default browser is not found " +
+                    "or didn't launched");
+            System.exit(0);
+        }
     }
 
-    static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) throws IOException {
+    static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
         var gitPath = FileSystems.getDefault().getPath(".");
         var plugins = new HashMap<String, PluginConfig>();
         String[] s = {"countCommits","countTotalCommits","countAuthor",
@@ -82,16 +100,16 @@ public class CLILauncher {
                     for(String st : s) plugins.put(st, new PluginConfig() {});
                 }
                 // arg est ici le lien d'un repo git
-                // COMMAND DE TEST : ./gradlew run --args="--addPlugin=countTotalCommits https://gitlab.com/edouardklein/falsisign"
                 if (isValidGitUrl(arg)){
                     CLILauncher c = new CLILauncher();
                     try {
                         FileUtils.deleteDirectory(new File("../dataFromGit"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } catch (IOException ignored) {
                     }
                     c.CloneRep(arg);
                     gitPath = Paths.get("../dataFromGit");
+                }else{
+                    CustomError err = new CustomError("Error : please check the link of your git repository");
                 }
             }
         }
@@ -111,14 +129,23 @@ public class CLILauncher {
             new URL(url).toURI();
         }
         catch (MalformedURLException | URISyntaxException e) {
-            System.out.print("An error occurred with git-repo link : please check if you typed it correctly");
+            String s = "An error occurred with git-repo link : please check if you typed it correctly";
+            System.out.print(s);
+            CustomError err = new CustomError(s);
         }
     }
 
-    public static boolean isValidGitUrl(String url) throws IOException  {
-        if(url.contains("gitlab.com") || url.contains("github.com") || url.contains("gaufre.informatique.univ-paris-diderot.fr") && getResponseCode(url) != 404){
-            CheckUrl(url);
-            return true;
+    public static boolean isValidGitUrl(String url) {
+        try {
+            if(url.contains("gitlab.com") || url.contains("github.com")
+                    || url.contains("gaufre.informatique.univ-paris-diderot.fr") && getResponseCode(url) != 404){
+                CheckUrl(url);
+                return true;
+            }
+        } catch (IOException e) {
+            CustomError err = new CustomError("An error occurred while accessing to your repository link, " +
+                    "please check your internet connexion or if the distant server is aviable");
+            System.exit(0);
         }
         return false;
     }
@@ -132,7 +159,10 @@ public class CLILauncher {
                     .setDirectory(Paths.get(cloneDirectoryPath).toFile())
                     .call();
         } catch (GitAPIException e) {
-            System.out.println("An error occurred while cloning repository, please check your internet connexion");
+            String st = "An error occurred while cloning repository, please check your internet connexion" +
+                    " or if the repository is in private mode";
+            System.out.println(s);
+            CustomError err = new CustomError(st);
             System.exit(0);
         }
     }
