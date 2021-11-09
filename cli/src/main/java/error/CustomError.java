@@ -32,7 +32,7 @@ public class CustomError {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream("Errors.html");
-            fos.write(this.error.getBytes());
+            fos.write(st.getBytes());
             fos.flush();
             fos.close();
         } catch (FileNotFoundException e) {

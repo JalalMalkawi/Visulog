@@ -25,7 +25,7 @@ import java.util.Optional;
 public class CLILauncher {
 
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         var config = makeConfigFromCommandLineArgs(args);
         if (config.isPresent()) {
             var analyzer = new Analyzer(config.get());
@@ -109,7 +109,8 @@ public class CLILauncher {
                     c.CloneRep(arg);
                     gitPath = Paths.get("../dataFromGit");
                 }else{
-                    CustomError err = new CustomError("Error : please check the link of your git repository");
+                    CustomError err = new CustomError("Error : please check the link of your git repository, " +
+                            "we are running Visulog on this Visulog project");
                 }
             }
         }
