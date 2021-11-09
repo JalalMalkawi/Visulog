@@ -9,8 +9,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class CustomError {
-    private String error="An error occured.";
+    private String error="An error occurred.";
 
+
+    public String generateHTMLError(){
+        return "<div id=\"err\">\n" + error + "</div>\n";
+    }
     public void generateError() {
         String st = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
