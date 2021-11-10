@@ -5,6 +5,7 @@ import up.visulog.gitrawdata.Commit;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class DailyAveragePlugin implements AnalyzerPlugin{
@@ -12,7 +13,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
 
-    private static List<Long> totalTime=new ArrayList<>();
+    private static Map<String, Long> totalTime=new HashMap<>();
 
     public DailyAveragePlugin(Configuration generalConfiguration){
 
@@ -58,7 +59,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         Calendar calFirstCom=Calendar.getInstance();
         calFirstCom.set(Integer.valueOf(date[4]), stringToMonth(date[1]), Integer.valueOf(date[2]));
 
-        return daysBetween(calCurrent, calFirstCom);
+        return Math.abs(daysBetween(calCurrent, calFirstCom));
 
     }
 
@@ -68,11 +69,19 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
         for (var commit:gitLog) {
             var nb=aux.getOrDefault(commit.getAuthor(), 0);
-            if(nb==0) totalTime.add(timeFormFirstCommit(commit));
+            if(nb==0) totalTime.put(commit.getAuthor(), timeFormFirstCommit(commit));
             aux.put(commit.getAuthor(), nb+1);
         }
 
         return aux;
+
+    }
+
+    public static BigDecimal calculAverage(int commits, String key){
+
+        BigDecimal bd1=new BigDecimal(commits);
+        BigDecimal bd2=new BigDecimal(totalTime.get(key));
+        return bd1.divide(bd2, 3, BigDecimal.ROUND_HALF_UP);
 
     }
 
@@ -81,9 +90,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         var result = new Result();
 
         for (var commit:commitsPerAuthor.entrySet())
-            result.dailyAverage.put(commit.getKey(), Double.valueOf(commit.getValue()/totalTime.remove(0))); // FIXME : souci à l'execution de :
-                                                                                // ./gradlew run --args="https://github.com/sherlock-project/sherlock"
-                                                                                //  Index 0 out of bounds for length 0
+            result.dailyAverage.put(commit.getKey(), calculAverage(commit.getValue(), commit.getKey())); 
 
         return result;
 
@@ -106,7 +113,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
     public static class Result implements AnalyzerPlugin.Result {
 
-        private final Map<String, Double> dailyAverage=new HashMap<>();
+        private final Map<String, BigDecimal> dailyAverage=new HashMap<>();
 
         @Override
         public String getResultAsString(){
