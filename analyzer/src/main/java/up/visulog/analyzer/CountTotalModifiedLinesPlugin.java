@@ -101,7 +101,7 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
         }
 
         @Override
-        public FileReader getRtxt(String s) throws IOException {
+        public FileReader getRtxt(String s, String lien) throws IOException {
             // TODO Auto-generated method stub
             return null;
         }

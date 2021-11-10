@@ -73,7 +73,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             return R_txt.toString();
         }
 
-        public FileReader getRtxt(String s) throws IOException {
+        public FileReader getRtxt(String s, String lien) throws IOException {
                 File txt = new File("commitsPA.txt");
                 boolean append = txt.exists() ? false : true;
                 FileOutputStream fos = new FileOutputStream(txt, append);
@@ -81,6 +81,10 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
                 fos.close();
                 FileReader readerTxt = new FileReader(txt);
                 return readerTxt;
+        }
+
+        public static void runWithR(String nomFichier)throws IOException {
+            Process process = new ProcessBuilder("R", "CMD", "BATCH", nomFichier, "result.txt").start();
         }
 
     }

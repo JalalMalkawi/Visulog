@@ -4,7 +4,6 @@ import org.junit.Test;
 import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.CommitBuilder;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,9 +39,10 @@ public class TestCountCommitsPerAuthorPlugin {
         var res = CountCommitsPerAuthorPlugin.processLog(log);
         //System.out.println(res.getRData());
         String line;
-        BufferedReader b = new BufferedReader(res.getRtxt(res.getRData()));
+        BufferedReader b = new BufferedReader(res.getRtxt(res.getRData(), ));
         while((line = b.readLine()) != null){
             System.out.println(line);
         }
+        //AnalyzerResult.runWithR("commitsPA.txt");
     }
-}
+    }
