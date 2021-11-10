@@ -4,6 +4,7 @@ import java.util.List;
 
 
 public class AnalyzerResult {
+
     public List<AnalyzerPlugin.Result> getSubResults() {
         return subResults;
     }

@@ -3,7 +3,6 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -26,7 +25,6 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         long timeCurrent=calCurrent.getTimeInMillis();
         long timeFirstCom=calFirstCom.getTimeInMillis();
         return (timeCurrent-timeFirstCom)/86400000; //1000*60*60*24
-
     }
 
     public static int stringToMonth(String s){
@@ -135,7 +133,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         }
 
         @Override
-        public FileReader getRtxt(String s) throws IOException {
+        public FileReader getRtxt(String s, String lien) throws IOException {
             return null;
         }
 

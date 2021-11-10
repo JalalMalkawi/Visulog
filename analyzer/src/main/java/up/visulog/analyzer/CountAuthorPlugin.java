@@ -3,7 +3,6 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -57,7 +56,7 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
         }
 
         @Override
-        public FileReader getRtxt(String s) throws IOException {
+        public FileReader getRtxt(String s, String lien) throws IOException {
             return null;
         }
     }

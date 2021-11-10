@@ -7,6 +7,7 @@ import up.visulog.analyzer.Analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.config.PluginConfig;
 
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
