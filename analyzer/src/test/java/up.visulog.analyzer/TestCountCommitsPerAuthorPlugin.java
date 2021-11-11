@@ -43,6 +43,12 @@ public class TestCountCommitsPerAuthorPlugin {
         while((line = b.readLine()) != null){
             System.out.println(line);
         }
-        //AnalyzerResult.runWithR("commitsPA.txt");
+        try {
+            mkdir(".visulogRTempFiles");
+            //CREER LE FICHIER .txt ICI avec: String lien = pwd() + "/.visulogRTempFiles"
+            //runWithR("commitsPA.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     }

@@ -68,7 +68,7 @@ public class CLILauncher {
         var gitPath = FileSystems.getDefault().getPath(".");
         var plugins = new HashMap<String, PluginConfig>();
         String[] s = {"countCommits","countTotalCommits","countAuthor",
-                      "countCommitsPerDay","countCommitsPerHour","dailyAverage",
+                      "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                       "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
                       "countTotalModifiedLines","countModifiedLinesPerDay","countModifiedLinesPerAuthorPerDay"};
         if(args.length==0) for(String st : s) plugins.put(st, new PluginConfig() {});
