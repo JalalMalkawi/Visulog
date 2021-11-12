@@ -84,7 +84,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             int max= 10;
             while (list.hasNext()){
                 String item= list.next();
-                if(commitsPerDay.size()-commitsPerDay.indexOf(item)== max){
+                if(commitsPerDay.size()-commitsPerDay.indexOf(item)== max+1){
                     html.append("</tbody>" + "</table>" +"<p onclick=\"toggle('showDiv1SousPartie')\"> suite :<p>" +"<div id=\"showDiv1SousPartie\">" + "<table>" +" <tbody>");
                 }
                 if(item!=null) {

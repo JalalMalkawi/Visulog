@@ -46,8 +46,7 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            return "<div><h1>Number of authors:</h1><div>" + getResultAsString() +
-                    "</div>";
+            return "<div><h1>Number of authors:</h1><div>" + getResultAsString() + "</div>";
         }
 
         @Override
