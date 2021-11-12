@@ -6,6 +6,7 @@ import up.visulog.gitrawdata.GetGitCommandOutput;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
@@ -78,14 +79,20 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day :</h1>");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
-            html.append("<div id=\"showDiv1\"> <table><tbody><thead><tr><th>Day </th><th>Commits count</th></thead>");
-            for (String item : commitsPerDay) {
+            html.append("<div id=\"showDiv1\"> <table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
+            Iterator<String> list = commitsPerDay.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
+            int max= 10;
+            while (list.hasNext()){
+                String item= list.next();
+                if(commitsPerDay.size()-commitsPerDay.indexOf(item)== max){
+                    html.append("</tbody>" + "</table>" +"<p onclick=\"toggle('showDiv1SousPartie')\"> suite :<p>" +"<div id=\"showDiv1SousPartie\">" + "<table>" +" <tbody>");
+                }
                 if(item!=null) {
                     html.append("<tr>");
                     String howMany = item.split(" ")[0];
                     String when = item.split(" ")[1];
-                    html.append("<td>").append(when).append("</td>");
                     html.append("<td>").append(howMany).append("</td>");
+                    html.append("<td>").append(when).append("</td>");
                     html.append("</tr>");
                 }
             }
