@@ -1,14 +1,16 @@
 # get data from file
 # column 1 is labels (row names)
-
-
-x <- read.table("./visulog/commitsPA.txt", header = FALSE, row.names = 1)
+w <- getwd()
+#setwd("/Users/cyprien/Desktop/testRgene")
+setwd(".visulogRTempFiles")
+#z <- paste(w,".visulogRTempFiles",sep="/")
+x <- read.table("commitsPA.txt", header = FALSE, row.names = 1)
 colnames(x) <- "nb"
 attach(x)
 
 ## SETTINGS:
 prob <- FALSE # set to TRUE if barplot(%) desired
-tofile <- FALSE # set to FALSE to print in RStudio
+tofile <- TRUE # set to FALSE to print in RStudio
 
 
 
@@ -40,7 +42,7 @@ if (! tofile) if (prob) {
 
 # output plot to a file in png; see ?pdf or ?png
 if (tofile) {
-  pdf(file = "mybarplot.pdf", width=7, height=5) # 1920/1080 full HD png
+  pdf(file = "CommitsPerAuthor.pdf", width=7, height=5) # 1920/1080 full HD png
   clab <- 1.4    # label size, 1 = default size
   cnames <- 1  # bar names size, adapt to nb of bars
   
