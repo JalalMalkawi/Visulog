@@ -35,8 +35,8 @@ public class AnalyzerResult {
     }
     
     
-    public static void runWithR(String nomFichier)throws IOException{
-        Process process = new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
-    }
+    //public static void runWithR(String nomFichier)throws IOException{
+    //    Process process = new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
+   // }
 
 }
