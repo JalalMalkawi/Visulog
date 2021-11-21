@@ -6,11 +6,10 @@ import java.nio.file.Path;
 public class RInvocation{
     
     public static void RGene(){
-        
         try {
             mkdir(".visulogRTempFiles");
-            //String s = res.getRdata();
-            //res.getRtxt(s,pwd() + ".visulogRTempFiles")
+            String s = res.getRdata();
+            res.getRtxt(s,pwd() + "/.visulogRTempFiles")
             runWithR();
         } catch (Exception e) {
             e.printStackTrace();

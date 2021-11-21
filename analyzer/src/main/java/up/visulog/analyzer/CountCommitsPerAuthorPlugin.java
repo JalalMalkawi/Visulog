@@ -25,9 +25,12 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         return result;
     }
 
+
+
     @Override
     public void run() {
         result = processLog(Commit.parseLogFromCommand(configuration.getGitPath(), "log"));
+
     }
 
     @Override
@@ -73,14 +76,13 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             return R_txt.toString();
         }
 
-        public FileReader getRtxt(String s, String lien) throws IOException {
-                File txt = new File("commitsPA.txt");
+        public void getRtxt(String s, String lien) throws IOException {
+                File txt = new File("commitsPA.txt" + lien);
                 boolean append = txt.exists() ? false : true;
                 FileOutputStream fos = new FileOutputStream(txt, append);
                 fos.write(s.getBytes());
                 fos.close();
                 FileReader readerTxt = new FileReader(txt);
-                return readerTxt;
         }
 
         public static void runWithR(String nomFichier)throws IOException {

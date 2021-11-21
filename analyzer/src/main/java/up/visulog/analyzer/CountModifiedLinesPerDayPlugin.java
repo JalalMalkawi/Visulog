@@ -1,6 +1,5 @@
 package up.visulog.analyzer;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -67,9 +66,8 @@ public class CountModifiedLinesPerDayPlugin implements AnalyzerPlugin
         }
 
         @Override
-        public FileReader getRtxt(String s, String lien) throws IOException {
+        public void getRtxt(String s, String lien) throws IOException {
             // TODO Auto-generated method stub
-            return null;
         }
         
     }

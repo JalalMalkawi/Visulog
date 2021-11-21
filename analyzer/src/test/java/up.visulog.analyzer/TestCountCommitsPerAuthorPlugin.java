@@ -39,15 +39,15 @@ public class TestCountCommitsPerAuthorPlugin {
         var res = CountCommitsPerAuthorPlugin.processLog(log);
         //System.out.println(res.getRData());
         String line;
-        BufferedReader b = new BufferedReader(res.getRtxt(res.getRData(), ));
+        BufferedReader b = new BufferedReader(res.getRtxt(res.getRData(), ""));
         while((line = b.readLine()) != null){
             System.out.println(line);
         }
         try {
-            mkdir(".visulogRTempFiles");
+            CountCommitsPerAuthorPlugin.Result.mkdir(".visulogRTempFiles");
             //CREER LE FICHIER .txt ICI avec: String lien = pwd() + "/.visulogRTempFiles"
             //runWithR("commitsPA.txt");
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

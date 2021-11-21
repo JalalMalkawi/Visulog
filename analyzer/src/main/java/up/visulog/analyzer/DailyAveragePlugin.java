@@ -3,7 +3,6 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
@@ -140,7 +139,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         }
 
         @Override
-        public FileReader getRtxt(String s, String lien) throws IOException {
+        public void getRtxt(String s, String lien) throws IOException {
             return null;
         }
 

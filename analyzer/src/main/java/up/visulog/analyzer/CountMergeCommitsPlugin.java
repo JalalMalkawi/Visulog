@@ -3,7 +3,6 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -67,8 +66,7 @@ public class CountMergeCommitsPlugin implements AnalyzerPlugin {
         }
 
         @Override
-        public FileReader getRtxt(String s, String lien) throws IOException {
-            return null;
+        public void getRtxt(String s, String lien) throws IOException {
         }
 
         @Override
