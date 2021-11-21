@@ -52,8 +52,8 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         public String getResultAsHtmlDiv() {
             // <div><h1 onclick=\"toggle()\">Number of authors:</h1><div id=\"showDiv\">" + getResultAsString() +
             //                    "</div></div>
-            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1><div id=\"showDiv2\"><ul>");
-            //html.append("<iframe src=\""+ pwd() + "\.visulogRTempFiles\CommitsPA.pdf\"" + "width=\"100%\" height=\"500px\"></iframe>\"");
+            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1>" + "<iframe src=\"/Users/cyprien/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe><div id=\"showDiv2\"><ul>");
+            //html.append("<iframe src=\""+ pwd() + "\.visulogRTempFiles\CommitsPA.pdf\"" + "width=\"100%\" height=\"500px\"></iframe>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
