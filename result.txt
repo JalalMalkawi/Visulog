@@ -1,7 +1,7 @@
 
-R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
-Copyright (C) 2016 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R est un logiciel libre livré sans AUCUNE GARANTIE.
 Vous pouvez le redistribuer sous certaines conditions.
@@ -15,18 +15,11 @@ Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
 en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
 Tapez 'q()' pour quitter R.
 
-[Sauvegarde de la session précédente restaurée]
-
 > # get data from file
 > # column 1 is labels (row names)
 > w <- getwd()
-> w
-[1] "/Users/cyprien/visulog/cli"
 > #setwd("/Users/cyprien/Desktop/testRgene")
 > setwd(".visulogRTempFiles")
-> #z <- paste(w,".visulogRTempFiles",sep="/")
-> x <- read.table("commitsPA.txt", header = FALSE, row.names = 1)
-Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  : 
-  la ligne 1 n'avait pas 3 éléments
-Calls: read.table -> scan
+Erreur dans setwd(".visulogRTempFiles") : 
+  impossible de changer de répertoire de travail
 Exécution arrêtée

@@ -21,7 +21,7 @@ public class AnalyzerResult {
     }
 
     public String toHTML() { // insertion de l'invocation du code css
-        return "<html><head><meta charset=\"UTF-8\"><link rel=\"stylesheet\" href=\"result.css\" /><head><body>"+subResults.stream().map(AnalyzerPlugin.Result::getResultAsHtmlDiv).reduce("", (acc, cur) -> acc + cur) + "<script>\n" +
+        return "<html><head><meta charset=\"UTF-8\"><link rel=\"stylesheet\" href=\"result.css\" /><head><body>"+ subResults.stream().map(AnalyzerPlugin.Result::getResultAsHtmlDiv).reduce("", (acc, cur) -> acc + cur) + "<script>\n" +
                 "function toggle(w) {\n" +
                 "  var x = document.getElementById(w);\n" +
                 "  if (x.style.display === \"none\") {\n" +

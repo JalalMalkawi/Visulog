@@ -4,7 +4,6 @@ import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 import up.visulog.config.Configuration;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -137,9 +136,8 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
         }
 
         @Override
-        public FileReader getRtxt(String s, String lien) throws IOException {
+        public void getRtxt(String s, String lien) throws IOException {
             // TODO
-            return null;
         }
 
     }

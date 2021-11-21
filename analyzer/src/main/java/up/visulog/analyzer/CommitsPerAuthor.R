@@ -1,7 +1,6 @@
 # get data from file
 # column 1 is labels (row names)
 w <- getwd()
-w
 #setwd("/Users/cyprien/Desktop/testRgene")
 setwd(".visulogRTempFiles")
 #z <- paste(w,".visulogRTempFiles",sep="/")

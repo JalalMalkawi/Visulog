@@ -1,3 +1,5 @@
+package up.visulog.analyzer;
+
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -5,23 +7,22 @@ import java.nio.file.Path;
 
 public class RInvocation{
     
-    public static void RGene(){
-        
+    public static void RGene(AnalyzerPlugin.Result res, String nomFichier){
         try {
             mkdir(".visulogRTempFiles");
-            //String s = res.getRdata();
-            //res.getRtxt(s,pwd() + ".visulogRTempFiles")
-            runWithR();
+            String s = res.getRData();
+            res.getRtxt(s,pwd() + "/.visulogRTempFiles");
+            runWithR(nomFichier);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public static void runWithR(String nomFichier)throws IOException{
-        Process process = new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
+       new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
     }
     
     public static void mkdir(String nom_dossier)throws IOException{
-        Process process = new ProcessBuilder("mkdir", nom_dossier).start();
+        new ProcessBuilder("mkdir", nom_dossier).start();
     }
     
     

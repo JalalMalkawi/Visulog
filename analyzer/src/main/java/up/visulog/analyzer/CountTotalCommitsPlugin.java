@@ -4,7 +4,6 @@ import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
 //import java.util.HashMap;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 //import java.util.Map;
@@ -58,8 +57,7 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
         }
 
         @Override
-        public FileReader getRtxt(String s, String lien) throws IOException {
-            return null;
+        public void getRtxt(String s, String lien) throws IOException {
         }
     }
 }
