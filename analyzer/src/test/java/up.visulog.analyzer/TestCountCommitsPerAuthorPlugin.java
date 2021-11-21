@@ -37,18 +37,7 @@ public class TestCountCommitsPerAuthorPlugin {
             log.add(new CommitBuilder("").setAuthor(authors[i % 3]).createCommit());
         }
         var res = CountCommitsPerAuthorPlugin.processLog(log);
-        //System.out.println(res.getRData());
-        String line;
-        BufferedReader b = new BufferedReader(res.getRtxt(res.getRData(), ""));
-        while((line = b.readLine()) != null){
-            System.out.println(line);
-        }
-        try {
-            CountCommitsPerAuthorPlugin.Result.mkdir(".visulogRTempFiles");
-            //CREER LE FICHIER .txt ICI avec: String lien = pwd() + "/.visulogRTempFiles"
-            //runWithR("commitsPA.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        RInvocation invoke = new RInvocation();
+        invoke.RGene(res, "CommitsPerAuthor.R");
     }
     }

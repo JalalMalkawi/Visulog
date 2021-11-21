@@ -17,7 +17,6 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
     public DailyAveragePlugin(Configuration generalConfiguration){
 
         this.configuration=generalConfiguration;
-
     }
 
     public static long daysBetween(Calendar calCurrent, Calendar calFirstCom){
@@ -140,7 +139,6 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
         @Override
         public void getRtxt(String s, String lien) throws IOException {
-            return null;
         }
 
         @Override
