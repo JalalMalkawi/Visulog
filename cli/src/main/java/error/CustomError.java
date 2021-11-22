@@ -9,12 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class CustomError {
-    private String error="An error occurred.";
+    private String error="";
 
-
-    public String generateHTMLError(){
-        return "<div id=\"err\">\n" + error + "</div>\n";
-    }
     public void generateError() {
         String st = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -40,7 +36,8 @@ public class CustomError {
             fos.flush();
             fos.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred while creating the error page, please allow us to write files");
+            System.out.println("An error occurred while creating the error page, please allow us to write files" +
+                    "\nIf you already did, submit us an issue at https://gaufre.informatique.univ-paris-diderot.fr/benmouff/visulog/issues");
             System.exit(1);
         } catch (IOException ignored) {
         }
@@ -48,7 +45,8 @@ public class CustomError {
             Desktop.getDesktop().browse((new File("Errors.html")).toURI());
         } catch (IOException e) {
             System.out.println("An error occurred while creating the error page, your default browser is not found " +
-                    "or didn't launched");
+                    "or didn't launched" +
+                    "\nIf already fixed this, submit us an issue at https://gaufre.informatique.univ-paris-diderot.fr/benmouff/visulog/issues");
             System.exit(1);
         }
     }
