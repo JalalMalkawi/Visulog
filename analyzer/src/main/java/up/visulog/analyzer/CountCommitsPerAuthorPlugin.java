@@ -105,7 +105,6 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0].replace(" ", "_");
-                nom = nom.substring(0, nom.length()-1);
                 R_txt.append(String.format(/*Integer.toString(i)*/nom.split("_")[nom.split("_").length-1] + " " + item.getValue() + "\n"));
                 i++;
             }
@@ -118,7 +117,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             for (var item : commitsPerAuthor.entrySet()) {
                 res += "<p>";
                 String nom_mail = item.getKey();
-                String nom = nom_mail.split("<")[0].replace(" ", "_");
+                String nom = nom_mail.split(" <")[0].replace(" ", "_");
                 nom = nom.substring(0, nom.length()-1);
                 res += nom + " : " + Integer.toString(i) + "\n" + "</p>";
                 i++;
