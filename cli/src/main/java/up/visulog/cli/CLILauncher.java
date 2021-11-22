@@ -67,7 +67,7 @@ public class CLILauncher {
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
         var gitPath = FileSystems.getDefault().getPath(".");
         var plugins = new HashMap<String, PluginConfig>();
-        String[] s = {"countCommits","countTotalCommits","countAuthor",
+        String[] s = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
                       "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                       "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
                       "countTotalModifiedLines","countModifiedLinesPerDay","countModifiedLinesPerAuthorPerDay"};
@@ -87,10 +87,6 @@ public class CLILauncher {
 
                             // Let's just trivially do this, before the TODO is fixed:
 
-                            if (pValue.equals("countCommits")) plugins.put("countCommits", new PluginConfig() {
-                            });
-                            if (pValue.equals("countTotalCommits")) plugins.put("countTotalCommits", new PluginConfig() {
-                            });
 
                             // TODO: parse argument and make an instance of PluginConfig
                             for(String st : s) if(pValue.equals(st)) plugins.put(st, new PluginConfig() {});
