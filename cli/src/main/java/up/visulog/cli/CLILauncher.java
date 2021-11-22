@@ -83,7 +83,6 @@ public class CLILauncher {
                     String pValue = parts[1];
                     switch (pName) {
                         case "--addPlugin":
-<<<<<<< HEAD
                             //TODO: parse argument and make an instance of PluginConfig
 
                             // Let's just trivially do this, before the TODO is fixed:
@@ -93,10 +92,8 @@ public class CLILauncher {
                             if (pValue.equals("countTotalCommits")) plugins.put("countTotalCommits", new PluginConfig() {
                             });
 
-=======
                             // TODO: parse argument and make an instance of PluginConfig
                             for(String st : s) if(pValue.equals(st)) plugins.put(st, new PluginConfig() {});
->>>>>>> ec57155161aad7cf2954f2c0533e6892312d53ba
                             break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
