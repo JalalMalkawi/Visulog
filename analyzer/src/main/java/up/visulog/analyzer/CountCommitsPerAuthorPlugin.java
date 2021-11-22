@@ -66,7 +66,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1>" + "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe><div id=\"showDiv2\"><ul>");
+            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1>" + "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe>" + this.getLegende() +"<div id=\"showDiv2\"><ul>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
@@ -79,13 +79,29 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         public String getRData() {
             StringBuilder R_txt = new StringBuilder();
+            int i = 0;
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0].replace(" ", "_");
                 nom = nom.substring(0, nom.length()-1);
-                R_txt.append(String.format(nom + " " + item.getValue() + "\n"));
+                R_txt.append(String.format(Integer.toString(i) + " " + item.getValue() + "\n"));
+                i++;
             }
             return R_txt.toString();
+        }
+        
+        public String getLegende(){
+            int i = 0;
+            String res = "";
+            for (var item : commitsPerAuthor.entrySet()) {
+                res += "<p>";
+                String nom_mail = item.getKey();
+                String nom = nom_mail.split("<")[0].replace(" ", "_");
+                nom = nom.substring(0, nom.length()-1);
+                res += nom + " : " + Integer.toString(i) + "\n" + "</p>";
+                i++;
+            }
+            return res;
         }
 
         public void getRtxt(String s, String lien) throws IOException {
