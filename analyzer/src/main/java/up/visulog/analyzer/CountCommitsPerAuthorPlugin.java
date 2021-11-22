@@ -21,16 +21,13 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         for (var commit : gitLog) {
             String nom_mail = commit.getAuthor();
             String nom = nom_mail.split(" <")[0];
-
             String author=AuthorName(nom);
-
             var nb = result.commitsPerAuthor.getOrDefault(author, 0);
             result.commitsPerAuthor.put(author, nb + 1);
         }
         return result;
     }
-    public static String AuthorName (String n){
-
+    private static String AuthorName (String n){
         try {
             String pwd = RInvocation.pwd()+"/../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
             BufferedReader reader = new BufferedReader(new FileReader(new File(pwd)));
