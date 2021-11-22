@@ -29,9 +29,10 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         }
         return result;
     }
-    public static String  AuthorName (String n){
+    public static String AuthorName (String n){
+
         try {
-            String pwd = RInvocation.pwd()+"/analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
+            String pwd = RInvocation.pwd()+"/../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
             BufferedReader reader = new BufferedReader(new FileReader(new File(pwd)));
             String ligne;
             while((ligne = reader.readLine()) != null){
@@ -157,9 +158,10 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     }
 
     public static void main(String[] args) throws IOException {
-        //System.out.println(CountCommitsPerAuthorPlugin.Result.pwd());
+        System.out.println(CountCommitsPerAuthorPlugin.Result.pwd());
         RInvocation invoke = new RInvocation();
         System.out.println(RInvocation.pwd()+"/analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt");
+        AuthorName("lne.h");
 ///Users/hu/visulog/analyzer/src/main/java/up/visulog/analyzer
 
         //CountCommitsPerAuthorPlugin.Result.mkdir(".test");
