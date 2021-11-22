@@ -80,7 +80,7 @@ Visulog contains the following modules:
     source SCRIPT/envsetup
     ```
     *This will setup the GRADLE_OPTS environment variable so that gradle uses the SCRIPT proxy for downloading its dependencies. It will also use a custom trust store (the one installed in the system is apparently broken... ).*
-4. Run gradle wrapper (it will download all dependencies including gradle itself, except R)
+4. (Optional) Run gradle wrapper (it will download all dependencies including gradle itself, except R)
     ```
     ./gradlew build
     ```
@@ -89,9 +89,8 @@ Visulog contains the following modules:
 
 ### Running the software
 
-Set your working directory to here : ```/visulog```
-
-Run through your terminal
+Open a terminal window and set your working directory to here : ```/visulog```
+Then, run through your terminal
 ```
 ./run.sh
 ```
@@ -114,3 +113,10 @@ And by entering your project link (the URL must come from GitHub or GitLab, and 
 ./gradlew run --args='<your URL>'
 ```
 you will have your analyzes on the desired project. 
+
+####Errors
+To properly run this tool, you should have : 
+- set a default browser
+- have an internet connexion
+- as wrote above, running this tool on a public github/gitlab project
+- allow this application to write files
