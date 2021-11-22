@@ -2,7 +2,7 @@ CourtilletMax  6
 lne.h  4
 xiaoxuan huang  7
 Albert Nguyen  3
-CHAUVEAU cyprien  16
+CHAUVEAU cyprien  17
 BALDE mamadou saliou  1
 JSB  4
 Saliou Balde  4
@@ -13,6 +13,6 @@ BENMOUFFEK jeremy  43
 Aldric Degorre  12
 Colin Gonzalez  1
 albert  6
-Jalal_Malkawi  33
+Jalal_Malkawi  36
 Max Courtillet  2
 Cyprien Chauveau  3
