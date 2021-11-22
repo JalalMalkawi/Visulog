@@ -1,11 +1,13 @@
 package up.visulog.analyzer;
 
-import java.lang.module.Configuration;
+import java.io.IOException;
 
-public interface AnalyzerPlugin {
+public interface AnalyzerPlugin extends Runnable {
     interface Result {
         String getResultAsString();
-        String getResultAsHtmlDiv();
+        String getResultAsHtmlDiv() ;
+        String getRData();
+        void getRtxt(String s, String lien) throws IOException;
     }
 
     /**

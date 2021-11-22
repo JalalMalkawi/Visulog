@@ -2,6 +2,8 @@ package up.visulog.cli;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -12,7 +14,7 @@ public class TestCLILauncher {
     - run the whole program with bad command and see whether something that looks like help is printed
      */
     @Test
-    public void testArgumentParser() {
+    public void testArgumentParser() throws IOException {
         var config1 = CLILauncher.makeConfigFromCommandLineArgs(new String[]{".", "--addPlugin=countCommits"});
         assertTrue(config1.isPresent());
         var config2 = CLILauncher.makeConfigFromCommandLineArgs(new String[] {

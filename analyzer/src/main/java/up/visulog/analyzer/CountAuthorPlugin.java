@@ -3,22 +3,25 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
-//import java.util.HashMap;
 import java.io.IOException;
 import java.util.List;
-//import java.util.Map;
+import java.util.LinkedList;
 
-public class CountTotalCommitsPlugin implements AnalyzerPlugin{
+public class CountAuthorPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
-    private CountTotalCommitsPlugin.Result result;
+    private CountAuthorPlugin.Result result;
 
-    public CountTotalCommitsPlugin(Configuration generalConfiguration) {
+    public CountAuthorPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
     }
 
-    public static CountTotalCommitsPlugin.Result processLog(List<Commit> gitLog) {
-        var result = new CountTotalCommitsPlugin.Result();
-        result.sum = gitLog.size();
+    public static CountAuthorPlugin.Result processLog(List<Commit> gitLog) {
+        var result = new CountAuthorPlugin.Result();
+        LinkedList<String> listAuthor= new LinkedList<String>();
+        for (var commit : gitLog) {
+           if(!listAuthor.contains(commit.getAuthor())) listAuthor.add(commit.getAuthor());
+        }
+        result.sum=listAuthor.size();
         return result;
     }
 
@@ -28,27 +31,21 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
     }
 
     @Override
-    public CountTotalCommitsPlugin.Result getResult() {
+    public CountAuthorPlugin.Result getResult() {
         if (result == null) run();
         return result;
     }
 
-    static class Result implements AnalyzerPlugin.Result {
+    public static class Result implements AnalyzerPlugin.Result {
         private int sum;
-
         @Override
         public String getResultAsString() {
             return String.valueOf(sum);
         }
 
-        public int getSum() {
-            return sum;
-        }
-
         @Override
         public String getResultAsHtmlDiv() {
-            return "<div><h1>Total commits: </h1>" + getResultAsString() +
-                    "</div>";
+            return "<div><h1>Number of authors:</h1><div>" + getResultAsString() + "</div>";
         }
 
         @Override
