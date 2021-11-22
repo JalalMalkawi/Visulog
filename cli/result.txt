@@ -91,4 +91,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.235       0.065       0.321 
+      0.242       0.063       0.319 
