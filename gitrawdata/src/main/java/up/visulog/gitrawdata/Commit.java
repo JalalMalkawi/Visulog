@@ -32,8 +32,6 @@ public class Commit {
         return author;
     }
 
-<<<<<<< HEAD
-=======
     public String getId()
     {
         return this.id;
@@ -44,7 +42,6 @@ public class Commit {
     }
 
     // TODO: factor this out (similar code will have to be used for all git commands)
->>>>>>> ec57155161aad7cf2954f2c0533e6892312d53ba
     public static List<Commit> parseLogFromCommand(Path gitPath, String command) {
         ProcessBuilder builder = new ProcessBuilder("git", command).directory(gitPath.toFile());
         Process process;
