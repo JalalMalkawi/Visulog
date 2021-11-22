@@ -84,7 +84,7 @@ Visulog contains the following modules:
     ```
     ./gradlew build
     ```
-5. Install R
+5. Install R.  link:https://www.r-project.org
 ...
 
 ### Running the software
