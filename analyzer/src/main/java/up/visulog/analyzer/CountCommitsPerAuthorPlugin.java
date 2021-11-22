@@ -19,12 +19,33 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     public static Result processLog(List<Commit> gitLog) {
         var result = new Result();
         for (var commit : gitLog) {
-            var nb = result.commitsPerAuthor.getOrDefault(commit.getAuthor(), 0);
-            result.commitsPerAuthor.put(commit.getAuthor(), nb + 1);
+            String nom_mail = commit.getAuthor();
+            String nom = nom_mail.split(" <")[0];
+
+            String author=AuthorName(nom);
+
+            var nb = result.commitsPerAuthor.getOrDefault(author, 0);
+            result.commitsPerAuthor.put(author, nb + 1);
         }
         return result;
     }
-
+    public static String  AuthorName (String n){
+        try {
+            String pwd = RInvocation.pwd()+"/analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
+            BufferedReader reader = new BufferedReader(new FileReader(new File(pwd)));
+            String ligne;
+            while((ligne = reader.readLine()) != null){
+                String[] name = ligne.split("=");
+                for(int i = 0;i<name.length;i++){
+                    if (name[i].equals(n)) return name[0];
+                }
+            }
+            return n;
+        } catch (Exception ex){
+            System.err.println("Error. "+ex.getMessage());
+        }
+        return "";
+    }
 
 
     @Override
@@ -70,8 +91,8 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
-                String mail = nom_mail.split("<")[1].replaceAll(">", " ");
-                html.append(String.format("<li><a href=\"mailto:" + mail + "\"> " + nom + "</a> : " + item.getValue() + "</li>"));
+                //String mail = nom_mail.split("<")[1].replaceAll(">", " ");
+                html.append(String.format("<li>"+ nom + " : " + item.getValue() + "</li>"));
             }
             html.append("</ul></div></div>");
             return html.toString();
@@ -119,9 +140,10 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(CountCommitsPerAuthorPlugin.Result.pwd());
+        //System.out.println(CountCommitsPerAuthorPlugin.Result.pwd());
         RInvocation invoke = new RInvocation();
-        System.out.println(RInvocation.pwd());
+        System.out.println(RInvocation.pwd()+"/analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt");
+///Users/hu/visulog/analyzer/src/main/java/up/visulog/analyzer
 
         //CountCommitsPerAuthorPlugin.Result.mkdir(".test");
         //CountCommitsPerAuthorPlugin.Result.mkdir(".test/test2");
