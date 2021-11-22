@@ -37,3 +37,6 @@ li:hover
 #showDiv1, #showDiv2, #showDiv3, #showDiv4, #showDiv5, #showDiv6, #showDiv1SousPartie,#showDiv4SousPartie{
     display: none
 }
+#err{
+    color: red;
+}
