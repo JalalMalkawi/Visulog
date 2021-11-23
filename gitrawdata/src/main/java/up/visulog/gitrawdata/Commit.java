@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Date;
 
 public class Commit {
 
@@ -43,6 +42,7 @@ public class Commit {
 
     // TODO: factor this out (similar code will have to be used for all git commands)
     public static List<Commit> parseLogFromCommand(Path gitPath, String command) {
+        System.out.println("[Visulog] Parsing log from command");
         ProcessBuilder builder = new ProcessBuilder("git", command).directory(gitPath.toFile());
         Process process;
         try {
@@ -57,11 +57,19 @@ public class Commit {
 
     public static List<Commit> parseLog(BufferedReader reader) {
         var result = new ArrayList<Commit>();
+        System.out.println("[Visulog] Parsing commits...");
         Optional<Commit> commit = parseCommit(reader);
+        int i = 0 ;
         while (commit.isPresent()) {
+            i++;
+            //System.out.print(".");
+            //if(i%40==0){
+//                System.out.println();
+  //          }
             result.add(commit.get());
             commit = parseCommit(reader);
         }
+        System.out.println("[Visulog] Parsed " + result.size() + " commits...");
         return result;
     }
 

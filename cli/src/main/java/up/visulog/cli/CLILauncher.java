@@ -50,12 +50,14 @@ public class CLILauncher {
         }
         try {
             fos.write(s.getBytes());
+            System.out.println("[Visulog] Writting results...");
             fos.flush();
             fos.close();
         } catch (IOException ignored) { // results.toHTML() never null/empty
         }
         File htmlFile = new File("result.html");
         try {
+            System.out.println("[Visulog] Opening results...");
             Desktop.getDesktop().browse(htmlFile.toURI());
         } catch (IOException e) {
             CustomError err = new CustomError("An error occurred while creating the error page, your default browser is not found " +
@@ -83,13 +85,10 @@ public class CLILauncher {
                     String pValue = parts[1];
                     switch (pName) {
                         case "--addPlugin":
-                            //TODO: parse argument and make an instance of PluginConfig
-
-                            // Let's just trivially do this, before the TODO is fixed:
-
-
-                            // TODO: parse argument and make an instance of PluginConfig
-                            for(String st : s) if(pValue.equals(st)) plugins.put(st, new PluginConfig() {});
+                            for(String st : s){
+                                System.out.println("[Visulog] Running plugin : " + parts[1]);
+                                if(pValue.equals(st)) plugins.put(st, new PluginConfig() {});
+                            }
                             break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
@@ -112,7 +111,9 @@ public class CLILauncher {
                         FileUtils.deleteDirectory(new File("../dataFromGit"));
                     } catch (IOException ignored) {
                     }
+                    System.out.println("[Visulog] Cloning repository...");
                     c.CloneRep(arg);
+                    System.out.println("[Visulog] Repository cloned");
                     gitPath = Paths.get("../dataFromGit");
                 }else{
                     CustomError err = new CustomError("Error : please check the link of your git repository, " +
