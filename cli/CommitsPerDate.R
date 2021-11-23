@@ -57,7 +57,7 @@ if (tofile) {
     abline(h = pcgood, lty=2, col=8)
   } else {
     barplot(nb, names.arg = row.names(x), main="Commits par Date",
-            xlab="auteurs", ylab="nombre de commits", 
+            xlab="", ylab="nombre de commits", 
             cex.names = cnames, cex.lab=clab)}
   
   dev.off() # close file
