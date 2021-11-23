@@ -10,7 +10,7 @@ attach(x)
 
 ## SETTINGS:
 prob <- FALSE # set to TRUE if barplot(%) desired
-tofile <- TRUE # set to FALSE to print in RStudio
+tofile <- FALSE # set to FALSE to print in RStudio
 
 
 
