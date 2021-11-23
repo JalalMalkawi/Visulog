@@ -21,7 +21,7 @@ Tapez 'q()' pour quitter R.
 > # column 1 is labels (row names)
 > w <- getwd()
 > w
-[1] "/Users/hu/visulog/cli"
+[1] "/Users/jalalmalkawi/visulog/cli"
 > #setwd("/Users/cyprien/Desktop/testRgene")
 > setwd(".visulogRTempFiles")
 > #z <- paste(w,".visulogRTempFiles",sep="/")
@@ -91,4 +91,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.246       0.049       0.301 
+      0.222       0.103       0.536 

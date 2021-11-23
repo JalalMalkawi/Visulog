@@ -23,6 +23,10 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
         result =  aux();
     }
 
+
+
+
+
     private Result aux(){
         Result r0 = new Result();
         // On execute étape par étape la commande :

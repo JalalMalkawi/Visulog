@@ -7,3 +7,13 @@ bin/
 .idea/
 *.DS_Store
 *.html
+cli/result.txt
+cli/.visulogRTempFiles/CommitsPerAuthor.pdf
+cli/.visulogRTempFiles/.RData
+cli/.visulogRTempFiles/commitsPA.txt
+
+
+
+
+
+
