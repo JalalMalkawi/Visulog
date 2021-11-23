@@ -4,16 +4,17 @@
 
 ## Presentation
 
-Visulog a tool for analyzing contributions from the members of a team working as a same given project hosted on a git repository. Its goal is to assist teachers for individual grading of students working as a team.
+Visulog a tool made for analyzing contributions from the members of a team working as a same given project hosted on a git repository. Its goal is to assist teachers for individual grading of students working as a team.
+It requires a UNIX system like macOS.
 
 This tool can:
 
 - compute a couple of relevant indicators such as:
-  - number of lines or characters added/deleted/changed
-  - number of commits
-  - number of merge commits
-  - number of authors
-  - ...
+    - number of lines or characters added/deleted/changed
+    - number of commits
+    - number of merge commits
+    - number of authors
+    - ...
 - analyze the variations of these indicators in time: for instance sum then by author, compute a daily average or compute an average of modified lines per day, ...
 - visualize the indicators as charts (histograms, pie charts, etc.) embedded in a generated web page.
 - to have an exhaustive list of the function, see the following section
@@ -22,17 +23,17 @@ This tool can:
 
 This tool will show you :
 - The total of commits & merge commits
-  - which can be used to see the importance of the work
+    - which can be used to see the importance of the work
 - The number of modified lines since the beginning of the project
-  - Used for similar reason
+    - Used for similar reason
 - Average number of modified lines per day
-  - It allows you to have an idea of the speed of the project's growth
+    - It allows you to have an idea of the speed of the project's growth
 
 
 - The number of commits per day & per month
-  - Used to compare when there are more commits
+    - Used to compare when there are more commits
 - The number of commits per hour
-  - To inspect at which hour is there more commits, independently of the day : indirectly, it informs when collaborators are more efficiency.
+    - To inspect at which hour is there more commits, independently of the day : indirectly, it informs when collaborators are more efficiency.
 
 
 - ...
@@ -40,16 +41,16 @@ This tool will show you :
 
 
 - The number of authors
-  - More authors implies a more important project
+    - More authors implies a more important project
 - The number of commits per author
-  - It informs of the authors' names and the importance of there contributions in the project
+    - It informs of the authors' names, and the importance of their contributions in the project
 - The number of the daily average commits per author
-  - Useful to have a better view about the proportion of a author contribution, during the time
-- 
+    - Useful to have a better view about the proportion of an author contribution, during the time
+-
 
 ## Already existing similar tools
 
-- [gitstats](https://pypi.org/project/gitstats/) 
+- [gitstats](https://pypi.org/project/gitstats/)
 
 
 ## Technical means
@@ -75,19 +76,17 @@ Visulog contains the following modules:
     ```
     git clone https://gaufre.informatique.univ-paris-diderot.fr/benmouff/visulog.git
     ```
-2. Only if you are on a SCRIPT computer (in one of the TP rooms):
+3. Only if you are on a SCRIPT computer (in one of the TP rooms):
     ```
     source SCRIPT/envsetup
     ```
-    *This will setup the GRADLE_OPTS environment variable so that gradle uses the SCRIPT proxy for downloading its dependencies. It will also use a custom trust store (the one installed in the system is apparently broken... ).*
-3. (Optional) Run gradle wrapper (it will download all dependencies including gradle itself, except R)
+   *This will setup the GRADLE_OPTS environment variable so that gradle uses the SCRIPT proxy for downloading its dependencies. It will also use a custom trust store (the one installed in the system is apparently broken... ).*
+4. (Optional) Run gradle wrapper (it will download all dependencies including gradle itself, except R)
     ```
     ./gradlew build
     ```
-
-4. Install R.  link:https://www.r-project.org
-
-5. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+5. Install R
+   ...
 
 ### Running the software
 
@@ -114,10 +113,10 @@ And by entering your project link (the URL must come from GitHub or GitLab, and 
 ```
 ./gradlew run --args='<your URL>'
 ```
-you will have your analyzes on the desired project. 
+you will have your analyses on the desired project.
 
 ####Errors
-To properly run this tool, you should have : 
+To properly run this tool, you should have :
 - set a default browser
 - have an internet connexion
 - as wrote above, running this tool on a public github/gitlab project
