@@ -1,4 +1,4 @@
-HU Hélène=lne.h
+HU Hélène=lne.h=HU helene
 CourtilletMax=Max Courtillet
 albert=Albert Nguyen
 CHAUVEAU cyprien=Cyprien Chauveau
