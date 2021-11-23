@@ -4,6 +4,7 @@ w <- getwd()
 w
 #setwd("/Users/cyprien/Desktop/testRgene")
 setwd(".visulogRTempFiles")
+
 #z <- paste(w,".visulogRTempFiles",sep="/")
 x <- read.table("commitsPA.txt", header = FALSE, row.names = 1)
 colnames(x) <- "nb"

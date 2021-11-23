@@ -86,7 +86,12 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1>" + "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe>" + "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\" width=\"50%\"  height=\"530px\"></iframe>" /*+ this.getLegende()*/ +"<div id=\"showDiv2\"><ul>");
+            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1>" + "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\">" 
+            
+            
+            /*"<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe>" +  "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\" width=\"50%\"  height=\"530px\"></iframe>"*/ /*+ this.getLegende()*/
+                                                   
+                                                   +"<div id=\"showDiv2\"><ul>");
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
