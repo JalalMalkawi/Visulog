@@ -70,7 +70,7 @@ Tapez 'q()' pour quitter R.
 +   if (prob) {
 +     barplot(pct, names.arg = row.names(x), main="Commits par auteurs (%)",
 +             ylim = c(0, min(c(100, max(pct)+10))),
-+             xlab="auteurs", ylab="% de commits" , 
++             xlab="", ylab="% de commits" , 
 +             cex.names = cnames, cex.lab=clab, col=cl, las = 2)
 +     legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2,
 +            bg = "antiquewhite")
@@ -79,10 +79,10 @@ Tapez 'q()' pour quitter R.
 +   } else {
 +     barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
 +             xlab="", ylab="nombre de commits", 
-+             cex.names = cnames, cex.lab=clab, null device 
++             cex.names = cnames, cex.lab=clab, las = 2null device 
           1 
 > ########
-> # pdf wnull device 
+> null device 
           1 
 > ########
 > # pdf width=7, height=5
@@ -90,4 +90,4 @@ Tapez 'q()' pour quitter R.
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.273       0.042       0.343 
+      0.264       0.036       0.294 

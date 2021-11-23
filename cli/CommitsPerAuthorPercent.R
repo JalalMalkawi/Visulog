@@ -50,7 +50,7 @@ if (tofile) {
   if (prob) {
     barplot(pct, names.arg = row.names(x), main="Commits par auteurs (%)",
             ylim = c(0, min(c(100, max(pct)+10))),
-            xlab="auteurs", ylab="% de commits" , 
+            xlab="", ylab="% de commits" , 
             cex.names = cnames, cex.lab=clab, col=cl, las = 2)
     legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2,
            bg = "antiquewhite")
