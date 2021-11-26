@@ -1,8 +1,15 @@
+.title {
+  background-color: #825B93;
+  text-align: center;
+  height: 110px;
+}
+
 h1
 {
 	font-size: 20px;
 	text-decoration: underline;
 }
+
 p
 {
 	text-decoration: underline;

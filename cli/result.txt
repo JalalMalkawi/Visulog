@@ -1,7 +1,7 @@
 
-R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
-Copyright (C) 2016 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R est un logiciel libre livré sans AUCUNE GARANTIE.
 Vous pouvez le redistribuer sous certaines conditions.
@@ -21,12 +21,10 @@ Tapez 'q()' pour quitter R.
 > # column 1 is labels (row names)
 > w <- getwd()
 > w
-[1] "/Users/cyprien/visulog/cli"
+[1] "/Users/hu/visulog/cli"
 > #setwd("/Users/cyprien/Desktop/testRgene")
 > setwd(".visulogRTempFiles")
-> #z <- paste(w,".visulogRTempFiles",sep="/")
-> x <- read.table("commitsPA.txt", header = FALSE, row.names = 1)
-> colnames(x) <- "nb"
+> #> #z <- paste(w,".visulogRTempFiles",sep="/")x> x <- read.table("commitsPA.txt", header = FALSE, row.names = > colnames(x) <- "nb"
 > attach(x)
 > 
 > ## SETTINGS:
@@ -72,14 +70,14 @@ Tapez 'q()' pour quitter R.
 +             ylim = c(0, min(c(100, max(pct)+10))),
 +             xlab="", ylab="% de commits" , 
 +             cex.names = cnames, cex.lab=clab, col=cl, las = 2)
-+     legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2,
-+            bg = "antiquewhite")
-+     # visualize "good" level...
-+     abline(h = pcgood, lty=2, col=8)
-+   } else {
++     legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2+     # visualize "good" level...
++     abline(h = pcgood, lty=2, col=+  +   } else {
 +     barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
 +             xlab="", ylab="nombre de commits", 
 +             cex.names = cnames, cex.lab=clab, las = 2)}
++   
++   dev.off() # close file
++ }
 null device 
           1 
 > ########null device 
@@ -90,4 +88,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.270       0.041       0.338 
+      0.261       0.056       0.356 
