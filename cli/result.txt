@@ -24,7 +24,9 @@ Tapez 'q()' pour quitter R.
 [1] "/Users/hu/visulog/cli"
 > #setwd("/Users/cyprien/Desktop/testRgene")
 > setwd(".visulogRTempFiles")
-> #> #z <- paste(w,".visulogRTempFiles",sep="/")x> x <- read.table("commitsPA.txt", header = FALSE, row.names = > colnames(x) <- "nb"
+> #z <- paste(w,".visulogRTempFiles",sep="/")
+> x <- read.table("commitsPA.txt", header = FALSE, row.names = 1)
+> colnames(x) <- "nb"
 > attach(x)
 > 
 > ## SETTINGS:
@@ -53,12 +55,11 @@ Tapez 'q()' pour quitter R.
 +   legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2,
 +        bg = "antiquewhite")
 +   # visualize "good" level...
-+   abline(h = pcgood, lty=2, col=8)
-+ } else {
++   ablin+   barplot(nb, names.arg = + } else {
 +   barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
 +           xlab="auteurs", ylab="nombre de commits", 
-+           cex.names = cnames, cex.lab=clab, las = 2)}
-> 
++           cex.n> 
+> # output plot to a file in png; se> 
 > # output plot to a file in png; see ?pdf or ?png
 > if (tofile) {
 +   pdf(file = "CommitsPerAuthorPercent.pdf", width=7, height=5) # 1920/1080 full HD png
@@ -70,13 +71,11 @@ Tapez 'q()' pour quitter R.
 +             ylim = c(0, min(c(100, max(pct)+10))),
 +             xlab="", ylab="% de commits" , 
 +             cex.names = cnames, cex.lab=clab, col=cl, las = 2)
-+     legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2+     # visualize "good" level...
-+     abline(h = pcgood, lty=2, col=+  +   } else {
-+     barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
-+             xlab="", ylab="nombre de commits", 
-+             cex.names = cnames, cex.lab=clab, las = 2)}
-+   
-+   dev.off() # close file
++     legend("topleft", l+            bg = "antiquewhite")
++     # visualize "good" level...
++       # visualize "good" level...
++  +   } else {
++     barplot(nb, names.arg = row.na+     barplot(nb, names.arg = row.na+             xlab="", ylab="nombre +             xl            cex.names = cnames, ce+             cex.names = c+   dev.off() # close file
 + }
 null device 
           1 
@@ -88,4 +87,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.261       0.056       0.356 
+      0.283       0.055       0.404 

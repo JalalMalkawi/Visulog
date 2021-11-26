@@ -11,6 +11,15 @@ import java.util.Map;
 public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     private final Configuration configuration;
     private Result result;
+    private static String pwd;
+
+    static {
+        try {
+            pwd = RInvocation.pwd();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public CountCommitsPerAuthorPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -29,8 +38,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     }
     private static String AuthorName (String n){
         try {
-            String pwd = RInvocation.pwd()+"/../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
-            BufferedReader reader = new BufferedReader(new FileReader(new File(pwd)));
+            BufferedReader reader = new BufferedReader(new FileReader(new File(pwd+"/../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt")));
             String ligne;
             while((ligne = reader.readLine()) != null){
                 String[] name = ligne.split("=");
@@ -50,12 +58,10 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     public void run() {
         result = processLog(Commit.parseLogFromCommand(configuration.getGitPath(), "log"));
         RInvocation invoke = new RInvocation();
-        try {
-            invoke.RGene(result,result.pwd()+"/CommitsPerAuthor.R");
-            invoke.RGene(result,result.pwd()+"/CommitsPerAuthorPercent.R");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            invoke.RGene(result,pwd+"/CommitsPerAuthor.R");
+            invoke.RGene(result,pwd+"/CommitsPerAuthorPercent.R");
+
     }
 
     @Override
@@ -78,19 +84,10 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            // <div><h1 onclick=\"toggle()\">Number of authors:</h1><div id=\"showDiv\">" + getResultAsString() +
-            //                    "</div></div>
-            String pwd = "";
-            try {
-                pwd = RInvocation.pwd();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\"> <ul> "  );
 
             /*"<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe>" +  "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\" width=\"50%\"  height=\"530px\"></iframe>"*/ /*+ this.getLegende()*/
-                                                   
-                     for (var item : commitsPerAuthor.entrySet()) {
+            for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0];
                 //String mail = nom_mail.split("<")[1].replaceAll(">", " ");
@@ -142,26 +139,14 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         public static void mkdir(String nom_dossier)throws IOException{
             Process process = new ProcessBuilder("mkdir", nom_dossier).start();
         }
-        
-        
-        public static String pwd()throws IOException{
-            Process process;
-            ProcessBuilder builder = new ProcessBuilder("pwd");
-            try {
-                process = builder.start();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return new BufferedReader(new InputStreamReader(process.getInputStream())).readLine();
-        }
 
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(CountCommitsPerAuthorPlugin.Result.pwd());
-        RInvocation invoke = new RInvocation();
-        System.out.println(RInvocation.pwd()+"/analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt");
-        AuthorName("lne.h");
+        //System.out.println(CountCommitsPerAuthorPlugin.Result.pwd());
+        //RInvocation invoke = new RInvocation();
+        //System.out.println(RInvocation.pwd()+"/analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt");
+       // AuthorName("lne.h");
 ///Users/hu/visulog/analyzer/src/main/java/up/visulog/analyzer
 
         //CountCommitsPerAuthorPlugin.Result.mkdir(".test");
