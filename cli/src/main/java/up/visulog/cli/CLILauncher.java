@@ -112,8 +112,10 @@ public class CLILauncher {
                     } catch (IOException ignored) {
                     }
                     System.out.println("[Visulog] Cloning repository...");
+                    long startTime=System.currentTimeMillis();
                     c.CloneRep(arg);
-                    System.out.println("[Visulog] Repository cloned");
+                    long takenTime=(System.currentTimeMillis()-startTime)/1000;
+                    System.out.println("[Visulog] Repository cloned in " + (takenTime/60) + "m " +takenTime+"s");
                     gitPath = Paths.get("../dataFromGit");
                 }else{
                     CustomError err = new CustomError("Error : please check the link of your git repository, " +
