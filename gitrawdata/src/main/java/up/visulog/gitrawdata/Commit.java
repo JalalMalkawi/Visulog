@@ -42,7 +42,8 @@ public class Commit {
 
     // TODO: factor this out (similar code will have to be used for all git commands)
     public static List<Commit> parseLogFromCommand(Path gitPath, String command) {
-        System.out.println("[Visulog] Parsing log from command");
+        System.out.println("[Visulog] Parsing log from command...");
+        long startTime = System.currentTimeMillis();
         ProcessBuilder builder = new ProcessBuilder("git", command).directory(gitPath.toFile());
         Process process;
         try {
@@ -52,12 +53,15 @@ public class Commit {
         }
         InputStream is = process.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        long endTime = System.currentTimeMillis();
+        System.out.println("[Visulog] Commits parsed (" + String.valueOf(endTime - startTime) + "ms)");
         return parseLog(reader);
     }
 
     public static List<Commit> parseLog(BufferedReader reader) {
         var result = new ArrayList<Commit>();
         System.out.println("[Visulog] Parsing commits...");
+        long startTime = System.currentTimeMillis();
         Optional<Commit> commit = parseCommit(reader);
         int i = 0 ;
         while (commit.isPresent()) {
@@ -69,7 +73,8 @@ public class Commit {
             result.add(commit.get());
             commit = parseCommit(reader);
         }
-        System.out.println("[Visulog] Parsed " + result.size() + " commits...");
+        long endTime = System.currentTimeMillis();
+        System.out.println("[Visulog] Parsed " + result.size() + " commits in " + String.valueOf(endTime - startTime) + "ms");
         return result;
     }
 

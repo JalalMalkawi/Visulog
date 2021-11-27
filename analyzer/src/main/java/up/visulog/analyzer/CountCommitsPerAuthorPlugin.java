@@ -11,6 +11,7 @@ import java.util.Map;
 public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     private final Configuration configuration;
     private Result result;
+    private static long startTime=System.currentTimeMillis();
 
     public CountCommitsPerAuthorPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -77,6 +78,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
+            System.out.println("[Visulog] Thread of CommitsPerAuthor plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             // <div><h1 onclick=\"toggle()\">Number of authors:</h1><div id=\"showDiv\">" + getResultAsString() +
             //                    "</div></div>
             String pwd = "";

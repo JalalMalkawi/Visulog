@@ -29,6 +29,7 @@ public class Analyzer {
             plugin.ifPresent(plugins::add);
         }
         // run all the plugins
+        System.out.println("[Visulog] Running " + plugins.size() + " threads for plugins...");
         for (AnalyzerPlugin plugin: plugins) {
             Thread t1 = new Thread(plugin);
             t1.start();

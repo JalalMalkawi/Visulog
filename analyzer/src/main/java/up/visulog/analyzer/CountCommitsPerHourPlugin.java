@@ -10,6 +10,7 @@ import java.util.LinkedList;
 public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
+    private static long startTime=System.currentTimeMillis();
 
     public CountCommitsPerHourPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -77,6 +78,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
+            System.out.println("[Visulog] Thread of CommitsPerHour plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv5')\">Commits Per Hour : </h1>");
             if(commitsPerHour.isEmpty()) return html.append("No commit</div>").toString();
             html.append(" <div id=\"showDiv5\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th><th>Proportion</th></thead>");

@@ -13,6 +13,8 @@ import java.util.LinkedList;
 public class CountAuthorPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private CountAuthorPlugin.Result result;
+    private static long startTime = System.currentTimeMillis();
+
 
     public CountAuthorPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -68,6 +70,7 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
+            System.out.println("[Visulog] Thread of Author plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             return "<div><h1>Number of authors:</h1><div>" + getResultAsString() + "</div>";
         }
 

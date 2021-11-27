@@ -1,16 +1,17 @@
 package up.visulog.analyzer;
 
-import java.io.IOException;
-import java.util.List;
-
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.GetGitCommandOutput;
+
+import java.io.IOException;
+import java.util.List;
 
 public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
 {
     private final Configuration configuration;
     private Result result;
+    private static long startTime=System.currentTimeMillis();
 
     public CountTotalModifiedLinesPlugin(Configuration config)
     {
@@ -89,7 +90,7 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
 
         @Override
         public String getResultAsHtmlDiv() 
-        {
+        {System.out.println("[Visulog] Thread of TotalModifiedLines plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             return "<div><h1>Number of modified lines since start:</h1>" + getResultAsString() +"</div>";
         }
 
