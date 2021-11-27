@@ -11,6 +11,7 @@ import java.util.Map;
 public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     private final Configuration configuration;
     private Result result;
+
     private static String pwd;
 
     static {
@@ -20,6 +21,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             e.printStackTrace();
         }
     }
+    private static long startTime=System.currentTimeMillis();
 
     public CountCommitsPerAuthorPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -84,6 +86,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
+            System.out.println("[Visulog] Thread of CommitsPerAuthor plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\"> <ul> "  );
 
             /*"<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe>" +  "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\" width=\"50%\"  height=\"530px\"></iframe>"*/ /*+ this.getLegende()*/
@@ -138,6 +141,18 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         
         public static void mkdir(String nom_dossier)throws IOException{
             Process process = new ProcessBuilder("mkdir", nom_dossier).start();
+        }
+        
+        
+        public static String pwd()throws IOException{
+            Process process;
+            ProcessBuilder builder = new ProcessBuilder("pwd");
+            try {
+                process = builder.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return new BufferedReader(new InputStreamReader(process.getInputStream())).readLine();
         }
 
     }

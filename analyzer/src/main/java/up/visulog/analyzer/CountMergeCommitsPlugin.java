@@ -9,6 +9,7 @@ import java.util.LinkedList;
 public class CountMergeCommitsPlugin implements AnalyzerPlugin {
     private final Configuration configuration;
     private CountMergeCommitsPlugin.Result result;
+    private static long startTime=System.currentTimeMillis();
 
     public CountMergeCommitsPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -61,6 +62,7 @@ public class CountMergeCommitsPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
+            System.out.println("[Visulog] Thread of MergeCommits plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             return "<div><h1>Number of merge commits:</h1>" + getResultAsString() +
                     "</div>";
         }

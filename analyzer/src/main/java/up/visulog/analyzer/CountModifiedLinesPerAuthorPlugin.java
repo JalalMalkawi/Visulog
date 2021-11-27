@@ -13,6 +13,7 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
 {
     private final Configuration configuration;
     private Result result;
+    private static long startTime=System.currentTimeMillis();
 
     public CountModifiedLinesPerAuthorPlugin(Configuration config)
     {
@@ -125,6 +126,7 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
 
         @Override
         public String getResultAsHtmlDiv() {
+            System.out.println("[Visulog] Thread of ModifiedLinesPerAuthor plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             //TODO
             return null;
         }

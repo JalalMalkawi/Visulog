@@ -1,9 +1,8 @@
 package up.visulog.analyzer;
 
-import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Path;
 
 public class RInvocation{
     
@@ -14,11 +13,11 @@ public class RInvocation{
             res.getRtxt(s,pwd() + "/.visulogRTempFiles");
             runWithR(nomFichier);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("[Visulog] Tried to run R but R not found");
         }
     }
     public static void runWithR(String nomFichier)throws IOException{
-       new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
+        new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
     }
     
     public static void mkdir(String nom_dossier)throws IOException{

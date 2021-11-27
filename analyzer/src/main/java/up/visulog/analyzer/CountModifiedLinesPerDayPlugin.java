@@ -1,15 +1,16 @@
 package up.visulog.analyzer;
 
-import java.io.IOException;
-import java.util.List;
-
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
+
+import java.io.IOException;
+import java.util.List;
 
 public class CountModifiedLinesPerDayPlugin implements AnalyzerPlugin
 {
     private final Configuration configuration;
     private Result result;
+    private static long startTime=System.currentTimeMillis();
 
     public CountModifiedLinesPerDayPlugin(Configuration config)
     {
@@ -56,6 +57,7 @@ public class CountModifiedLinesPerDayPlugin implements AnalyzerPlugin
         @Override
         public String getResultAsHtmlDiv() 
         {
+            System.out.println("[Visulog] Thread of ModifiedLinesPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             return "<div><h1>Average number of modified lines per day:</h1>" + getResultAsString() +"</div>";
         }
 
