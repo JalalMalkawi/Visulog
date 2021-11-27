@@ -13,7 +13,6 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
 {
     private final Configuration configuration;
     private Result result;
-    private static long startTime=System.currentTimeMillis();
 
     public CountModifiedLinesPerAuthorPlugin(Configuration config)
     {
@@ -90,7 +89,9 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
     @Override
     public void run()
     {
-        this.result = this.processLog(Commit.parseLogFromCommand(this.configuration.getGitPath(),"log")); 
+        long startTime=System.currentTimeMillis();
+        this.result = this.processLog(Commit.parseLogFromCommand(this.configuration.getGitPath(),"log"));
+        System.out.println("[Visulog] Thread of ModifiedLinesPerAuthor plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
     @Override
@@ -126,7 +127,6 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
 
         @Override
         public String getResultAsHtmlDiv() {
-            System.out.println("[Visulog] Thread of ModifiedLinesPerAuthor plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             //TODO
             return null;
         }

@@ -11,7 +11,6 @@ import java.util.List;
 public class CountTotalCommitsPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private CountTotalCommitsPlugin.Result result;
-    private static long startTime=System.currentTimeMillis();
 
     public CountTotalCommitsPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -25,7 +24,9 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
 
     @Override
     public void run() {
+        long startTime=System.currentTimeMillis();
         result = processLog(Commit.parseLogFromCommand(configuration.getGitPath(),"log"));
+        System.out.println("[Visulog] Thread of TotalCommits plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
     @Override
@@ -48,7 +49,6 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            System.out.println("[Visulog] Thread of TotalCommits plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             return "<div><h1>Total commits: </h1>" + getResultAsString() +
                     "</div>";
         }

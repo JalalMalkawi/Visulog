@@ -11,7 +11,6 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
 {
     private final Configuration configuration;
     private Result result;
-    private static long startTime=System.currentTimeMillis();
 
     public CountTotalModifiedLinesPlugin(Configuration config)
     {
@@ -67,7 +66,9 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
     @Override
     public void run() 
     {
+        long startTime=System.currentTimeMillis();
         this.result = this.processLog(Commit.parseLogFromCommand(this.configuration.getGitPath(),"log"));
+        System.out.println("[Visulog] Thread of TotalModifiedLines plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
     @Override
@@ -90,7 +91,7 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
 
         @Override
         public String getResultAsHtmlDiv() 
-        {System.out.println("[Visulog] Thread of TotalModifiedLines plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
+        {
             return "<div><h1>Number of modified lines since start:</h1>" + getResultAsString() +"</div>";
         }
 

@@ -11,7 +11,6 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
     private final Configuration configuration;
     private Result result;
-    private static long startTime=System.currentTimeMillis();
 
     private static Map<String, Long> totalTime=new HashMap<>();
 
@@ -97,8 +96,9 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
     @Override
     public void run(){
-
-        result=processLog(comPerAuth(Commit.parseLogFromCommand(configuration.getGitPath(),"log"))); 
+        long startTime=System.currentTimeMillis();
+        result=processLog(comPerAuth(Commit.parseLogFromCommand(configuration.getGitPath(),"log")));
+        System.out.println("[Visulog] Thread of DailyAverage plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
 
     }
 
@@ -123,7 +123,6 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv(){
-            System.out.println("[Visulog] Thread of DailyAverage plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             StringBuilder html=new StringBuilder("<div> <h1 onclick=\"toggle('showDiv3')\">Daily Average Per Author:</h1> <div id=\"showDiv3\"><ul>");
 
             for (var item : dailyAverage.entrySet()) {

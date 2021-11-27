@@ -13,7 +13,6 @@ public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
 
     private final Configuration configuration;
     private Result result;
-    private static long startTime=System.currentTimeMillis();
 
     public CountModifiedLinesPerAuthorPerDayPlugin(Configuration config)
     {
@@ -53,7 +52,9 @@ public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
     @Override
     public void run() 
     {
+        long startTime=System.currentTimeMillis();
         this.result = this.getAverageLines();
+        System.out.println("[Visulog] Thread of ModifierLinesPerAuthorPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
     @Override
@@ -83,7 +84,6 @@ public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
 
         @Override
         public String getResultAsHtmlDiv() {
-            System.out.println("[Visulog] Thread of ModifierLinesPerAuthorPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             // TODO Auto-generated method stub
             return null;
         }

@@ -11,7 +11,6 @@ import java.util.LinkedList;
 public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
-    private static long startTime=System.currentTimeMillis();
 
     public CountCommitsPerMonthPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -21,7 +20,10 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
 
     @Override
     public void run() {
+        long startTime=System.currentTimeMillis();
         result =  aux();
+        System.out.println("[Visulog] Thread of CommitsPerMonth plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
+
     }
 
 
@@ -81,7 +83,6 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            System.out.println("[Visulog] Thread of CommitsPerMonth plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv4')\">Commits Per Month :</h1>");
             if(commitsPerMonth.isEmpty()) return html.append(" No commit</div>").toString();
             html.append(" <div id=\"showDiv4\" style=\"display:none;\"><table><tbody><thead><tr><th>Commits count</th><th>Month</th></thead>");

@@ -11,17 +11,18 @@ import java.util.LinkedList;
 public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
-    private static long startTime=System.currentTimeMillis();
-
     public CountCommitsPerDayPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
     }
 
 
 
+
     @Override
     public void run() {
+        long startTime=System.currentTimeMillis();
         result =  aux();
+        System.out.println("[Visulog] Thread of CommitsPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
     private Result aux(){
@@ -77,7 +78,6 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            System.out.println("[Visulog] Thread of CommitsPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day :</h1>");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" > <table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
