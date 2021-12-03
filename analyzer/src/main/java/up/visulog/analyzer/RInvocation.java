@@ -25,7 +25,7 @@ public class RInvocation{
         new ProcessBuilder("mkdir", nom_dossier).start();
     }
     
-    
+//les fonctions rm ne fonctionnent pas. Aucune erreur mais les fichiers ne sont pas détruits !!?
     public static void rm(String nom_fichier)throws IOException{
         new ProcessBuilder("rm", nom_fichier).start();
     }
