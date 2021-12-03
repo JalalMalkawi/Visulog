@@ -55,11 +55,12 @@ Tapez 'q()' pour quitter R.
 +   legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2,
 +        bg = "antiquewhite")
 +   # visualize "good" level...
-+   ablin+   barplot(nb, names.arg = + } else {
++   abline(h = pcgood, lty=2, col=8)
++ } else {
 +   barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
 +           xlab="auteurs", ylab="nombre de commits", 
-+           cex.n> 
-> # output plot to a file in png; se> 
++           cex.names = cnames, cex.lab=clab, las = 2)}
+> 
 > # output plot to a file in png; see ?pdf or ?png
 > if (tofile) {
 +   pdf(file = "CommitsPerAuthorPercent.pdf", width=7, height=5) # 1920/1080 full HD png
@@ -71,12 +72,14 @@ Tapez 'q()' pour quitter R.
 +             ylim = c(0, min(c(100, max(pct)+10))),
 +             xlab="", ylab="% de commits" , 
 +             cex.names = cnames, cex.lab=clab, col=cl, las = 2)
-+     legend("topleft", l+            bg = "antiquewhite")
++     legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2,
++            bg = "antiquewhite")
 +     # visualize "good" level...
-+       # visualize "good" level...
-+  +   } else {
-+     barplot(nb, names.arg = row.na+     barplot(nb, names.arg = row.na+             xlab="", ylab="nombre +             xl            cex.names = cnames, ce+             cex.names = c+   dev.off() # close file
-+ }
++     abline(h = pcgood, lty=2, col=8)
++   } else {
++     barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
++             xlab="", ylab="nombre de commits", 
++             cex.names = cnames, cex.lab=clab, las = 2)}
 null device 
           1 
 > ########null device 
@@ -87,4 +90,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.283       0.055       0.404 
+      0.280       0.054       0.387 

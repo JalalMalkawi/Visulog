@@ -78,7 +78,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day :</h1>");
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:</h1>");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" > <table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
             Iterator<String> list = commitsPerDay.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
@@ -97,7 +97,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                     html.append("</tr>");
                 }
             }
-            html.append("</tbody></table></div></div>");
+            html.append("</tbody></table></div></div></div>");
             return html.toString();
         }
 

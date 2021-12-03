@@ -83,7 +83,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv4')\">Commits Per Month :</h1>");
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv4')\">Commits Per Month:</h1>");
             if(commitsPerMonth.isEmpty()) return html.append(" No commit</div>").toString();
             html.append(" <div id=\"showDiv4\" style=\"display:none;\"><table><tbody><thead><tr><th>Commits count</th><th>Month</th></thead>");
             Iterator<String> list = commitsPerMonth.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
@@ -102,7 +102,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
                     html.append("</tr>");
                 }
             }
-            html.append("</tbody></table></div></div>");
+            html.append("</tbody></table></div></div></div>");
             return html.toString();
         }
 

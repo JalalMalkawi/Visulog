@@ -86,16 +86,19 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\"> <ul> "  );
+            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\">"  );
 
             /*"<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe>" +  "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\" width=\"50%\"  height=\"530px\"></iframe>"*/ /*+ this.getLegende()*/
+            html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
+
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
+
                 String nom = nom_mail.split("<")[0];
                 //String mail = nom_mail.split("<")[1].replaceAll(">", " ");
-                html.append(String.format("<li>"+ nom + " : " + item.getValue() + "</li>"));
+                html.append(String.format("<tr><td>"+ nom + " </td><td> " + item.getValue() + "</td>"));
             }
-            html.append("</ul></div></div>");
+            html.append("</tbody></table></div></div>");
             return html.toString();
         }
 

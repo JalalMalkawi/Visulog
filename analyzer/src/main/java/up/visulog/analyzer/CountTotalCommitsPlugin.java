@@ -49,8 +49,8 @@ public class CountTotalCommitsPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            return "<div><h1>Total commits: </h1>" + getResultAsString() +
-                    "</div>";
+            return "<div><h1>Total commits:  " + getResultAsString() +
+                    "</h1></div>";
         }
 
         @Override

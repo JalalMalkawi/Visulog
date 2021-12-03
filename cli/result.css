@@ -1,9 +1,23 @@
+body{
+    background-color: #DFD4E4;
+	font-family: monospace;
+}
+
+
 .title {
-  background-color: #825B93;
+  background-color: #B29DBA;
   text-align: center;
   height: 110px;
 }
 
+div{
+    background-color:#D9C9DF;
+    text-align: center;
+}
+
+table{
+    margin:auto;
+}
 h1
 {
 	font-size: 20px;
@@ -15,34 +29,30 @@ p
 	text-decoration: underline;
 }
 
-td {
+td:not(#commitsPerAuthor td) {
   text-align: center;
   vertical-align: middle;
   width:100px;
 }
-ul
-{
-	border: 3px black inset;
-	border-radius: 5px;
-	box-shadow:6px 6px 6px black;
-	margin: 100px;
-	width : 40%;
+
+
+#commitsPerAuthor{
+    margin:auto;
+    table-layout:fixed;
 }
 
-
-li
-{
-	font-family: Verdana, Arial, Georgia, Times New Roman;
-	font-size: 14px;
-	margin: 10px;
+#commitsPerAuthor td{
+    text-align: center;
+    vertical-align: middle;
 }
 
-li:hover
+tr:hover
 {
-	color : blue;
+	background-color : #C7BCCB;
 }
 #showDiv1, #showDiv2, #showDiv3, #showDiv4, #showDiv5, #showDiv6, #showDiv1SousPartie,#showDiv4SousPartie{
     display: none
+
 }
 #err{
     color: red;
