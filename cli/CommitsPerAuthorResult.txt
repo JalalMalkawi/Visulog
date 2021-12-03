@@ -1,7 +1,7 @@
 
-R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
-Copyright (C) 2016 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R est un logiciel libre livré sans AUCUNE GARANTIE.
 Vous pouvez le redistribuer sous certaines conditions.
@@ -21,7 +21,7 @@ Tapez 'q()' pour quitter R.
 > # column 1 is labels (row names)
 > w <- getwd()
 > w
-[1] "/Users/cyprien/visulog/cli"
+[1] "/Users/hu/visulog/cli"
 > #setwd("/Users/cyprien/Desktop/testRgene")
 > setwd(".visulogRTempFiles")
 > 
@@ -92,4 +92,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.292       0.045       0.432 
+      0.271       0.056       0.473 
