@@ -58,8 +58,8 @@ if (tofile) {
     # visualize "good" level...
     abline(h = pcgood, lty=2, col=8)
   } else {
-    barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
-            xlab="", ylab="nombre de commits", 
+    barplot(nb, names.arg = row.names(x), main="Commits per author",
+            xlab="", ylab="number of commits", 
             cex.names = cnames, cex.lab=clab, las = 2)}
   
   dev.off() # close file
