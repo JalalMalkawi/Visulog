@@ -9,19 +9,34 @@ public class RInvocation{
     public static void RGene(AnalyzerPlugin.Result res, String nomFichier){
         try {
             mkdir(".visulogRTempFiles");
-            //String s = res.getRData();
-            //res.getRtxt(s,pwd() + "/.visulogRTempFiles");
+            String s = res.getRData();
+            res.getRtxt(s,pwd() + "/.visulogRTempFiles");
             runWithR(nomFichier);
         } catch (Exception e) {
             System.out.println("[Visulog] Tried to run R but R not found");
         }
     }
     public static void runWithR(String nomFichier)throws IOException{
-        new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , "result.txt").start();
+        String s = nomFichier.substring(0,nomFichier.length()-2) + "Result.txt";
+        new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , s).start();
     }
     
     public static void mkdir(String nom_dossier)throws IOException{
         new ProcessBuilder("mkdir", nom_dossier).start();
+    }
+    
+    
+    public static void rm(String nom_fichier)throws IOException{
+        new ProcessBuilder("rm", nom_fichier).start();
+    }
+    
+    public static void rm_D(String nom_dossier)throws IOException{
+        new ProcessBuilder("rm","-d", nom_dossier).start();
+    }
+    
+    public static void cleanUp()throws IOException{
+        rm(pwd() + "/.visulogRTempFiles/*");
+        rm_D(pwd() + "/.visulogRTempFiles");
     }
     
     
