@@ -89,7 +89,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:git</h1> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerDate.pdf\">");
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:</h1> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerDate.pdf\">");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" > <table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
             Iterator<String> list = commitsPerDay.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
