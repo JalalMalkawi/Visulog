@@ -10,7 +10,7 @@ attach(x)
 
 ## SETTINGS:
 prob <- FALSE # set to TRUE if barplot(%) desired
-tofile <- FALSE # set to FALSE to print in RStudio
+tofile <- TRUE # set to FALSE to print in RStudio
 
 
 
@@ -56,8 +56,8 @@ if (tofile) {
     # visualize "good" level...
     abline(h = pcgood, lty=2, col=8)
   } else {
-    barplot(nb, names.arg = row.names(x), main="Commits par Date",
-            xlab="", ylab="nombre de commits", 
+    barplot(nb, names.arg = row.names(x), main="Commits per Date",
+            xlab="", ylab="number of commits", 
             cex.names = cnames, cex.lab=clab)}
   
   dev.off() # close file
