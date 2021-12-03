@@ -9,8 +9,8 @@ public class RInvocation{
     public static void RGene(AnalyzerPlugin.Result res, String nomFichier){
         try {
             mkdir(".visulogRTempFiles");
-            String s = res.getRData();
-            res.getRtxt(s,pwd() + "/.visulogRTempFiles");
+            //String s = res.getRData();
+            //res.getRtxt(s,pwd() + "/.visulogRTempFiles");
             runWithR(nomFichier);
         } catch (Exception e) {
             System.out.println("[Visulog] Tried to run R but R not found");

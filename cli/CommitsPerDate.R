@@ -1,7 +1,8 @@
 # get data from file
 # column 1 is labels (row names)
 w <- getwd()
-#setwd("/Users/cyprien/Desktop/testRgene")
+w
+
 setwd(".visulogRTempFiles")
 #z <- paste(w,".visulogRTempFiles",sep="/")
 x <- read.table("commitsPerDate.txt", header = FALSE, row.names = 1)

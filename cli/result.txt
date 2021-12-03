@@ -78,9 +78,14 @@ Tapez 'q()' pour quitter R.
 +     abline(h = pcgood, lty=2, col=8)
 +   } else {
 +     barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
-+             xlab="", ylab="nombre de commits", 
-+             cex.names = cnames, cex.lab=clab, las = 2)}
-null device 
++             xlab=null device 
+          1 
+> ########
+> # pdf width=7, height=5
+> 
+> 
+> proc.time()
+utilisnull device 
           1 
 > ########null device 
           1 
@@ -90,4 +95,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.286       0.043       0.378 
+      0.292       0.042       0.423 

@@ -14,14 +14,25 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
     public CountCommitsPerDayPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
     }
-
-
+    
+    private static String pwd;
+    static {
+        try {
+            pwd = RInvocation.pwd();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
     public void run() {
         long startTime=System.currentTimeMillis();
         result =  aux();
+        RInvocation invoke = new RInvocation();
+        
+        invoke.RGene(result,pwd+"/CommitsPerDate.R");
+        
         System.out.println("[Visulog] Thread of CommitsPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
@@ -78,7 +89,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day :</h1>");
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day :</h1> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerDate.pdf\">");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" > <table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
             Iterator<String> list = commitsPerDay.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
@@ -105,6 +116,10 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
         public String getRData() {
             return null;
         }
+        
+
+        
+        
 
         @Override
         public void getRtxt(String s, String lien) throws IOException {
