@@ -32,6 +32,12 @@ public class CLILauncher {
             var analyzer = new Analyzer(config.get());
             var results = analyzer.computeResults();
             makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
+            try {
+                System.out.println("[Visulog] Removing the cloned repository at visulog/dataFromGit/");
+                FileUtils.deleteDirectory(new File("../dataFromGit"));
+            } catch (IOException ignored) {
+                System.out.println("[Visulog] Tried to remove the the cloned repository at visulog/dataFromGit/, but didn't did");
+            }
         } else displayHelpAndExit();
     }
 
@@ -107,10 +113,6 @@ public class CLILauncher {
                 // arg est ici le lien d'un repo git
                 if (isValidGitUrl(arg)){
                     CLILauncher c = new CLILauncher();
-                    try {
-                        FileUtils.deleteDirectory(new File("../dataFromGit"));
-                    } catch (IOException ignored) {
-                    }
                     System.out.println("[Visulog] Cloning repository...");
                     long startTime=System.currentTimeMillis();
                     c.CloneRep(arg);
@@ -170,7 +172,7 @@ public class CLILauncher {
                     .call();
         } catch (GitAPIException e) {
             String st = "An error occurred while cloning repository, please check your internet connexion" +
-                    " or if the repository is in private mode";
+                    " or if the repository is in private mode, see Errors Section of README.md for more details";
             System.out.println(s);
             CustomError err = new CustomError(st);
             System.exit(0);
