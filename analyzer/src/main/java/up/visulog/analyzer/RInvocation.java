@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.File;
 
+
 public class RInvocation{
     
     public static void RGene(AnalyzerPlugin.Result res, String nomFichier){
@@ -27,12 +28,30 @@ public class RInvocation{
         new ProcessBuilder("mkdir", nom_dossier).start();
     }
     
-    public static void cleanUp()throws IOException{
-        File f1 = new File(pwd() + "/.visulogRTempFiles");
-        for (File f : f1.listFiles()){
-            f.delete();
+    public static void cleanUp(boolean supprStackTrace){
+        try{
+            java.lang.Thread.sleep(1000); //attend une seconde avant de supprimer les fichiers
+            try{
+            File f1 = new File(pwd() + "/.visulogRTempFiles");
+            for (File f : f1.listFiles()){
+                f.delete();
+            }
+            f1.delete();
+            if (supprStackTrace){
+                File f2 = new File(pwd() + "/CommitsPerAuthorPercentResult.txt");
+                f2.delete();
+                File f3 = new File(pwd() + "/CommitsPerAuthorResult.txt");
+                f3.delete();
+                File f4 = new File(pwd() + "/CommitsPerDateResult.txt");
+                f4.delete();
+            }
+        }catch(IOException e){
+            System.out.println(".visulogRTempFiles does not exist.");
         }
-        f1.delete();
+        }catch (InterruptedException e){
+            System.out.println("Error with the deletion of visulog/cli/.visulogRTempFiles ");
+        }
+    
     }
     
     

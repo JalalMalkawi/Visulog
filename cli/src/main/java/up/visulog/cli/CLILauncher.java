@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import up.visulog.analyzer.Analyzer;
+import up.visulog.analyzer.RInvocation;
 import up.visulog.config.Configuration;
 import up.visulog.config.PluginConfig;
 
@@ -39,6 +40,7 @@ public class CLILauncher {
             } catch (IOException ignored) {
                 System.out.println("[Visulog] Tried to remove the the cloned repository at visulog/dataFromGit/, but didn't did");
             }
+            RInvocation.cleanUp(true);
         } else displayHelpAndExit();
     }
 
@@ -71,6 +73,7 @@ public class CLILauncher {
                     "or didn't launched");
             System.exit(0);
         }
+        
     }
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
