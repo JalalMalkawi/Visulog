@@ -57,7 +57,7 @@ public class CLILauncher {
         }
         try {
             fos.write(s.getBytes());
-            System.out.println("[Visulog] Writting results...");
+            System.out.println("[Visulog] Writing results...");
             fos.flush();
             fos.close();
         } catch (IOException ignored) { // results.toHTML() never null/empty

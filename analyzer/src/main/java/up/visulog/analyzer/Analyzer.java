@@ -27,8 +27,8 @@ public class Analyzer {
             String pluginName = pluginConfigEntry;
             Optional<AnalyzerPlugin> plugin = (Optional<AnalyzerPlugin>) makePlugin(pluginName);
             plugin.ifPresent(plugins::add);
+            // run all the plugins
         }
-        // run all the plugins
         System.out.println("[Visulog] Running " + plugins.size() + " threads for plugins...");
         for (AnalyzerPlugin plugin: plugins) {
             Thread t1 = new Thread(plugin);
