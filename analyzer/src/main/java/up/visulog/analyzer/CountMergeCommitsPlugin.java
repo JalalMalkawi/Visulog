@@ -64,8 +64,8 @@ public class CountMergeCommitsPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            return "<div><h1>Number of merge commits:</h1>" + getResultAsString() +
-                    "</div>";
+            return "<div><h1>Number of merge commits:  " + getResultAsString() +
+                    "</h1></div>";
         }
 
         @Override

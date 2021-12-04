@@ -57,9 +57,9 @@ Tapez 'q()' pour quitter R.
 +   # visualize "good" level...
 +   abline(h = pcgood, lty=2, col=8)
 + } else {
-+   barplot(nb, names.arg = row.names(x), main="Commits par Date",
-+           xlab="jours", ylab="nombre de commits", 
-+           cex.names = cnames, cex.lab=clab)}
++   barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
++           xlab="auteurs", ylab="nombre de commits", 
++           cex.names = cnames, cex.lab=clab, las = 2)}
 > 
 > # output plot to a file in png; see ?pdf or ?png
 > if (tofile) {
@@ -70,19 +70,16 @@ Tapez 'q()' pour quitter R.
 +   if (prob) {
 +     barplot(pct, names.arg = row.names(x), main="Commits par auteurs (%)",
 +             ylim = c(0, min(c(100, max(pct)+10))),
-+             xlab="dates", ylab="% de commits" , 
-+             cex.names = cnames, cex.lab=clab, col=cl)
-+     legend("topleft", legend = c(lgdbon,"mauvais"), fill=3:2,
++             xlab="", ylab="% de commits" , 
++             cex.names = cnames, cex.lab=clab, col=cl, las = 2)
++     legend("topleft", legend = c(lgdbon,lgdbad), fill=3:2,
 +            bg = "antiquewhite")
 +     # visualize "good" level...
 +     abline(h = pcgood, lty=2, col=8)
 +   } else {
-+     barplot(nb, names.arg = row.names(x), main="Commits per Date",
-+             xlab="", ylab="number of commits", 
-+             cex.names = cnames, cex.lab=clab)}
-+   
-+   dev.off() # close file
-+ }
++     barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
++             xlab="", ylab="nombre de commits", 
++             cex.names = cnames, cex.lab=clab, las = 2)}
 null device 
           1 
 > ########
@@ -91,4 +88,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.271       0.044       0.346 
+      0.280       0.054       0.387

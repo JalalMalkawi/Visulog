@@ -58,7 +58,7 @@ public class CountModifiedLinesPerDayPlugin implements AnalyzerPlugin
         @Override
         public String getResultAsHtmlDiv() 
         {
-            return "<div><h1>Average number of modified lines per day:</h1>" + getResultAsString() +"</div>";
+            return "<div><h1>Average number of modified lines per day:  " + getResultAsString() +"</h1></div>";
         }
 
         @Override
