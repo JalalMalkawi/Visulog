@@ -76,17 +76,19 @@ Visulog contains the following modules:
     ```
     git clone https://gaufre.informatique.univ-paris-diderot.fr/benmouff/visulog.git
     ```
-3. Only if you are on a SCRIPT computer (in one of the TP rooms):
+2. Only if you are on a SCRIPT computer (in one of the TP rooms):
     ```
     source SCRIPT/envsetup
     ```
    *This will setup the GRADLE_OPTS environment variable so that gradle uses the SCRIPT proxy for downloading its dependencies. It will also use a custom trust store (the one installed in the system is apparently broken... ).*
-4. (Optional) Run gradle wrapper (it will download all dependencies including gradle itself, except R)
+3. (Optional) Run gradle wrapper (it will download all dependencies including gradle itself, except R)
     ```
     ./gradlew build
     ```
-5. Install R
+4. Install R
    ...
+5. 5. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+
 
 ### Running the software
 
