@@ -54,7 +54,7 @@ public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
     {
         long startTime=System.currentTimeMillis();
         this.result = this.getAverageLines();
-        System.out.println("[Visulog] Thread of ModifierLinesPerAuthorPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
+        System.out.println("[Visulog] Thread of ModifiedLinesPerAuthorPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
     @Override

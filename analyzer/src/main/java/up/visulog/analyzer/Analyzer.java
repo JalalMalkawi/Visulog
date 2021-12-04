@@ -52,7 +52,7 @@ public class Analyzer {
                     Object[] parameters = {config};
                     return Optional.of(constructor.newInstance(parameters));
                 } catch (InstantiationException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-                    System.out.println("A fatal error occurred while loading plugin, please submit us an issue at " +
+                    System.out.println("[Visulog] A fatal error occurred while loading plugin, please submit us an issue at " +
                             "https://gaufre.informatique.univ-paris-diderot.fr/benmouff/visulog/issues" +
                             "\nOr send us an email at jeremybnfk@gmail.com");
                     System.exit(1);

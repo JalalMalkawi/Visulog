@@ -12,6 +12,7 @@ public class RInvocation{
             String s = res.getRData();
             res.CreateRtxt(s,pwd() + "/.visulogRTempFiles");
             runWithR(nomFichier);
+            System.out.println("[Visulog] Running R");
         } catch (Exception e) {
             System.out.println("[Visulog] Tried to run R but R not found");
         }
