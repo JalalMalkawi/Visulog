@@ -76,20 +76,21 @@ Visulog contains the following modules:
     ```
     git clone https://gaufre.informatique.univ-paris-diderot.fr/benmouff/visulog.git
     ```
-3. Only if you are on a SCRIPT computer (in one of the TP rooms):
+2. Only if you are on a SCRIPT computer (in one of the TP rooms):
     ```
     source SCRIPT/envsetup
     ```
    *This will setup the GRADLE_OPTS environment variable so that gradle uses the SCRIPT proxy for downloading its dependencies. It will also use a custom trust store (the one installed in the system is apparently broken... ).*
-4. (Optional) Run gradle wrapper (it will download all dependencies including gradle itself, except R)
+3. (Optional) Run gradle wrapper (it will download all dependencies including gradle itself, except R)
     ```
     ./gradlew build
     ```
-4. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+4. Install R
 
-5. Install R
+    See https://www.r-project.org to install R
    
-   See https://www.r-project.org to install R
+5. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+    
 
 ### Running the software
 
@@ -122,6 +123,5 @@ you will have your analyses on the desired project.
 To properly run this tool, you should have :
 - set a default browser
 - have an internet connexion
-- as wrote above, running this tool on a public GitHub/GitLab repository project
-*(example : this tool should not work on https://github.com/cassandra-project, but work on https://github.com/cassandra-project/platform, because the last one is a repository while the first one is just the main page of the project)*
+- as wrote above, running this tool on a public github/gitlab project
 - allow this application to write files
