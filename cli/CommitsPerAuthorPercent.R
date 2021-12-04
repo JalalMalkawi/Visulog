@@ -5,8 +5,8 @@ w
 #setwd("/Users/cyprien/Desktop/testRgene")
 setwd(".visulogRTempFiles")
 #z <- paste(w,".visulogRTempFiles",sep="/")
-x <- read.table("commitsPA.txt", header = FALSE, row.names = 1)
-colnames(x) <- "nb"
+x <- read.table("commitsPA.txt", header = FALSE)
+colnames(x) <- c("auteurs", "nb")
 attach(x)
 
 ## SETTINGS:
@@ -28,7 +28,7 @@ cnames <- 0.7  # bar names size, adapt to nb of bars
 lgdbon <- paste(">", round(pcgood,1),"%")
 lgdbad <- paste("<", round(pcgood,1),"%")
 if (! tofile) if (prob) {
-  barplot(pct, names.arg = row.names(x), main="Commits par auteurs (%)",
+  barplot(pct, names.arg = auteurs, main="Commits par auteurs (%)",
         ylim = c(0, min(c(100, max(pct)+10))),
         xlab="", ylab="% de commits" , 
         cex.names = cnames, cex.lab=clab, col=cl, las = 2)
@@ -37,7 +37,7 @@ if (! tofile) if (prob) {
   # visualize "good" level...
   abline(h = pcgood, lty=2, col=8)
 } else {
-  barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
+  barplot(nb, names.arg = auteurs, main="Commits par auteurs",
           xlab="auteurs", ylab="nombre de commits", 
           cex.names = cnames, cex.lab=clab, las = 2)}
 
@@ -48,7 +48,7 @@ if (tofile) {
   cnames <- 0.7  # bar names size, adapt to nb of bars
   
   if (prob) {
-    barplot(pct, names.arg = row.names(x), main="Commits per author (%)",
+    barplot(pct, names.arg = auteurs, main="Commits per author (%)",
             ylim = c(0, min(c(100, max(pct)+10))),
             xlab="", ylab="% of commits" , 
             cex.names = cnames, cex.lab=clab, col=cl, las = 2)
@@ -57,7 +57,7 @@ if (tofile) {
     # visualize "good" level...
     abline(h = pcgood, lty=2, col=8)
   } else {
-    barplot(nb, names.arg = row.names(x), main="Commits par auteurs",
+    barplot(nb, names.arg = auteurs, main="Commits par auteurs",
             xlab="", ylab="nombre de commits", 
             cex.names = cnames, cex.lab=clab, las = 2)}
   
