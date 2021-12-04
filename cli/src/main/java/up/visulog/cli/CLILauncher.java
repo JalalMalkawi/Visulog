@@ -75,11 +75,14 @@ public class CLILauncher {
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
         var gitPath = FileSystems.getDefault().getPath(".");
         var plugins = new HashMap<String, PluginConfig>();
-        String[] s = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
+        String[] sAdvanced = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
                       "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                       "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
                       "countTotalModifiedLines","countModifiedLinesPerDay","countModifiedLinesPerAuthorPerDay"};
-        if(args.length==0) for(String st : s) plugins.put(st, new PluginConfig() {});
+        String[] sSimple = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
+                "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
+                "countCommitsPerMonth","countMergeCommits"};
+        if(args.length==0) for(String st : sAdvanced) plugins.put(st, new PluginConfig() {}); // default visulog case
         boolean opt=false;
         for (var arg : args) {
             if (arg.startsWith("--")) {
@@ -90,8 +93,12 @@ public class CLILauncher {
                     String pName = parts[0];
                     String pValue = parts[1];
                     switch (pName) {
+                        case "--advancedMode":
+                            // Analyse avancée
+                            for(String st : sAdvanced) plugins.put(st, new PluginConfig() {});
+                            break;
                         case "--addPlugin":
-                            for(String st : s){
+                            for(String st : sAdvanced){
                                 System.out.println("[Visulog] Running plugin : " + parts[1]);
                                 if(pValue.equals(st)) plugins.put(st, new PluginConfig() {});
                             }
@@ -108,7 +115,8 @@ public class CLILauncher {
                 }
             } else {
                 if(!opt){
-                    for(String st : s) plugins.put(st, new PluginConfig() {});
+                    // Analyse simple
+                    for(String st : sSimple) plugins.put(st, new PluginConfig() {});
                 }
                 // arg est ici le lien d'un repo git
                 if (isValidGitUrl(arg)){
@@ -172,8 +180,8 @@ public class CLILauncher {
                     .call();
         } catch (GitAPIException e) {
             String st = "An error occurred while cloning repository, please check your internet connexion" +
-                    " or if the repository is in private mode, see Errors Section of README.md for more details";
-            System.out.println(s);
+                    " or if the repository is in private mode, see Errors Section of README.md for more details<br><br>Invalid link : " + s;
+            System.out.println("[Visulog] Error with the link : " + s);
             CustomError err = new CustomError(st);
             System.exit(0);
         }
