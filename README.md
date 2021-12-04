@@ -46,6 +46,7 @@ This tool will show you :
     - It informs of the authors' names, and the importance of their contributions in the project
 - The number of the daily average commits per author
     - Useful to have a better view about the proportion of an author contribution, during the time
+-
 
 ## Already existing similar tools
 
@@ -84,24 +85,26 @@ Visulog contains the following modules:
     ```
     ./gradlew build
     ```
+4. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+
 5. Install R
    
    See https://www.r-project.org to install R
 
 ### Running the software
 
-Open a terminal window and set your working directory to here : ```visulog/```
+Open a terminal window and set your working directory to here : ```/visulog```
 Then, run through your terminal
 ```
 ./run.sh
 ```
-*(It may ask you to allow permission of execution on this file, in which case just do ```chmod u+x ./run.sh```).*
+(It may ask you to allow permission of execution on this file, in which case just do ```chmod u+x ./run.sh```).
 
 Then the script will ask you
 ```
 Welcome User , please enter your git repository link or just press enter :
 ```
-And, after pasting your project link (the URL must come from a GitHub or GitLab repository, and the project must be public, *see Errors section for more details*), press enter.
+And, after pasting your project link (the URL must come from GitHub or GitLab, and the project must be public), press enter.
 
 ####Remarks
 Notice that, it can be also run through gradle on our project :
