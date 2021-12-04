@@ -68,7 +68,7 @@ public class CountModifiedLinesPerDayPlugin implements AnalyzerPlugin
         }
 
         @Override
-        public void getRtxt(String s, String lien) throws IOException {
+        public void CreateRtxt(String s, String lien) throws IOException {
             // TODO Auto-generated method stub
         }
         

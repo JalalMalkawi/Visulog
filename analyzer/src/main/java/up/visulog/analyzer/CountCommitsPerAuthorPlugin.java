@@ -104,12 +104,10 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         public String getRData() {
             StringBuilder R_txt = new StringBuilder();
-            int i = 0;
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0].replace(" ", "_");
-                R_txt.append(String.format(/*Integer.toString(i)*/nom.split("_")[nom.split("_").length-1] + " " + item.getValue() + "\n"));
-                i++;
+                R_txt.append(String.format(nom.split("_")[nom.split("_").length-1] + " " + item.getValue() + "\n"));
             }
             return R_txt.toString();
         }
@@ -122,13 +120,13 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split(" <")[0].replace(" ", "_");
                 nom = nom.substring(0, nom.length()-1);
-                res += nom + " : " + Integer.toString(i) + "\n" + "</p>";
+                res += nom + " : " + i + "\n" + "</p>";
                 i++;
             }
             return res;
         }
 
-        public void getRtxt(String s, String lien) throws IOException {
+        public void CreateRtxt(String s, String lien) throws IOException {
                 File txt = new File(lien + "/commitsPA.txt" );
                 boolean append = !txt.exists();
                 FileOutputStream fos = new FileOutputStream(txt, append);
@@ -136,26 +134,6 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
                 fos.close();
         }
 
-        public static void runWithR(String nomFichier)throws IOException {
-            Process process = new ProcessBuilder("R", "CMD", "BATCH", nomFichier, "result.txt").start();
-        }
-        
-        
-        public static void mkdir(String nom_dossier)throws IOException{
-            Process process = new ProcessBuilder("mkdir", nom_dossier).start();
-        }
-        
-        
-        public static String pwd()throws IOException{
-            Process process;
-            ProcessBuilder builder = new ProcessBuilder("pwd");
-            try {
-                process = builder.start();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return new BufferedReader(new InputStreamReader(process.getInputStream())).readLine();
-        }
 
     }
 

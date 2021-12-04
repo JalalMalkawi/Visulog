@@ -3,6 +3,8 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -105,12 +107,23 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         }
 
         @Override
-        public void getRtxt(String s, String lien) throws IOException {
+        public void CreateRtxt(String s, String lien) throws IOException {
+            File txt = new File(lien + "/commitsPerHour.txt" );
+            boolean append = !txt.exists();
+            FileOutputStream fos = new FileOutputStream(txt, append);
+            fos.write(s.getBytes());
+            fos.close();
         }
 
         @Override
         public String getRData() {
-            return null;
+            StringBuilder R_txt = new StringBuilder();
+            for (var item : commitsPerHour) {
+                String nombreDeCommits = item.split(" ")[0];
+                String heure = item.split(" ")[1]+" h";
+                R_txt.append(nombreDeCommits + " "  + heure + "\n");
+            }
+            return R_txt.toString();
         }
     }
 }

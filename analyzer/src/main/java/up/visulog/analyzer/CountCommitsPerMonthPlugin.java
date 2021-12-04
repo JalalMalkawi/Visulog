@@ -3,6 +3,8 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
@@ -108,11 +110,22 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
 
         @Override
         public String getRData() {
-            return null;
+            StringBuilder R_txt = new StringBuilder();
+            for (var item : commitsPerMonth) {
+                String nombreDeCommits= item.split(" ")[0];
+                String mois = item.split(" ")[1];
+                R_txt.append(nombreDeCommits + " " + mois);
+            }
+            return R_txt.toString();
         }
 
         @Override
-        public void getRtxt(String s, String lien) throws IOException {
+        public void CreateRtxt(String s, String lien) throws IOException {
+            File txt = new File(lien + "/commitsPerMonth.txt" );
+            boolean append = !txt.exists();
+            FileOutputStream fos = new FileOutputStream(txt, append);
+            fos.write(s.getBytes());
+            fos.close();
         }
     }
 }

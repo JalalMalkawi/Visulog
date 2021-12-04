@@ -23,8 +23,8 @@ public class Analyzer {
     public AnalyzerResult computeResults() {
         System.out.println("[Visulog] Computing results of plugins...");
         List<AnalyzerPlugin> plugins = new ArrayList<>();
-        for (var pluginConfigEntry: config.getPluginConfigs().entrySet()) {
-            String pluginName = pluginConfigEntry.getKey();
+        for (var pluginConfigEntry: config.getPluginConfigs() ) {
+            String pluginName = pluginConfigEntry;
             Optional<AnalyzerPlugin> plugin = (Optional<AnalyzerPlugin>) makePlugin(pluginName);
             plugin.ifPresent(plugins::add);
         }
