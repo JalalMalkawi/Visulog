@@ -85,9 +85,10 @@ Visulog contains the following modules:
     ```
     ./gradlew build
     ```
-4. Install R
+4. Install R. You can download it  here: https://www.r-project.org
    ...
-5. 5. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+5. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+6. Use visulog on a unix operating system.
 
 
 ### Running the software
