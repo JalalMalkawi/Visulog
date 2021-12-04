@@ -43,7 +43,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             String ligne;
             while((ligne = reader.readLine()) != null){
                 String[] name = ligne.split("=");
-                for(int i = 0;i<name.length;i++){
+                for(int i = 0;i < name.length;i++){
                     if (name[i].equals(n)) return name[0];
                 }
             }

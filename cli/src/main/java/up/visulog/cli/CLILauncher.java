@@ -21,6 +21,7 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
 
 public class CLILauncher {
@@ -74,7 +75,7 @@ public class CLILauncher {
 
     static Optional<Configuration> makeConfigFromCommandLineArgs(String[] args) {
         var gitPath = FileSystems.getDefault().getPath(".");
-        var plugins = new HashMap<String, PluginConfig>();
+        var plugins = new HashSet<String>();
         String[] sAdvanced = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
                       "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                       "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
@@ -82,7 +83,7 @@ public class CLILauncher {
         String[] sSimple = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
                 "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                 "countCommitsPerMonth","countMergeCommits"};
-        if(args.length==0) for(String st : sAdvanced) plugins.put(st, new PluginConfig() {}); // default visulog case
+        if(args.length==0) for(String st : sAdvanced) plugins.add(st); // default visulog case
         boolean opt=false;
         for (var arg : args) {
             if (arg.startsWith("--")) {
@@ -95,12 +96,12 @@ public class CLILauncher {
                     switch (pName) {
                         case "--advancedMode":
                             // Analyse avancée
-                            for(String st : sAdvanced) plugins.put(st, new PluginConfig() {});
+                            for(String st : sAdvanced) plugins.add(st);
                             break;
                         case "--addPlugin":
                             for(String st : sAdvanced){
                                 System.out.println("[Visulog] Running plugin : " + parts[1]);
-                                if(pValue.equals(st)) plugins.put(st, new PluginConfig() {});
+                                if(pValue.equals(st)) plugins.add(st);
                             }
                             break;
                         case "--loadConfigFile":
@@ -116,7 +117,7 @@ public class CLILauncher {
             } else {
                 if(!opt){
                     // Analyse simple
-                    for(String st : sSimple) plugins.put(st, new PluginConfig() {});
+                    for(String st : sSimple) plugins.add(st);
                 }
                 // arg est ici le lien d'un repo git
                 if (isValidGitUrl(arg)){
