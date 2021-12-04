@@ -20,7 +20,7 @@ dt <- as.Date(Date) # convert to Date
 
 
 # output plot to a file in png; see ?pdf or ?png
-pdf(file = "CommitsPerDate.pdf", width=7, height=5) # 1920/1080 full HD png
+pdf(file = "CommitsPerDate.pdf", width=9, height=7) # 1920/1080 full HD png
 plot(dt, nb, type="b", pch=20, xaxt = "n", xlab = "Date", ylab="Commits")
 # axis.Date(1, at = dt, format = "%b %y")  
 axis.Date(1, at = dt, format = "%d %b %y", cex.axis=0.7)  

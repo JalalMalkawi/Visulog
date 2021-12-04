@@ -3,6 +3,7 @@ package up.visulog.analyzer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.File;
 
 public class RInvocation{
     
@@ -26,21 +27,12 @@ public class RInvocation{
         new ProcessBuilder("mkdir", nom_dossier).start();
     }
     
-    
-    
-    
-//les fonctions rm ne fonctionnent pas. Aucune erreur mais les fichiers ne sont pas détruits !!?
-    public static void rm(String nom_fichier)throws IOException{
-        new ProcessBuilder("rm", nom_fichier).start();
-    }
-    
-    public static void rm_D(String nom_dossier)throws IOException{
-        new ProcessBuilder("rm","-d", nom_dossier).start();
-    }
-    
     public static void cleanUp()throws IOException{
-        rm(pwd() + "/.visulogRTempFiles/*");
-        rm_D(pwd() + "/.visulogRTempFiles");
+        File f1 = new File(pwd() + "/.visulogRTempFiles");
+        for (File f : f1.listFiles()){
+            f.delete();
+        }
+        f1.delete();
     }
     
     
