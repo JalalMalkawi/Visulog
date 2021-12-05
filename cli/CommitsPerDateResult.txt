@@ -1,7 +1,7 @@
 
-R version 4.1.2 (2021-11-01) -- "Bird Hippie"
-Copyright (C) 2021 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin17.0 (64-bit)
+R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
 R est un logiciel libre livré sans AUCUNE GARANTIE.
 Vous pouvez le redistribuer sous certaines conditions.
@@ -21,7 +21,7 @@ Tapez 'q()' pour quitter R.
 > # column 1 is labels (row names)
 > w <- getwd()
 > w
-[1] "/Users/jalalmalkawi/visulog/cli"
+[1] "/Users/cyprien/visulog/cli"
 > 
 > setwd(".visulogRTempFiles")
 > #z <- paste(w,".visulogRTempFiles",sep="/")
@@ -35,6 +35,9 @@ Tapez 'q()' pour quitter R.
 > Sys.getlocale("LC_TIME")
 [1] "C"
 > dt <- as.Date(Date) # convert to Date
+Warning message:
+In strptime(xx, f <- "%Y-%m-%d", tz = "GMT") :
+  unknown timezone 'zone/tz/2021a.1.0/zoneinfo/Europe/Paris'
 > 
 > ## SETTINGS:
 > 
@@ -56,4 +59,4 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.247       0.096       0.404 
+      0.289       0.052       0.484 
