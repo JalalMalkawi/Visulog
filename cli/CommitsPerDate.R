@@ -18,7 +18,7 @@ dt <- as.Date(Date) # convert to Date
 ## SETTINGS:
 
 
-
+setwd("../")
 # output plot to a file in png; see ?pdf or ?png
 pdf(file = "CommitsPerDate.pdf", width=9, height=7) # 1920/1080 full HD png
 plot(dt, nb, type="b", pch=20, xaxt = "n", xlab = "Date", ylab="Commits")
