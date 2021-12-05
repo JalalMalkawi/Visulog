@@ -119,10 +119,15 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         public String getRData() {
             StringBuilder R_txt = new StringBuilder();
+            int max=10;
+            int cpt =0;
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
                 String nom = nom_mail.split("<")[0].replace(" ", "_");
-                R_txt.append(String.format(nom.split("_")[nom.split("_").length-1] + " " + item.getValue() + "\n"));
+                if(cpt< max){
+                    R_txt.append(String.format(nom.split("_")[nom.split("_").length-1] + " " + item.getValue() + "\n"));
+                    cpt++;
+                }
             }
             return R_txt.toString();
         }
