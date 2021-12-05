@@ -85,7 +85,6 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             Map<String, Integer> map_apres = new LinkedHashMap<String, Integer>();
             for(Map.Entry<String, Integer> entry : list) {
                 map_apres.put(entry.getKey(), entry.getValue());
-                System.out.println(entry);
             }
             return map_apres;
         }
@@ -104,14 +103,17 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\">"  );
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
-
+            int max=10;
+            int cpt =0;
             for (var item : commitsPerAuthor.entrySet()) {
+                if(cpt++== max+1){
+                    html.append("</tbody>" + "</table>" +"<p onclick=\"toggle('showDiv2SousPartie')\"> suite :<p>" +"<div id=\"showDiv2SousPartie\" style=\"display:none;\">" + "<table id=\"commitsPerAuthor\">" +" <tbody>");
+                }
                 String nom_mail = item.getKey();
-
                 String nom = nom_mail.split("<")[0];
-                html.append(String.format("<tr><td>"+ nom + " </td><td> " + item.getValue() + "</td>"));
+                html.append(String.format("<tr><td>"+ nom + " </td><td id=\"commitsPerAuthorValue\"> " + item.getValue() + "</td>"));
             }
-            html.append("</tbody></table></div></div>");
+            html.append("</tbody></table></div></div></div>");
             return html.toString();
         }
 

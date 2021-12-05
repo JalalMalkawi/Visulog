@@ -93,7 +93,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
             while (list.hasNext()){
                 String item= list.next();
                 if(commitsPerMonth.size()-commitsPerMonth.indexOf(item)== max+1){
-                    html.append("</tbody>" + "</table>" +"<p onclick=\"toggle('showDiv4SousPartie')\"> suite :<p>" +"<div id=\"showDiv4SousPartie\">" + "<table>" +" <tbody>");
+                    html.append("</tbody>" + "</table>" +"<p onclick=\"toggle('showDiv4SousPartie')\"> suite :<p>" +"<div id=\"showDiv4SousPartie\" style=\"display:none;\" >" + "<table>" +" <tbody>");
                 }
                if(item!=null) {
                     html.append("<tr>");
