@@ -4,9 +4,7 @@ import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     private final Configuration configuration;
@@ -35,6 +33,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             var nb = result.commitsPerAuthor.getOrDefault(author, 0);
             result.commitsPerAuthor.put(author, nb + 1);
         }
+        result.commitsPerAuthor = result.triAvecValeur(result.commitsPerAuthor);
         return result;
     }
     private static String AuthorName (String n){
@@ -73,7 +72,24 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     }
 
     public static class Result implements AnalyzerPlugin.Result {
-        private final Map<String, Integer> commitsPerAuthor = new HashMap<>();
+        private Map<String, Integer> commitsPerAuthor = new HashMap<>();
+
+        private static Map<String, Integer> triAvecValeur( Map<String, Integer> map ){
+            List<Map.Entry<String, Integer>> list =
+                    new LinkedList<Map.Entry<String, Integer>>( map.entrySet() );
+            Collections.sort( list, new Comparator<Map.Entry<String, Integer>>(){
+                public int compare( Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2 ){
+                    return (o2.getValue()).compareTo( o1.getValue());
+                }
+            });
+            Map<String, Integer> map_apres = new LinkedHashMap<String, Integer>();
+            for(Map.Entry<String, Integer> entry : list) {
+                map_apres.put(entry.getKey(), entry.getValue());
+                System.out.println(entry);
+            }
+            return map_apres;
+        }
+
 
         public Map<String, Integer> getCommitsPerAuthor() {
             return commitsPerAuthor;
@@ -87,15 +103,12 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         @Override
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\">"  );
-
-            /*"<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthor.pdf\" width=\"50%\"  height=\"530px\"></iframe>" +  "<iframe src=\""+pwd+"/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\" width=\"50%\"  height=\"530px\"></iframe>"*/ /*+ this.getLegende()*/
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
 
             for (var item : commitsPerAuthor.entrySet()) {
                 String nom_mail = item.getKey();
 
                 String nom = nom_mail.split("<")[0];
-                //String mail = nom_mail.split("<")[1].replaceAll(">", " ");
                 html.append(String.format("<tr><td>"+ nom + " </td><td> " + item.getValue() + "</td>"));
             }
             html.append("</tbody></table></div></div>");
