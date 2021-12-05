@@ -101,7 +101,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
-            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.visulogRTempFiles/CommitsPerAuthorPercent.pdf\">"  );
+            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/CommitsPerAuthorPercent.pdf\">"  );
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
             int max=10;
             int cpt =0;
