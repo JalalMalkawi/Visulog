@@ -30,7 +30,7 @@ public class RInvocation{
     
     public static void cleanUp(boolean supprStackTrace){
         try{
-            java.lang.Thread.sleep(1000); //attend une seconde avant de supprimer les fichiers
+            java.lang.Thread.sleep(10000); //attend une seconde avant de supprimer les fichiers
             try{
             File f1 = new File(pwd() + "/.visulogRTempFiles");
             for (File f : f1.listFiles()){
