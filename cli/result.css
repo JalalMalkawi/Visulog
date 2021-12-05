@@ -46,11 +46,16 @@ td:not(#commitsPerAuthor td) {
     vertical-align: middle;
 }
 
+#commitsPerAuthorValue {
+    text-align: center;
+    width:120px;
+}
+
 tr:hover
 {
 	background-color : #C7BCCB;
 }
-#showDiv1, #showDiv2, #showDiv3, #showDiv4, #showDiv5, #showDiv6, #showDiv1SousPartie,#showDiv4SousPartie{
+#showDiv1, #showDiv2, #showDiv3, #showDiv4, #showDiv5, #showDiv6, #showDiv1SousPartie,#showDiv2SousPartie,#showDiv4SousPartie{
     display: none
 
 }
