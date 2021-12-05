@@ -106,7 +106,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             int max=10;
             int cpt =0;
             for (var item : commitsPerAuthor.entrySet()) {
-                if(cpt++== max+1){
+                if(cpt++== max){
                     html.append("</tbody>" + "</table>" +"<p onclick=\"toggle('showDiv2SousPartie')\"> suite :<p>" +"<div id=\"showDiv2SousPartie\" style=\"display:none;\">" + "<table id=\"commitsPerAuthor\">" +" <tbody>");
                 }
                 String nom_mail = item.getKey();
