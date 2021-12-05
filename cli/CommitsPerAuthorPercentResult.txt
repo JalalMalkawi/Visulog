@@ -91,4 +91,8 @@ null device
 > 
 > proc.time()
 utilisateur     système      écoulé 
+<<<<<<< HEAD
       0.291       0.044       0.446 
+=======
+      0.236       0.080       0.292 
+>>>>>>> 926e440ac7c3178f160196a55fd74186f69f29c4
