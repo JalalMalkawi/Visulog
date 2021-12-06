@@ -55,6 +55,7 @@ public class RInvocation{
     
     public static void cleanUpPdf(){
         File f1 = new File(pwd() + "/.graphs");
+        if(f1.listFiles()==null) return;
         for (File f : f1.listFiles()){
             f.delete();
         }
