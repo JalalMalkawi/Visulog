@@ -93,8 +93,33 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:</h1> ");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
-            html.append("<div id=\"showDiv1\" style=\"display:none;\" ><img src=\""+
-                        pwd + "/CommitsPerDate.pdf\"> <table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
+            html.append("<div id=\"showDiv1\" style=\"display:none;\" >");
+            int count = 1;
+            String r = "";
+            for (var item : commitsPerDay) {
+                String jour = item.split(" ")[1];
+                r += jour.substring(0,7);
+            }
+            
+            int mois = 0;
+            String s = r.substring(mois,mois+7);
+            while (new File(pwd + "/.graphs/CommitsPerDate_"+ String.valueOf(count) +".pdf").exists()){
+                html.append("<p onclick=\"toggle('showgraph"+String.valueOf(count)+"')\"> "+s+" </p>");
+                
+                html.append("<graph"+String.valueOf(count)+" id=\"showgraph"+String.valueOf(count)+"\" style=\"display:none;\">");
+                
+                html.append("<img src=\""+ pwd + "/.graphs/CommitsPerDate_"+ String.valueOf(count) +".pdf\">");
+                
+                html.append("</graph"+String.valueOf(count)+">");
+                count++;
+                
+                while( s.equals(r.substring(mois,mois+7)) && mois+7<r.length()){
+                    mois += 7;
+                }
+                s =r.substring(mois,mois+7);
+                System.out.println("s : " + s);
+            }
+            html.append("<table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
             Iterator<String> list = commitsPerDay.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
             int max= 10;
             while (list.hasNext()){
