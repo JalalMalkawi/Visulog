@@ -117,7 +117,6 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                     mois += 7;
                 }
                 s =r.substring(mois,mois+7);
-                System.out.println("s : " + s);
             }
             html.append("<table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
             Iterator<String> list = commitsPerDay.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse

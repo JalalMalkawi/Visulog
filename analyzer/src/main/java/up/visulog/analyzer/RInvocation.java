@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.File;
 
-
 public class RInvocation{
     
     public static void RGene(AnalyzerPlugin.Result res, String nomFichier){
@@ -42,6 +41,10 @@ public class RInvocation{
                 f3.delete();
                 File f4 = new File(pwd() + "/CommitsPerDateResult.txt");
                 f4.delete();
+                File f5 = new File(pwd() + "/CommitsPerHourResult.txt");
+                f5.delete();
+                File f6 = new File(pwd() + "/CommitsPerHourPercentResult.txt");
+                f6.delete();
             }
         }catch(IOException e){
             System.out.println(".visulogRTempFiles does not exist.");
@@ -74,6 +77,8 @@ public class RInvocation{
         }
         return new BufferedReader(new InputStreamReader(process.getInputStream())).readLine();
     }
+
+
     
     
     

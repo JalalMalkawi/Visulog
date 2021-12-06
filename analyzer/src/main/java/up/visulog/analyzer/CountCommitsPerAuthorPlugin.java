@@ -1,8 +1,13 @@
 package up.visulog.analyzer;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
@@ -12,12 +17,17 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
     private static String pwd;
 
+
     static {
         try {
             pwd = RInvocation.pwd();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getPwd() {
+        return pwd;
     }
 
     public CountCommitsPerAuthorPlugin(Configuration generalConfiguration) {
@@ -63,6 +73,14 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             invoke.RGene(result,pwd+"/CommitsPerAuthor.R");
             invoke.RGene(result,pwd+"/CommitsPerAuthorPercent.R");
         System.out.println("[Visulog] Thread of CommitsPerAuthor plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
+        /*try {
+            Result.generateImageFromPDF("CommitsPerAuthor.pdf","png");
+            Result.generateImageFromPDF("CommitsPerAuthorPercent.pdf","png");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
     }
 
     @Override
@@ -102,8 +120,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         @Override
         public String getResultAsHtmlDiv() {
 
-            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.graphs/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\">"  );
-
+        StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.graphs/CommitsPerAuthor.pdf\"> <br><br>"+ "<img src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\">"  );
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
             int max=10;
             int cpt =0;
@@ -133,7 +150,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             }
             return R_txt.toString();
         }
-        
+
         public String getLegende(){
             int i = 0;
             String res = "";
@@ -155,6 +172,20 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
                 fos.write(s.getBytes());
                 fos.close();
         }
+        public static void generateImageFromPDF(String filename, String extension) throws IOException {
+            PDDocument document = PDDocument.load(new File(filename));
+            PDFRenderer pdfRenderer = new PDFRenderer(document);
+            for (int page = 0; page < document.getNumberOfPages(); ++page) {
+                BufferedImage bim = pdfRenderer.renderImageWithDPI(
+                        page, 700, ImageType.RGB);
+                ImageIOUtil.writeImage(
+                        bim, String.format(filename.substring(0,filename.indexOf('.')) +".%s", extension), 300);
+            }
+            document.close();
+        }
+
+
+
 
 
     }
@@ -168,7 +199,6 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         //CountCommitsPerAuthorPlugin.Result.mkdir(".test");
         //CountCommitsPerAuthorPlugin.Result.mkdir(".test/test2");
-
 
 
     }
