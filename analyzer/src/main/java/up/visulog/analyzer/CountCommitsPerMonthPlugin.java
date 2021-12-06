@@ -95,7 +95,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv4')\">Commits Per Month:</h1>");
             if(commitsPerMonth.isEmpty()) return html.append(" No commit</div>").toString();
-            html.append(" <div id=\"showDiv4\" style=\"display:none;\"><img src=\""+ pwd + "/.graphs/CommitsPerMonth.pdf\"><img src=\""+ pwd + "/.graphs/CommitsPerMonthPercent.pdf\"><table><tbody><thead><tr><th>Commits count</th><th>Month</th></thead>");
+            html.append(" <div id=\"showDiv4\" style=\"display:none;\"><embed src=\""+ pwd + "/.graphs/CommitsPerMonth.pdf\"width=\"500\" height=\"400\"><embed src=\""+ pwd + "/.graphs/CommitsPerMonthPercent.pdf\"width=\"500\" height=\"400\"><table><tbody><thead><tr><th>Commits count</th><th>Month</th></thead>");
             Iterator<String> list = commitsPerMonth.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
             int max= 3;
             while (list.hasNext()){

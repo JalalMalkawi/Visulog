@@ -1,0 +1,76 @@
+
+R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R est un logiciel libre livré sans AUCUNE GARANTIE.
+Vous pouvez le redistribuer sous certaines conditions.
+Tapez 'license()' ou 'licence()' pour plus de détails.
+
+R est un projet collaboratif avec de nombreux contributeurs.
+Tapez 'contributors()' pour plus d'information et
+'citation()' pour la façon de le citer dans les publications.
+
+Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
+en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
+Tapez 'q()' pour quitter R.
+
+[Sauvegarde de la session précédente restaurée]
+
+> # get data from file
+> # column 1 is labels (row names)
+> w <- getwd() 
+> #setwd("../")
+> w
+[1] "/Users/cyprien/visulog/cli"
+> #setwd("/Users/cyprien/visulog/cli/.visulogRTempFiles")
+> setwd(".visulogRTempFiles")
+> #z <- paste(w,".visulogRTempFiles",sep="/")
+> x <- read.table("commitsPerDate.txt", header = FALSE)
+> 
+> colnames(x) <- c("Date", "nb")
+> 
+> #x <- data.frame(Date = as.character(row.names(x)), x)
+> 
+> attach(x)
+> 
+> # handling Date with local system time
+> 
+> 
+> Sys.getlocale("LC_TIME")
+[1] "C"
+> dt <- as.Date(Date, "%Y-%m-%d") # convert to Date
+Warning message:
+In strptime(x, format, tz = "GMT") :
+  unknown timezone 'zone/tz/2021a.1.0/zoneinfo/Europe/Paris'
+> 
+> setwd("../")
+> setwd(".graphs")
+> # output plots to files in pdf
+> ymt <- substr(Date, 1, 7)
+> ind <- table(ymt)
+> nl <- length(ind) # nb of months in data
+> start <- 1
+> for (i in 1:nl) { # for each year-month
++   dtfig <- dt[start:(start + ind[i]-1)]
++   nbfig <- nb[start:(start + ind[i]-1)]
++   fname <- paste("CommitsPerDate_",i,".pdf", sep="")
++   pdf(file = fname, width=9, height=7) # 1920/1080 full HD png
++   plot(dtfig, nbfig, type="b", pch = 20, xaxt = "n", xlab = "Days", ylab="Commits")
++   axis.Date(1, at = dtfig, format = "%d %b", cex.axis=1)  # set %B for full months
++   title(paste("Periode:", names(ind[i])))
++   dev.off() # close file
++   start <- start + ind[i]
++ }
+> 
+> pdf(file = "CommitsPerDate.pdf", width=9, height=7) # 1920/1080 full HD png
+> plot(dt, nb, type="l", pch = 20, xaxt = "n", xlab = "Days", ylab="Commits")
+> axis.Date(1, at = dt, format = "%d %b", cex.axis=1)  # set %B for full months
+> title(paste("Commits per Days", names(ind[i])))
+> 
+> 
+> 
+> 
+> proc.time()
+utilisateur     système      écoulé 
+      0.324       0.051       0.996 
