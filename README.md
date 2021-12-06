@@ -14,7 +14,6 @@ This tool can:
     - number of commits
     - number of merge commits
     - number of authors
-- analyze the variations of these indicators in time: for instance sum then by author, compute a daily average or compute an average of modified lines per day, ...
 - visualize the indicators as charts (histograms, pie charts, etc.) embedded in a generated web page.
 - to have an exhaustive list of the function, see the following section
 
