@@ -94,6 +94,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:</h1> ");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" >");
+            html.append("<img src=\""+ pwd + "/.graphs/CommitsPerDate.pdf\">");
             int count = 1;
             String r = "";
             for (var item : commitsPerDay) {

@@ -32,13 +32,17 @@ for (i in 1:nl) { # for each year-month
   nbfig <- nb[start:(start + ind[i]-1)]
   fname <- paste("CommitsPerDate_",i,".pdf", sep="")
   pdf(file = fname, width=9, height=7) # 1920/1080 full HD png
-  plot(dtfig, nbfig, type="b", pch = 20, xaxt = "n", xlab = "Jour du mois", ylab="Commits")
+  plot(dtfig, nbfig, type="b", pch = 20, xaxt = "n", xlab = "Days", ylab="Commits")
   axis.Date(1, at = dtfig, format = "%d %b", cex.axis=1)  # set %B for full months
   title(paste("Periode:", names(ind[i])))
   dev.off() # close file
   start <- start + ind[i]
 }
 
+pdf(file = "CommitsPerDate.pdf", width=9, height=7) # 1920/1080 full HD png
+plot(dt, nb, type="b", pch = 20, xaxt = "n", xlab = "Days", ylab="Commits")
+axis.Date(1, at = dt, format = "%d %b", cex.axis=1)  # set %B for full months
+title(paste("Commits per Days", names(ind[i])))
 
 
 
