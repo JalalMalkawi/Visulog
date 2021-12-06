@@ -16,11 +16,18 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
     public CountCommitsPerHourPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
     }
+    private static String pwd;
+    static {
+        pwd = RInvocation.pwd();
+    }
 
     @Override
     public void run() {
         long startTime=System.currentTimeMillis();
         result =  aux();
+        RInvocation invoke = new RInvocation();
+        invoke.RGene(result,pwd+"/CommitsPerHour.R");
+        invoke.RGene(result,pwd+"/CommitsPerHourPercent.R");
         System.out.println("[Visulog] Thread of CommitsPerHour plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
@@ -83,7 +90,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv5')\">Commits Per Hour: </h1>");
             if(commitsPerHour.isEmpty()) return html.append("No commit</div>").toString();
-            html.append(" <div id=\"showDiv5\"  style =\"display:none;\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th><th>Proportion</th></thead>");
+            html.append(" <div id=\"showDiv5\"  style =\"display:none;\"><img src=\""+ pwd + "/.graphs/CommitsPerHour.pdf\"><img src=\""+ pwd + "/.graphs/CommitsPerHourPercent.pdf\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th><th>Proportion</th></thead>");
             int c = 0;
             for(String item : commitsPerHour) {
                 c+=Integer.parseInt(item.split(" ")[0]);
@@ -120,7 +127,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
             StringBuilder R_txt = new StringBuilder();
             for (var item : commitsPerHour) {
                 String nombreDeCommits = item.split(" ")[0];
-                String heure = item.split(" ")[1]+" h";
+                String heure = item.split(" ")[1]+"h";
                 R_txt.append(nombreDeCommits + " "  + heure + "\n");
             }
             return R_txt.toString();

@@ -92,7 +92,7 @@ public class CountTotalModifiedLinesPlugin implements AnalyzerPlugin
         @Override
         public String getResultAsHtmlDiv() 
         {
-            return "<div><h1>Number of modified lines since start:  " + getResultAsString() +"</h1></div>";
+            return "<div><h1>Number of modified lines since first commit:  " + getResultAsString() +"</h1></div>";
         }
 
         @Override

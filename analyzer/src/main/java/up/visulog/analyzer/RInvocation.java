@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.File;
 
 public class RInvocation{
-    
+    private static String pwd="";
     public static void RGene(AnalyzerPlugin.Result res, String nomFichier){
         try {
             mkdir(".visulogRTempFiles");
@@ -28,8 +28,8 @@ public class RInvocation{
     }
     
     public static void cleanUp(boolean supprStackTrace){
-        try{
             File f1 = new File(pwd() + "/.visulogRTempFiles");
+            if(f1.listFiles()==null) return;
             for (File f : f1.listFiles()){
                 f.delete();
             }
@@ -41,37 +41,53 @@ public class RInvocation{
                 f3.delete();
                 File f4 = new File(pwd() + "/CommitsPerDateResult.txt");
                 f4.delete();
+                File f5 = new File(pwd() + "/CommitsPerHourResult.txt");
+                f5.delete();
+                File f6 = new File(pwd() + "/CommitsPerHourPercentResult.txt");
+                f6.delete();
+                File f7 = new File(pwd() + "/CommitsPerMonthPercentResult.txt");
+                f7.delete();
+                File f8 = new File(pwd() + "/CommitsPerMonthResult.txt");
+                f8.delete();
             }
-        }catch(IOException e){
-            System.out.println(".visulogRTempFiles does not exist.");
-        }
-    
+
     }
     
     public static void cleanUpPdf(){
-        try{
-            File f1 = new File(pwd() + "/.graphs");
-            for (File f : f1.listFiles()){
-                f.delete();
-            }
-        }catch(IOException e){
-            System.out.println(".graphs does not exist.");
+        File f1 = new File(pwd() + "/.graphs");
+        if(f1.listFiles()==null) return;
+        for (File f : f1.listFiles()){
+            f.delete();
         }
-        
+
     }
     
     
     
-    
-    public static String pwd()throws IOException{
+    public static String pwd(){
+        if(pwd.equals("")){ pwd = generatePwd();}
+        return pwd;
+    }
+    private static String generatePwd() {
         Process process;
         ProcessBuilder builder = new ProcessBuilder("pwd");
+        String spaceEsc ="";
         try {
+            System.out.println("[Visulog] Reading pwd");
             process = builder.start();
+            spaceEsc = new BufferedReader(new InputStreamReader(process.getInputStream())).readLine();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("[Visulog] ! Tried to read result of pwd command but can't");
+            System.out.println("[Visulog] ! You may have no picture/graph on the result page");
         }
-        return new BufferedReader(new InputStreamReader(process.getInputStream())).readLine();
+        for(int i = 0 ; i < spaceEsc.length()-1 ; i++){
+            if(spaceEsc.charAt(i)==' '){
+                spaceEsc = spaceEsc.substring(0,i)+"\\ " + spaceEsc.substring(i+1);
+                i++;
+            }
+        }
+        System.out.println(spaceEsc);
+        return spaceEsc;
     }
 
 

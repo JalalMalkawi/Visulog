@@ -19,11 +19,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
 
     static {
-        try {
-            pwd = RInvocation.pwd();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        pwd = RInvocation.pwd();
     }
 
     public static String getPwd() {
@@ -48,7 +44,8 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     }
     private static String AuthorName (String n){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(pwd+"/../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt"));
+
+            BufferedReader reader = new BufferedReader(new FileReader("../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt"));
             String ligne;
             while((ligne = reader.readLine()) != null){
                 String[] name = ligne.split("=");
@@ -58,7 +55,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
             }
             return n;
         } catch (Exception ex){
-            System.err.println("Error. "+ex.getMessage());
+            System.err.println("[Visulog] ! Error (AuthorName) ");
         }
         return "";
     }
@@ -73,6 +70,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         invoke.RGene(result,pwd+"/CommitsPerAuthorPercent.R");
 
         System.out.println("[Visulog] Thread of CommitsPerAuthor plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
+
     }
 
     @Override

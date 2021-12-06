@@ -4,11 +4,10 @@ import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
 
 public class CountAuthorPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
@@ -32,8 +31,8 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
     }
     private static String AuthorName (String n){
         try {
-            String pwd = RInvocation.pwd()+"/../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
-            BufferedReader reader = new BufferedReader(new FileReader(new File(pwd)));
+            String pwd = "../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
+            BufferedReader reader = new BufferedReader(new FileReader(pwd));
             String ligne;
             while((ligne = reader.readLine()) != null){
                 String[] name = ligne.split("=");
@@ -43,7 +42,7 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
             }
             return n;
         } catch (Exception ex){
-            System.err.println("Error. "+ex.getMessage());
+            System.err.println("[Visulog] ! Error (AuthorName2)");
         }
         return "";
     }

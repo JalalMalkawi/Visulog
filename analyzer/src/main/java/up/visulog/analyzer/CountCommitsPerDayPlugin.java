@@ -25,11 +25,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
     
     private static String pwd;
     static {
-        try {
-            pwd = RInvocation.pwd();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        pwd = RInvocation.pwd();
     }
 
 
@@ -101,6 +97,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:</h1> ");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" >");
+            html.append("<img src=\""+ pwd + "/.graphs/CommitsPerDate.pdf\">");
             int count = 1;
             String r = "";
             for (var item : commitsPerDay) {
@@ -124,7 +121,6 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                     mois += 7;
                 }
                 s =r.substring(mois,mois+7);
-                System.out.println("s : " + s);
             }
             html.append("<table><tbody><thead><tr><th>Commits count </th><th>Day</th></thead>");
             Iterator<String> list = commitsPerDay.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
