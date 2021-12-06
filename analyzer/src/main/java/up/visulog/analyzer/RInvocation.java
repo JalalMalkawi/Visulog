@@ -1,9 +1,9 @@
 package up.visulog.analyzer;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.File;
 
 public class RInvocation{
     private static String pwd="";
@@ -28,34 +28,33 @@ public class RInvocation{
     }
     
     public static void cleanUp(boolean supprStackTrace){
-        File f1 = new File(pwd() + "/.visulogRTempFiles");
-        if(f1.listFiles()==null) return;
-        for (File f : f1.listFiles()){
-            f.delete();
-        }
-        f1.delete();
-        if (supprStackTrace){
-            File f2 = new File(pwd() + "/CommitsPerAuthorPercentResult.txt");
-            f2.delete();
-            File f3 = new File(pwd() + "/CommitsPerAuthorResult.txt");
-            f3.delete();
-            File f4 = new File(pwd() + "/CommitsPerDateResult.txt");
-            f4.delete();
-            File f5 = new File(pwd() + "/CommitsPerHourResult.txt");
-            f5.delete();
-            File f6 = new File(pwd() + "/CommitsPerHourPercentResult.txt");
-            f6.delete();
-            File f7 = new File(pwd() + "/CommitsPerMonthPercentResult.txt");
-            f7.delete();
-            File f8 = new File(pwd() + "/CommitsPerMonthResult.txt");
-            f8.delete();
-        }
+            File f1 = new File(pwd() + "/.visulogRTempFiles");
+            if(f1.listFiles()==null) return;
+            for (File f : f1.listFiles()){
+                f.delete();
+            }
+            f1.delete();
+            if (supprStackTrace){
+                File f2 = new File(pwd() + "/CommitsPerAuthorPercentResult.txt");
+                f2.delete();
+                File f3 = new File(pwd() + "/CommitsPerAuthorResult.txt");
+                f3.delete();
+                File f4 = new File(pwd() + "/CommitsPerDateResult.txt");
+                f4.delete();
+                File f5 = new File(pwd() + "/CommitsPerHourResult.txt");
+                f5.delete();
+                File f6 = new File(pwd() + "/CommitsPerHourPercentResult.txt");
+                f6.delete();
+                File f7 = new File(pwd() + "/CommitsPerMonthPercentResult.txt");
+                f7.delete();
+                File f8 = new File(pwd() + "/CommitsPerMonthResult.txt");
+                f8.delete();
+            }
 
     }
     
     public static void cleanUpPdf(){
-        File f1 = new File((pwd() + "/.graphs"));
-        if(f1.listFiles()==null) return;
+        File f1 = new File(pwd() + "/.graphs");
         for (File f : f1.listFiles()){
             f.delete();
         }
@@ -70,10 +69,6 @@ public class RInvocation{
     }
     private static String generatePwd() {
         Process process;
-        /*String[] cmd = {
-                "/bin/sh", "-c",    // invoke shell and then run inside it
-                 "printf \"%q\\n\" \"$(pwd)\""
-        };*/
         ProcessBuilder builder = new ProcessBuilder("pwd");
         String spaceEsc ="";
         try {
