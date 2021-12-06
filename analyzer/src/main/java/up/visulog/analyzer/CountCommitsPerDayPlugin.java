@@ -1,8 +1,14 @@
 package up.visulog.analyzer;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import up.visulog.config.Configuration;
+import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,6 +40,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
         RInvocation invoke = new RInvocation();
         
         invoke.RGene(result,pwd+"/CommitsPerDate.R");
+
         
         System.out.println("[Visulog] Thread of CommitsPerDay plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
@@ -103,14 +110,14 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             
             int mois = 0;
             String s = r.substring(mois,mois+7);
-            while (new File(pwd + "/.graphs/CommitsPerDate_"+ String.valueOf(count) +".pdf").exists()){
-                html.append("<p onclick=\"toggle('showgraph"+String.valueOf(count)+"')\"> "+s+" </p>");
+            while (new File(pwd + "/.graphs/CommitsPerDate_"+ (count) +".pdf").exists()){
+                html.append("<p onclick=\"toggle('showgraph"+(count)+"')\"> "+s+" </p>");
                 
-                html.append("<graph"+String.valueOf(count)+" id=\"showgraph"+String.valueOf(count)+"\" style=\"display:none;\">");
+                html.append("<graph"+(count)+" id=\"showgraph"+(count)+"\" style=\"display:none;\">");
                 
-                html.append("<img src=\""+ pwd + "/.graphs/CommitsPerDate_"+ String.valueOf(count) +".pdf\">");
+                html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate_"+ (count) +".pdf\">");
                 
-                html.append("</graph"+String.valueOf(count)+">");
+                html.append("</graph"+(count)+">");
                 count++;
                 
                 while( s.equals(r.substring(mois,mois+7)) && mois+7<r.length()){
@@ -141,6 +148,8 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             return html.toString();
         }
 
+
+
         @Override
         public String getRData() {
             StringBuilder R_txt = new StringBuilder();
@@ -163,12 +172,6 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                 fos.close();
             }
         }
-    
-        /*public Result[] splitResult(){
-            for (String s : commitsPerDay){
-                
-            }
-        }*/
-    
+
     }
 
