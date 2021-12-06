@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
 {
@@ -126,9 +127,27 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
         }
 
         @Override
-        public String getResultAsHtmlDiv() {
-            //TODO
-            return null;
+        public String getResultAsHtmlDiv() 
+        {
+            
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv6')\">Modified lines per author: </h1>");
+            if(modifiedLinesPerAuthor.isEmpty()) 
+            {
+                return html.append("None</div>").toString();
+            }
+            html.append(" <div id=\"showDiv6\"  style =\"display:none;\"><table><tbody><thead><tr><th>Author</th><th>Added/deleted lines</th></thead>");
+
+            for (Entry<String,Integer[]> item : modifiedLinesPerAuthor.entrySet()) {
+                if(item!=null) 
+                {
+                    html.append("<tr>");
+                    html.append("<td>").append(item.getKey()).append("</td>");
+                    html.append("<td>").append(item.getValue()[0].toString()+", "+item.getValue()[1].toString()).append("</td>");
+                    html.append("</tr>");
+                }
+            }
+            html.append("</tbody></table></div></div>");
+            return html.toString();
         }
 
         @Override
