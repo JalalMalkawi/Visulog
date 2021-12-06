@@ -52,7 +52,7 @@ if (tofile) {
   cnames <- 0.7  # bar names size, adapt to nb of bars
   
   if (prob) {
-    barplot(pct, names.arg = auteurs, main="Commits par auteurs (%)",
+    barplot(pct, names.arg = auteurs, main="Commits per Month (%)",
             ylim = c(0, min(c(100, max(pct)+10))),
             xlab="", ylab="% de commits" , 
             cex.names = cnames, cex.lab=clab, col=cl)
