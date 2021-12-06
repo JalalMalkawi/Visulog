@@ -14,7 +14,6 @@ This tool can:
     - number of commits
     - number of merge commits
     - number of authors
-    - ...
 - analyze the variations of these indicators in time: for instance sum then by author, compute a daily average or compute an average of modified lines per day, ...
 - visualize the indicators as charts (histograms, pie charts, etc.) embedded in a generated web page.
 - to have an exhaustive list of the function, see the following section
@@ -26,28 +25,26 @@ This tool will show you :
     - which can be used to see the importance of the work
 - The number of modified lines since the beginning of the project
     - Used for similar reason
-- Average number of modified lines per day
+- Average number of modified lines per day (include in the advanced analysis)
     - It allows you to have an idea of the speed of the project's growth
-
 
 - The number of commits per day & per month
     - Used to compare when there are more commits
+  
 - The number of commits per hour
     - To inspect at which hour is there more commits, independently of the day : indirectly, it informs when collaborators are more efficiency.
-
-
-- ...
-- ...
-
 
 - The number of authors
     - More authors implies a more important project
 - The number of commits per author
     - It informs of the authors' names, and the importance of their contributions in the project
-- The number of the daily average commits per author
-    - Useful to have a better view about the proportion of an author contribution, during the time
--
-
+  
+- The number of modified lines per day (include in the advanced analysis)
+    - Useful to have a better view about the daily contribution of the team
+- The number of modified lines per author (include in the advanced analysis)
+  - To see the contribution of each author in the code
+- The number of modified lines per author per day(include in the advanced analysis)
+    - To see the daily contribution of each author in the code
 ## Already existing similar tools
 
 - [gitstats](https://pypi.org/project/gitstats/)
@@ -107,20 +104,14 @@ Welcome User , please enter your git repository link or just press enter :
 ```
 And, after pasting your project link (the URL must come from GitHub or GitLab, and the project must be public), press enter.
 
-####Remarks
-Notice that, it can be also run through gradle on our project :
+Then it will ask you
 ```
-./gradlew run
+Please enter 'y' if you want an advanced analysis (it will take more time !), else for a simple analysis enter 'n' :
 ```
-
-And by entering your project link (the URL must come from GitHub or GitLab, and the project must be public) in the following command :
-```
-./gradlew run --args='<your URL>'
-```
-you will have your analyses on the desired project.
-
+The advanced analysis includes all of our plugins mentioned before. There is a lot, so it will take more time. However, you have the choice to make a simple analysis which is made up of seven basic plugins 
 ####Errors
 To properly run this tool, you should have :
+- make sure there is no space in the pathname of the visulog directory.
 - set a default browser
 - have an internet connexion
 - as wrote above, running this tool on a public github/gitlab project
