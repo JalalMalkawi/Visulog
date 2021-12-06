@@ -1,9 +1,6 @@
 package up.visulog.analyzer;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.ImageType;
-import org.apache.pdfbox.rendering.PDFRenderer;
-import org.apache.pdfbox.tools.imageio.ImageIOUtil;
+
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
@@ -111,7 +108,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         public String getResultAsHtmlDiv() {
 
         StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <embed src=\""+pwd + "/.graphs/CommitsPerAuthor.pdf\"  width=\"500\" height=\"375\" \n" +
-                " type=\"application/pdf\"> <br><br>"+ "<embed src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\"  width=\"500\" height=\"375\" \n" +
+                " type=\"application/pdf\"> <br><br>"+ "<embed src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\"  width=\"500\" height=\"500\" \n" +
                 " type=\"application/pdf\">"  );
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
             int max=10;

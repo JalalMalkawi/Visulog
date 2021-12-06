@@ -1,9 +1,6 @@
 package up.visulog.analyzer;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.ImageType;
-import org.apache.pdfbox.rendering.PDFRenderer;
-import org.apache.pdfbox.tools.imageio.ImageIOUtil;
+
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.GetGitCommandOutput;
@@ -97,7 +94,8 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:</h1> ");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" >");
-            html.append("<img src=\""+ pwd + "/.graphs/CommitsPerDate.pdf\">");
+            html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate.pdf\" width=\"500\" height=\"500\" \n" +
+                    "\" type=\"application/pdf\">");
             int count = 1;
             String r = "";
             for (var item : commitsPerDay) {
@@ -112,7 +110,8 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                 
                 html.append("<graph"+(count)+" id=\"showgraph"+(count)+"\" style=\"display:none;\">");
                 
-                html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate_"+ (count) +".pdf\">");
+                html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate_"+ (count) +".pdf\" width=\"500\" height=\"500\" \n" +
+                        " type=\"application/pdf\">");
                 
                 html.append("</graph"+(count)+">");
                 count++;
