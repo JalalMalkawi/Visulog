@@ -14,25 +14,22 @@ public class CustomError {
 
     public void generateError() {
         String st = null;
-        try {
-            st = "<!DOCTYPE html>\n" +
-                    "<html lang=\"en\">\n" +
-                    "<head>\n" +
-                    "    <meta charset=\"UTF-8\">\n" +
-                    "    <link rel=\"stylesheet\" href=\"result.css\" />\n" +
-                    "    <title>Visulog : error</title>\n" +
-                    "</head>\n" +
-                    "<body>\n" +
-                    "<div class=\"title\">\n\n" +
-                    "                \t\t\t\t<img src=\""+ RInvocation.pwd()+"/visulog.png\" style=\" height: 110px;\">\n" +
-                    "                \t\t\t</div>" +
-                    "<div id=\"err\">\n" +
-                    error +
-                    "</div>\n" +
-                    "</body>\n" +
-                    "</html>";
-        } catch (IOException ignored) {
-        }
+        st = "<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <link rel=\"stylesheet\" href=\"result.css\" />\n" +
+                "    <title>Visulog : error</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<div class=\"title\">\n\n" +
+                "                \t\t\t\t<img src=\""+ RInvocation.pwd()+"/visulog.png\" style=\" height: 110px;\">\n" +
+                "                \t\t\t</div>" +
+                "<div id=\"err\">\n" +
+                error +
+                "</div>\n" +
+                "</body>\n" +
+                "</html>";
         try {
             FileUtils.writeStringToFile(new File("Errors.html"), "");
         } catch (IOException ignored) {
