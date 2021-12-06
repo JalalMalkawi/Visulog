@@ -62,8 +62,7 @@ public class RInvocation{
             for (File f : f1.listFiles()){
                 f.delete();
             }
-        }catch(IOException e){
-            System.out.println(".graphs does not exist.");
+        }catch(IOException e){ //si pas de fichier alors pas de problème
         }
         
     }
