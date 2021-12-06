@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
 {
@@ -83,9 +84,26 @@ public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
         }
 
         @Override
-        public String getResultAsHtmlDiv() {
-            // TODO Auto-generated method stub
-            return null;
+        public String getResultAsHtmlDiv() 
+        {
+            StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv7')\">Modified lines per author per day: </h1>");
+            if(modifiedLinesPerAuthor.isEmpty()) 
+            {
+                return html.append("None</div>").toString();
+            }
+            html.append(" <div id=\"showDiv7\"  style =\"display:none;\"><table><tbody><thead><tr><th>Author</th><th>Added+deleted lines per day</th></thead>");
+
+            for (Entry<String,Double> item : modifiedLinesPerAuthor.entrySet()) {
+                if(item!=null) 
+                {
+                    html.append("<tr>");
+                    html.append("<td>").append(item.getKey()).append("</td>");
+                    html.append("<td>").append(String.format("%.3f",item.getValue().doubleValue())).append("</td>");
+                    html.append("</tr>");
+                }
+            }
+            html.append("</tbody></table></div></div>");
+            return html.toString();
         }
 
         @Override
