@@ -23,7 +23,7 @@ public class CustomError {
                 "</head>\n" +
                 "<body>\n" +
                 "<div class=\"title\">\n\n" +
-                "                \t\t\t\t<img src=\""+ RInvocation.pwd()+"/visulog.png\" style=\" height: 110px;\">\n" +
+                "                \t\t\t\t<img src=\""+ RInvocation.pwd().replace("\\","")+"/visulog.png\" style=\" height: 110px;\">\n" +
                 "                \t\t\t</div>" +
                 "<div id=\"err\">\n" +
                 error +

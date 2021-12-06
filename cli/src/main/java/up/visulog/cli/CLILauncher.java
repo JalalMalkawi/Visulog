@@ -30,6 +30,10 @@ public class CLILauncher {
         try { // Au cas d'un arrêt brutale du programme : dataFromGit n'aura pas été supprimer
             FileUtils.deleteDirectory(new File("../dataFromGit"));
         } catch (IOException ignored) {
+            if(!new File("../dataFromGit").delete()) {
+                CustomError ex = new CustomError("Unable to delete dataFromGit/ folder, please do it by yourself");
+                System.exit(0);
+            }
         }
         RInvocation.cleanUpPdf();
         var config = makeConfigFromCommandLineArgs(args);
@@ -41,9 +45,8 @@ public class CLILauncher {
                 System.out.println("[Visulog] Removing the cloned repository at visulog/dataFromGit/");
                 FileUtils.deleteDirectory(new File("../dataFromGit"));
             } catch (IOException ignored) {
-                System.out.println("[Visulog] Tried to remove the the cloned repository at visulog/dataFromGit/, but didn't did");
+                System.out.println("[Visulog] !!! Tried to remove the the cloned repository at visulog/dataFromGit/, but didn't did, please do it by yourself\n[Visulog] Delete visulog/dataFromGit folder");
             }
-
             RInvocation.cleanUp(true);
         } else displayHelpAndExit();
     }
@@ -87,9 +90,9 @@ public class CLILauncher {
                       "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                       "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
                       "countTotalModifiedLines","countModifiedLinesPerDay","countModifiedLinesPerAuthorPerDay"};
-        String[] sSimple = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
+        String[] sSimple = {"countCommitsPerAuthor"/*,"countTotalCommits","countAuthor",
                 "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
-                "countCommitsPerMonth","countMergeCommits"};
+                "countCommitsPerMonth","countMergeCommits"*/};
         if(args.length==0) {
             for (String st : sAdvanced) plugins.add(st); // default visulog case
             gitPath = Paths.get(".");
