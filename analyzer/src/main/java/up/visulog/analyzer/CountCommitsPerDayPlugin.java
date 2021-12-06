@@ -108,7 +108,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                 
                 html.append("<graph"+String.valueOf(count)+" id=\"showgraph"+String.valueOf(count)+"\" style=\"display:none;\">");
                 
-                html.append("<img src=\""+ pwd + "/.graphs/CommitsPerDate_"+ String.valueOf(count) +".pdf\">");
+                html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate_"+ String.valueOf(count) +".pdf\"width=\"45%\"height=\"500px\">");
                 
                 html.append("</graph"+String.valueOf(count)+">");
                 count++;

@@ -46,7 +46,7 @@ if (! tofile) if (prob) {
 
 # output plot to a file in png; see ?pdf or ?png
 if (tofile) {
-  pdf(file = "CommitsPerAuthorPercent.pdf", width=10, height=8) # 1920/1080 full HD png
+  pdf(file = "CommitsPerAuthorPercent.pdf", width=9, height=7) # 1920/1080 full HD png
   clab <- 1.4    # label size, 1 = default size
   cnames <- 0.7  # bar names size, adapt to nb of bars
   
