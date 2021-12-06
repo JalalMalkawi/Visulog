@@ -90,9 +90,9 @@ public class CLILauncher {
                       "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                       "countCommitsPerMonth","countMergeCommits","countModifiedLinesPerAuthor",
                       "countTotalModifiedLines","countModifiedLinesPerDay","countModifiedLinesPerAuthorPerDay"};
-        String[] sSimple = {"countCommitsPerAuthor"/*,"countTotalCommits","countAuthor",
+        String[] sSimple = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
                 "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
-                "countCommitsPerMonth","countMergeCommits"*/};
+                "countCommitsPerMonth","countMergeCommits"};
         if(args.length==0) {
             for (String st : sAdvanced) plugins.add(st); // default visulog case
             gitPath = Paths.get(".");
