@@ -101,12 +101,17 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
 
         @Override
         public String getResultAsHtmlDiv() {
+<<<<<<< HEAD
             StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.graphs/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\">"  );
+=======
+
+            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/CommitsPerAuthor.pdf\">"+ "<img src=\""+ pwd + "/CommitsPerAuthorPercent.pdf\">"  );
+>>>>>>> 958269871d1768bfcaf6d1becf85a4737ca4d73d
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
             int max=10;
             int cpt =0;
             for (var item : commitsPerAuthor.entrySet()) {
-                if(cpt++== max+1){
+                if(cpt++== max){
                     html.append("</tbody>" + "</table>" +"<p onclick=\"toggle('showDiv2SousPartie')\"> suite :<p>" +"<div id=\"showDiv2SousPartie\" style=\"display:none;\">" + "<table id=\"commitsPerAuthor\">" +" <tbody>");
                 }
                 String nom_mail = item.getKey();
