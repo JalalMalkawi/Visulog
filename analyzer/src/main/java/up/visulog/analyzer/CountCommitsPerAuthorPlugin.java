@@ -120,7 +120,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         @Override
         public String getResultAsHtmlDiv() {
 
-            StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none\"> <img src=\""+ pwd + "/CommitsPerAuthor.png\" width=\"800px\" height=\"800px\" type=\"application/pdf\"><br><br>"+ "<img src=\""+ pwd +"/CommitsPerAuthorPercent.png\" width=\"800px\" height=\"800px\" type=\"application/pdf\">"  );
+        StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <img src=\""+ pwd + "/.graphs/CommitsPerAuthor.png\"> <br><br>"+ "<img src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\">"  );
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
             int max=10;
             int cpt =0;

@@ -28,6 +28,7 @@ cnames <- 0.7  # bar names size, adapt to nb of bars
 lgdbon <- paste(">", round(pcgood,1),"%")
 lgdbad <- paste("<", round(pcgood,1),"%")
 setwd("../")
+setwd(".graphs")
 
 if (! tofile) if (prob) {
   barplot(pct, names.arg = auteurs, main="Commits par auteurs (%)",

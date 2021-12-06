@@ -36,6 +36,7 @@ public class CLILauncher {
 
     public static void main(String[] args) throws IOException {
 
+        RInvocation.cleanUpPdf();
         var config = makeConfigFromCommandLineArgs(args);
         if (config.isPresent()) {
             var analyzer = new Analyzer(config.get());

@@ -28,6 +28,7 @@ clab <- 1.4    # label size, 1 = default size
 cnames <- 0.1  # bar names size, adapt to nb of bars
 lgdbon <- paste("bon (>", pcgood,"%)")
 setwd("../")
+setwd(".graphs")
 
 if (! tofile) if (prob) {
   barplot(pct, names.arg = auteurs, main="Commits par auteurs (%)",

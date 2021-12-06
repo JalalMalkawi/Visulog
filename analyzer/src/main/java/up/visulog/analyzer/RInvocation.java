@@ -29,8 +29,6 @@ public class RInvocation{
     
     public static void cleanUp(boolean supprStackTrace){
         try{
-            java.lang.Thread.sleep(10000); //attend une seconde avant de supprimer les fichiers
-            try{
             File f1 = new File(pwd() + "/.visulogRTempFiles");
             for (File f : f1.listFiles()){
                 f.delete();
@@ -47,11 +45,22 @@ public class RInvocation{
         }catch(IOException e){
             System.out.println(".visulogRTempFiles does not exist.");
         }
-        }catch (InterruptedException e){
-            System.out.println("Error with the deletion of visulog/cli/.visulogRTempFiles ");
-        }
     
     }
+    
+    public static void cleanUpPdf(){
+        try{
+            File f1 = new File(pwd() + "/.graphs");
+            for (File f : f1.listFiles()){
+                f.delete();
+            }
+        }catch(IOException e){
+            System.out.println(".graphs does not exist.");
+        }
+        
+    }
+    
+    
     
     
     public static String pwd()throws IOException{
