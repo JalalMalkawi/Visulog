@@ -91,7 +91,7 @@ public class CountModifiedLinesPerAuthorPerDayPlugin implements AnalyzerPlugin
             {
                 return html.append("None</div>").toString();
             }
-            html.append(" <div id=\"showDiv7\"  style =\"display:none;\"><table><tbody><thead><tr><th>Author</th><th>Added+deleted lines per day</th></thead>");
+            html.append(" <div id=\"showDiv7\"  style =\"display:none;\"><table><tbody><thead><tr><th>Author</th><th>Modified lines per day</th></thead>");
 
             for (Entry<String,Double> item : modifiedLinesPerAuthor.entrySet()) {
                 if(item!=null) 
