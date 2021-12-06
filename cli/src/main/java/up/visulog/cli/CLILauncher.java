@@ -2,20 +2,13 @@ package up.visulog.cli;
 
 import error.CustomError;
 import org.apache.commons.io.FileUtils;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.ImageType;
-import org.apache.pdfbox.rendering.PDFRenderer;
-import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import up.visulog.analyzer.Analyzer;
 import up.visulog.analyzer.RInvocation;
 import up.visulog.config.Configuration;
-import up.visulog.config.PluginConfig;
-
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,7 +19,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -35,7 +27,10 @@ public class CLILauncher {
 
 
     public static void main(String[] args) throws IOException {
-
+        try { // Au cas d'un arrêt brutale du programme : dataFromGit n'aura pas été supprimer
+            FileUtils.deleteDirectory(new File("../dataFromGit"));
+        } catch (IOException ignored) {
+        }
         RInvocation.cleanUpPdf();
         var config = makeConfigFromCommandLineArgs(args);
         if (config.isPresent()) {
@@ -95,7 +90,10 @@ public class CLILauncher {
         String[] sSimple = {"countCommitsPerAuthor","countTotalCommits","countAuthor",
                 "countCommitsPerDay","countCommitsPerHour",//"dailyAverage",
                 "countCommitsPerMonth","countMergeCommits"};
-        if(args.length==0) for(String st : sAdvanced) plugins.add(st); // default visulog case
+        if(args.length==0) {
+            for (String st : sAdvanced) plugins.add(st); // default visulog case
+            gitPath = Paths.get(".");
+        }
         boolean opt=false;
         for (var arg : args) {
             if (arg.startsWith("--")) {
