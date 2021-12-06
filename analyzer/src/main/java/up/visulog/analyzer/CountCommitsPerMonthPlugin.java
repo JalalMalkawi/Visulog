@@ -13,6 +13,14 @@ import java.util.LinkedList;
 public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
     private final Configuration configuration;
     private Result result;
+    private static String pwd;
+    static {
+        try {
+            pwd = RInvocation.pwd();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public CountCommitsPerMonthPlugin(Configuration generalConfiguration) {
         this.configuration = generalConfiguration;
@@ -24,6 +32,10 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
     public void run() {
         long startTime=System.currentTimeMillis();
         result =  aux();
+        RInvocation invoke = new RInvocation();
+        invoke.RGene(result,pwd+"/CommitsPerMonth.R");
+        invoke.RGene(result,pwd+"/CommitsPerMonthPercent.R");
+        
         System.out.println("[Visulog] Thread of CommitsPerMonth plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
 
     }
@@ -87,7 +99,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv4')\">Commits Per Month:</h1>");
             if(commitsPerMonth.isEmpty()) return html.append(" No commit</div>").toString();
-            html.append(" <div id=\"showDiv4\" style=\"display:none;\"><table><tbody><thead><tr><th>Commits count</th><th>Month</th></thead>");
+            html.append(" <div id=\"showDiv4\" style=\"display:none;\"><img src=\""+ pwd + "/.graphs/CommitsPerMonth.pdf\"><img src=\""+ pwd + "/.graphs/CommitsPerMonthPercent.pdf\"><table><tbody><thead><tr><th>Commits count</th><th>Month</th></thead>");
             Iterator<String> list = commitsPerMonth.descendingIterator(); // iterator permettant d'itérer une liste dans l'ordre inverse
             int max= 3;
             while (list.hasNext()){
@@ -114,7 +126,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
             for (var item : commitsPerMonth) {
                 String nombreDeCommits= item.split(" ")[0];
                 String mois = item.split(" ")[1];
-                R_txt.append(nombreDeCommits + " " + mois);
+                R_txt.append(nombreDeCommits + " " + mois + "\n");
             }
             return R_txt.toString();
         }
