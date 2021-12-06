@@ -45,6 +45,10 @@ public class RInvocation{
                 f5.delete();
                 File f6 = new File(pwd() + "/CommitsPerHourPercentResult.txt");
                 f6.delete();
+                File f7 = new File(pwd() + "/CommitsPerMonthPercentResult.txt");
+                f7.delete();
+                File f8 = new File(pwd() + "/CommitsPerMonthResult.txt");
+                f8.delete();
             }
         }catch(IOException e){
             System.out.println(".visulogRTempFiles does not exist.");
