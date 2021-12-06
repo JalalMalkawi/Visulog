@@ -1,13 +1,21 @@
 package up.visulog.cli;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import org.junit.Test;
+import up.visulog.analyzer.CountCommitsPerAuthorPlugin;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestCLILauncher {
+
     /*
     TODO: one can also add integration tests here:
     - run the whole program with some valid options and look whether the output has a valid format
@@ -21,5 +29,7 @@ public class TestCLILauncher {
             "--nonExistingOption"
         });
         assertFalse(config2.isPresent());
+        CountCommitsPerAuthorPlugin.Result.generateImageFromPDF("CommitsPerAuthor.pdf","png");
+
     }
 }

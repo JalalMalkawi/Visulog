@@ -2,6 +2,10 @@ package up.visulog.cli;
 
 import error.CustomError;
 import org.apache.commons.io.FileUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import up.visulog.analyzer.Analyzer;
@@ -11,6 +15,7 @@ import up.visulog.config.PluginConfig;
 
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,7 +33,9 @@ import java.util.Optional;
 public class CLILauncher {
 
 
+
     public static void main(String[] args) throws IOException {
+
         var config = makeConfigFromCommandLineArgs(args);
         if (config.isPresent()) {
             var analyzer = new Analyzer(config.get());

@@ -1,6 +1,7 @@
 package up.visulog.analyzer;
 
 import org.junit.Test;
+import org.w3c.dom.Document;
 import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.CommitBuilder;
 
@@ -36,8 +37,11 @@ public class TestCountCommitsPerAuthorPlugin {
         for (int i = 0; i < entries; i++) {
             log.add(new CommitBuilder("").setAuthor(authors[i % 3]).createCommit());
         }
-        var res = CountCommitsPerAuthorPlugin.processLog(log);
-        RInvocation invoke = new RInvocation();
-        invoke.RGene(res, "CommitsPerAuthor.R");
-    }
+        //var res = CountCommitsPerAuthorPlugin.processLog(log);
+        //RInvocation invoke = new RInvocation();
+        //invoke.RGene(res, "CommitsPerAuthor.R");
+
+
+
+        }
     }

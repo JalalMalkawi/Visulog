@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.File;
 
-
 public class RInvocation{
     
     public static void RGene(AnalyzerPlugin.Result res, String nomFichier){
@@ -65,6 +64,8 @@ public class RInvocation{
         }
         return new BufferedReader(new InputStreamReader(process.getInputStream())).readLine();
     }
+
+
     
     
     
