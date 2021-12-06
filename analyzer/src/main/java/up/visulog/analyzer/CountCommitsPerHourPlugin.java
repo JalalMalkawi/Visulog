@@ -18,11 +18,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
     }
     private static String pwd;
     static {
-        try {
-            pwd = RInvocation.pwd();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        pwd = RInvocation.pwd();
     }
 
     @Override

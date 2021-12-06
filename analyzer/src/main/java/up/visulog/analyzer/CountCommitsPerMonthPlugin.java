@@ -15,11 +15,7 @@ public class CountCommitsPerMonthPlugin implements AnalyzerPlugin{
     private Result result;
     private static String pwd;
     static {
-        try {
-            pwd = RInvocation.pwd();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        pwd = RInvocation.pwd();
     }
 
     public CountCommitsPerMonthPlugin(Configuration generalConfiguration) {
