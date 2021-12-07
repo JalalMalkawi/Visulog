@@ -3,9 +3,11 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
-import java.io.IOException;
-import java.math.BigDecimal;
+import java.io.*;
 import java.util.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class DailyAveragePlugin implements AnalyzerPlugin{
 
@@ -17,13 +19,7 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
     public DailyAveragePlugin(Configuration generalConfiguration){
 
         this.configuration=generalConfiguration;
-    }
 
-    public static long daysBetween(Calendar calCurrent, Calendar calFirstCom){
-
-        long timeCurrent=calCurrent.getTimeInMillis();
-        long timeFirstCom=calFirstCom.getTimeInMillis();
-        return (timeCurrent-timeFirstCom)/86400000; //1000*60*60*24
     }
 
     public static int stringToMonth(String s){
@@ -53,11 +49,10 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
 
         String[] date=commit.getDate().split(" ");
 
-        Calendar calCurrent=Calendar.getInstance();
-        Calendar calFirstCom=Calendar.getInstance();
-        calFirstCom.set(Integer.valueOf(date[4]), stringToMonth(date[1]), Integer.valueOf(date[2]));
-
-        return Math.abs(daysBetween(calCurrent, calFirstCom));
+        LocalDate current=LocalDate.now();
+        LocalDate firstCom=LocalDate.of(Integer.valueOf(date[4]), stringToMonth(date[1]), Integer.valueOf(date[2]));
+        
+        return ChronoUnit.DAYS.between(firstCom, current);
 
     }
 
@@ -66,9 +61,12 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
         Map<String, Integer> aux=new HashMap<>();
 
         for (var commit:gitLog) {
-            var nb=aux.getOrDefault(commit.getAuthor(), 0);
-            if(nb==0) totalTime.put(commit.getAuthor(), timeFormFirstCommit(commit));
-            aux.put(commit.getAuthor(), nb+1);
+            String nom_mail = commit.getAuthor();
+            String nom = nom_mail.split(" <")[0];
+            String author=AuthorName(nom);
+            var nb=aux.getOrDefault(author, 0);
+            if(nb==0) totalTime.put(author, timeFormFirstCommit(commit));
+            aux.put(author, nb+1);
         }
 
         return aux;
@@ -91,6 +89,27 @@ public class DailyAveragePlugin implements AnalyzerPlugin{
             result.dailyAverage.put(commit.getKey(), calculAverage(commit.getValue(), commit.getKey()));
 
         return result;
+
+    }
+
+    private static String AuthorName (String n){
+
+        try {
+            String pwd = RInvocation.pwd()+"/../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
+            BufferedReader reader = new BufferedReader(new FileReader(new File(pwd)));
+            String ligne;
+            while((ligne = reader.readLine()) != null){
+                String[] name = ligne.split("=");
+                for(int i = 0;i<name.length;i++){
+                    if (name[i].equals(n)) return name[0];
+                }
+            }
+            return n;
+        } catch (Exception ex){
+            System.err.println("Error. "+ex.getMessage());
+        }
+
+        return "";
 
     }
 

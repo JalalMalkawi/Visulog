@@ -92,7 +92,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv1')\">Commits Per Day:</h1> ");
             if(commitsPerDay.isEmpty()) return html.append(" No commit</div>").toString();
             html.append("<div id=\"showDiv1\" style=\"display:none;\" >");
-            html.append("<embed src=\""+ pwd.replace("\\","") + "/.graphs/CommitsPerDate.pdf\" width=\"500\" height=\"500\" \n" +
+            html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate.pdf\" width=\"500\" height=\"400\" \n" +
                     "\" type=\"application/pdf\">");
             int count = 1;
             String r = "";
@@ -107,7 +107,7 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
                 html.append("<p onclick=\"toggle('showgraph"+(count)+"')\"> "+s+" </p>");
                 html.append("<graph"+(count)+" id=\"showgraph"+(count)+"\" style=\"display:none;\">");
                 
-                html.append("<embed src=\""+ pwd.replace("\\","") + "/.graphs/CommitsPerDate_"+ (count) +".pdf\" width=\"500\" height=\"500\" \n" +
+                html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate_"+ (count) +".pdf\" width=\"500\" height=\"400\" \n" +
                         " type=\"application/pdf\">");
 
                 html.append("</graph"+(count)+">");

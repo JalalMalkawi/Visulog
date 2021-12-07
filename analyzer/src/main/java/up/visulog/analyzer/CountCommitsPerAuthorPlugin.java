@@ -107,8 +107,8 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
         @Override
         public String getResultAsHtmlDiv() {
 
-        StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <embed src=\""+pwd + "/.graphs/CommitsPerAuthor.pdf\"  width=\"500\" height=\"375\" \n" +
-                " type=\"application/pdf\"> <br><br>"+ "<embed src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\"  width=\"500\" height=\"500\" \n" +
+        StringBuilder html = new StringBuilder("<div> <h1 onclick=\"toggle('showDiv2')\">Number of commits per author:</h1> <div id=\"showDiv2\" style=\"display:none;\"> <embed src=\""+pwd + "/.graphs/CommitsPerAuthor.pdf\"  width=\"500\" height=\"410\" \n" +
+                " type=\"application/pdf\"> <br><br>"+ "<embed src=\""+ pwd + "/.graphs/CommitsPerAuthorPercent.pdf\"  width=\"500\" height=\"410\" \n" +
                 " type=\"application/pdf\">"  );
             html.append("<table id=\"commitsPerAuthor\"><tbody><thead><tr><th>Name</th><th>Commits count</th><th></th></thead>");
             int max=10;
