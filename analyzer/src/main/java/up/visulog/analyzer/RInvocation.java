@@ -20,6 +20,7 @@ public class RInvocation{
     }
     public static void runWithR(String nomFichier)throws IOException{
         String s = nomFichier.substring(0,nomFichier.length()-2) + "Result.txt";
+        //System.out.println(nomFichier);
         new ProcessBuilder("R", "CMD" , "BATCH" , nomFichier , s).start();
     }
     
