@@ -9,10 +9,7 @@ import up.visulog.analyzer.RInvocation;
 import up.visulog.config.Configuration;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -42,7 +39,7 @@ public class CLILauncher {
             var results = analyzer.computeResults();
             makeFileOfResAndOpenIt(results.toHTML()); // Sortie dans un fichier : visulog/cli/result.html
             try {
-                System.out.println("[Visulog] Removing the cloned repository at visulog/dataFromGit/");
+                System.out.println("[Visulog] Removing the cloned repository at visulog/dataFromGit/ if you used a web link");
                 FileUtils.deleteDirectory(new File("../dataFromGit"));
             } catch (IOException ignored) {
                 System.out.println("[Visulog] !!! Tried to remove the the cloned repository at visulog/dataFromGit/, but didn't did, please do it by yourself\n[Visulog] Delete visulog/dataFromGit folder");
@@ -117,6 +114,9 @@ public class CLILauncher {
                                 if(pValue.equals(st)) plugins.add(st);
                             }
                             break;
+                        case "--loadLocal":
+
+                            break;
                         case "--loadConfigFile":
                             // TODO (load options froadd m a file)
                             break;
@@ -133,7 +133,12 @@ public class CLILauncher {
                     for(String st : sSimple) plugins.add(st);
                 }
                 // arg est ici le lien d'un repo git
-                if (isValidGitUrl(arg)){
+                if(arg.startsWith(".") || arg.startsWith("..") || arg.startsWith("/")){
+                    System.out.println("[Visulog] Loading local git repository : " +arg);
+                    if(arg.startsWith("/")) gitPath = Paths.get(arg);
+                    else gitPath = Paths.get("../"+arg);
+                }
+                else if (isValidGitUrl(arg)){
                     CLILauncher c = new CLILauncher();
                     System.out.println("[Visulog] Cloning repository...");
                     long startTime=System.currentTimeMillis();
