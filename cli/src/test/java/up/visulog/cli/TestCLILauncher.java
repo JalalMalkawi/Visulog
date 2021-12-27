@@ -1,9 +1,5 @@
 package up.visulog.cli;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.ImageType;
-import org.apache.pdfbox.rendering.PDFRenderer;
-import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import org.junit.Test;
 import up.visulog.analyzer.CountCommitsPerAuthorPlugin;
 
@@ -29,7 +25,5 @@ public class TestCLILauncher {
             "--nonExistingOption"
         });
         assertFalse(config2.isPresent());
-        CountCommitsPerAuthorPlugin.Result.generateImageFromPDF("CommitsPerAuthor.pdf","png");
-
     }
 }

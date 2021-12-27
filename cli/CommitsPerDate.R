@@ -42,7 +42,7 @@ for (i in 1:nl) { # for each year-month
 pdf(file = "CommitsPerDate.pdf", width=9, height=7) # 1920/1080 full HD png
 plot(dt, nb, type="l", pch = 20, xaxt = "n", xlab = "Days", ylab="Commits")
 axis.Date(1, at = dt, format = "%d %b", cex.axis=1)  # set %B for full months
-title(paste("Commits per Days", names(ind[i])))
+title(paste("Commits per Days"))
 
 
 

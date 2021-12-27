@@ -105,7 +105,6 @@ public class CountCommitsPerDayPlugin implements AnalyzerPlugin{
             String s = r.substring(mois,mois+7);
             while (new File(pwd + "/.graphs/CommitsPerDate_"+ (count) +".pdf").exists()){
                 html.append("<p onclick=\"toggle('showgraph"+(count)+"')\"> "+s+" </p>");
-                
                 html.append("<graph"+(count)+" id=\"showgraph"+(count)+"\" style=\"display:none;\">");
                 
                 html.append("<embed src=\""+ pwd + "/.graphs/CommitsPerDate_"+ (count) +".pdf\" width=\"500\" height=\"400\" \n" +
