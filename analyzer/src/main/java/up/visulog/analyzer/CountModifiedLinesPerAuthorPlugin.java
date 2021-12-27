@@ -4,6 +4,8 @@ import up.visulog.gitrawdata.Commit;
 import up.visulog.gitrawdata.GetGitCommandOutput;
 import up.visulog.config.Configuration;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +48,19 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
             temp[1] = Integer.valueOf(currentValues[1].intValue() + addedValues[1].intValue());
             res.modifiedLinesPerAuthor.replace(gitLog.get(i).getAuthor(), temp);
         }
-        return res;
+        var result =  new CountModifiedLinesPerAuthorPlugin.Result();
+        for (Map.Entry<String,Integer[]> item  : res.modifiedLinesPerAuthor.entrySet()){
+            String tmp [] = item.getKey().split(" <");
+            String nom = AuthorName(tmp[0]);
+            if (! result.modifiedLinesPerAuthor.containsKey(nom)){
+                result.modifiedLinesPerAuthor.put(nom,item.getValue());
+            }
+            else {
+                Integer[] i = {result.modifiedLinesPerAuthor.get(nom)[0]+item.getValue()[0], result.modifiedLinesPerAuthor.get(nom)[1]+item.getValue()[1]};
+                result.modifiedLinesPerAuthor.replace(nom,i);
+            }
+        }
+        return result;
     }
 
     public Integer[] getLineDifference(String id1, String id2) 
@@ -86,6 +100,23 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
         return res;
     }
 
+    private static String AuthorName (String n){
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader("../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt"));
+            String ligne;
+            while((ligne = reader.readLine()) != null){
+                String[] name = ligne.split("=");
+                for(int i = 0;i < name.length;i++){
+                    if (name[i].equals(n)) return name[0];
+                }
+            }
+            return n;
+        } catch (Exception ex){
+            System.err.println("[Visulog] ! Error (AuthorName) ");
+        }
+        return "";
+    }
 
     @Override
     public void run()
@@ -135,14 +166,15 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
             {
                 return html.append("None</div>").toString();
             }
-            html.append(" <div id=\"showDiv6\"  style =\"display:none;\"><table><tbody><thead><tr><th>Author</th><th>Added/deleted lines</th></thead>");
+            html.append(" <div id=\"showDiv6\"  style =\"display:none;\"><table><tbody><thead><tr><th>Author</th><th>Added</th><th>deleted lines</th></thead>");
 
             for (Entry<String,Integer[]> item : modifiedLinesPerAuthor.entrySet()) {
                 if(item!=null) 
                 {
                     html.append("<tr>");
                     html.append("<td>").append(item.getKey()).append("</td>");
-                    html.append("<td>").append(item.getValue()[0].toString()+", "+item.getValue()[1].toString()).append("</td>");
+                    html.append("<td>").append(item.getValue()[0].toString()).append("</td>");
+                    html.append("<td>").append(item.getValue()[1].toString()).append("</td>");
                     html.append("</tr>");
                 }
             }
