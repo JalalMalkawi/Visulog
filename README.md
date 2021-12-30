@@ -85,7 +85,8 @@ Visulog contains the following modules:
 
     See https://www.r-project.org to install R
    
-5. (Optional) Register your other account(s) in the file "AuthorName.txt" in this format : "MainAccount=YourOtherAccount". (Only your main account will be displayed by the graphs).
+5. (Optional) Register your other account(s)
+   In the file `./AuthorName.txt` in this format : `MainAccountName=YourSecondAccountName=YourThirdAccountName=..`". (Only your main account name will be displayed by the graphs).
     
 
 ### Running the software
@@ -93,21 +94,42 @@ Visulog contains the following modules:
 Open a terminal window and set your working directory to here : ```/visulog```
 Then, run through your terminal
 ```
-./run.sh
+./run
 ```
 (It may ask you to allow permission of execution on this file, in which case just do ```chmod u+x ./run.sh```).
 
-Then the script will ask you
+Then follow the command usage :
 ```
-Welcome User , please enter your git repository link or just press enter :
-```
-And, after pasting your project link (the URL must come from GitHub or GitLab, and the project must be public), press enter.
+[Visulog] Welcome JSB !
+[Visulog] Usage: ./run.sh [-a | -s] <link/path>
+                 ./run.sh [-t]
+                 ./run.sh [-h]
+Options :
+   -s   for a simple analysis (it includes stats on Commits Per
+         Month/Day/Hour/Author and the Total of (merged) commits)
+   -a   for an advanced analysis (it could take more time! 
+        It includes all plugins, see README.md for an exhaustive list)
+   -h   to display this
 
-Then it will ask you
+   -t   to run an interactive script (useful if you have differents analysis to do)
+
+Examples :
+   ./run.sh -a  https://github.com/Homebrew/install 
+        to run an advanced analysis on homebrew-install repository
+   ./run.sh -s . 
+        to run a simple analysis on this repository
+
+Remarks :
+   Writting both -s and -a will automatically let Visulog choose the last one
+   See README.md if any errors occurs
+
+Authors :
+   LN Supremacy Team
+
 ```
-Please enter 'y' if you want an advanced analysis (it will take more time !), else for a simple analysis enter 'n' :
-```
-The advanced analysis includes all of our plugins mentioned before. There is a lot, so it will take more time. However, you have the choice to make a simple analysis which is made up of seven basic plugins 
+
+
+ 
 ####Errors
 To properly run this tool, you should have :
 - make sure there is no space in the pathname of the visulog directory.

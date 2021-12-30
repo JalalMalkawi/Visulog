@@ -31,7 +31,7 @@ public class CountAuthorPlugin implements AnalyzerPlugin{
     }
     private static String AuthorName (String n){
         try {
-            String pwd = "../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt";
+            String pwd = "../AuthorName.txt";
             BufferedReader reader = new BufferedReader(new FileReader(pwd));
             String ligne;
             while((ligne = reader.readLine()) != null){
