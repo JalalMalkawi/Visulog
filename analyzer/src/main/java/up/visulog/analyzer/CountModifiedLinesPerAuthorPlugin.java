@@ -103,7 +103,7 @@ public class CountModifiedLinesPerAuthorPlugin implements AnalyzerPlugin
     private static String AuthorName (String n){
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader("../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("../AuthorName.txt"));
             String ligne;
             while((ligne = reader.readLine()) != null){
                 String[] name = ligne.split("=");
