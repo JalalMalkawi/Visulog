@@ -80,18 +80,22 @@ Tapez 'q()' pour quitter R.
 +     # visualize "good" level...
 +     abline(h = pcgood, lty=2, col=8)
 +   } else {
-+     barplot(nb, names.arg = auteurs, main="Commits per Hour",
-+             xlab="", ylab="number of commits", 
-+             cex.names = cnames, cex.lab=clab)}
-+   
-+   dev.off() # close file
++     plot(nb, names.arg = auteurs, main="Commits per Hour",
++          xlab="", ylab="number of commits", type ="l",
++          cex.names = cnames, cex.lab=clab)
++   }
++     
 + }
+There were 12 warnings (use warnings() to see them)
+>   
+>   dev.off() # close file
 null device 
           1 
+> 
 > ########
 > # pdf width=7, height=5
 > 
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.284       0.042       0.465 
+      0.281       0.044       0.657 

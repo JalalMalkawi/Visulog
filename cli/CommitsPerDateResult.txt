@@ -42,7 +42,7 @@ Tapez 'q()' pour quitter R.
 > dt <- as.Date(Date, "%Y-%m-%d") # convert to Date
 Warning message:
 In strptime(x, format, tz = "GMT") :
-  unknown timezone 'zone/tz/2021a.1.0/zoneinfo/Europe/Paris'
+  unknown timezone 'zone/tz/2021a.3.0/zoneinfo/Europe/Paris'
 > 
 > setwd("../")
 > setwd(".graphs")
@@ -73,11 +73,4 @@ In strptime(x, format, tz = "GMT") :
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.324       0.049       0.714 
-Error in save.image(name) : 
-  l'image d'environnement ne peut être renommée et est laissée dans .RDataTmp
-Calls: sys.save.image -> save.image
-De plus : Warning message:
-In file.rename(outfile, file) :
-  impossible de renommer le fichier '.RDataTmp' en '.RData', à cause de 'No such file or directory'
-Exécution arrêtée
+      0.311       0.050       0.699 

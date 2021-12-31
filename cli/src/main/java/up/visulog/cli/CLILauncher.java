@@ -44,7 +44,7 @@ public class CLILauncher {
             } catch (IOException ignored) {
                 System.out.println("[Visulog] !!! Tried to remove the the cloned repository at visulog/dataFromGit/, but didn't did, please do it by yourself\n[Visulog] Delete visulog/dataFromGit folder");
             }
-            RInvocation.cleanUp(true);
+            //RInvocation.cleanUp(true);
         } else displayHelpAndExit();
     }
 
