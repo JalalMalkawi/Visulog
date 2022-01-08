@@ -4,7 +4,6 @@ package up.visulog.analyzer;
 import up.visulog.config.Configuration;
 import up.visulog.gitrawdata.Commit;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
@@ -42,7 +41,7 @@ public class CountCommitsPerAuthorPlugin implements AnalyzerPlugin {
     private static String AuthorName (String n){
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader("../analyzer/src/main/java/up/visulog/analyzer/AuthorName.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("../AuthorName.txt"));
             String ligne;
             while((ligne = reader.readLine()) != null){
                 String[] name = ligne.split("=");

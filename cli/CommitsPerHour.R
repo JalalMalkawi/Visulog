@@ -60,12 +60,15 @@ if (tofile) {
     # visualize "good" level...
     abline(h = pcgood, lty=2, col=8)
   } else {
-    barplot(nb, names.arg = auteurs, main="Commits per Hour",
-            xlab="", ylab="number of commits", 
-            cex.names = cnames, cex.lab=clab)}
+    plot(nb, names.arg = auteurs, main="Commits per Hour",
+         xlab="", ylab="number of commits", type ="l",
+         cex.names = cnames, cex.lab=clab)
+  }
+    
+}
   
   dev.off() # close file
-}
+
 ########
 # pdf width=7, height=5
 

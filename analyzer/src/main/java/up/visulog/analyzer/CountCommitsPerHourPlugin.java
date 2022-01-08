@@ -27,7 +27,6 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         result =  aux();
         RInvocation invoke = new RInvocation();
         invoke.RGene(result,pwd+"/CommitsPerHour.R");
-        invoke.RGene(result,pwd+"/CommitsPerHourPercent.R");
         System.out.println("[Visulog] Thread of CommitsPerHour plugin obtained in " + (System.currentTimeMillis()-startTime)/1000 +"s");
     }
 
@@ -90,7 +89,7 @@ public class CountCommitsPerHourPlugin implements AnalyzerPlugin{
         public String getResultAsHtmlDiv() {
             StringBuilder html = new StringBuilder("<div><h1 onclick=\"toggle('showDiv5')\">Commits Per Hour: </h1>");
             if(commitsPerHour.isEmpty()) return html.append("No commit</div>").toString();
-            html.append(" <div id=\"showDiv5\"  style =\"display:none;\"><embed src=\""+ pwd + "/.graphs/CommitsPerHour.pdf\"width=\"500\" height=\"400\"><embed src=\""+ pwd + "/.graphs/CommitsPerHourPercent.pdf\"width=\"500\" height=\"400\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th><th>Proportion</th></thead>");
+            html.append(" <div id=\"showDiv5\"  style =\"display:none;\"><embed src=\""+ pwd + "/.graphs/CommitsPerHour.pdf\"width=\"500\" height=\"400\"><table><tbody><thead><tr><th>Hour</th><th>Commits count</th><th>Proportion</th></thead>");
 
             int c = 0;
             for(String item : commitsPerHour) {

@@ -60,9 +60,14 @@ if (tofile) {
     # visualize "good" level...
     abline(h = pcgood, lty=2, col=8)
   } else {
-    barplot(nb, names.arg = auteurs, main="Commits per Month",
-            xlab="", ylab="number of commits", 
-            cex.names = cnames, cex.lab=clab)}
+    #plot(dt, nb, type="l", pch = 20, xaxt = "n", xlab = "Month", ylab="Commits")
+    #axis.Date(1, at = dt, format = "%d %b", cex.axis=1)  # set %B for full months
+    #title(paste("Commits per Month"))
+    
+    plot(nb, names.arg = auteurs, main="Commits per Month",
+          xlab="", ylab="number of commits", type ="l",
+          cex.names = cnames, cex.lab=clab)
+    }
   
   dev.off() # close file
 }
