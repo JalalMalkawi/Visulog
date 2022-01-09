@@ -33,9 +33,9 @@ done
 
 help()
 {
-  echo "[Visulog] Usage: ./run.sh [-a | -s] <link/path>"
-  echo "                 ./run.sh [-t]"
-  echo "                 ./run.sh [-h]"
+  echo "[Visulog] Usage: ./run [-a | -s] <link/path>"
+  echo "                 ./run [-t]"
+  echo "                 ./run [-h]"
   echo -e "Options :"
   echo -e "   -s \tfor a simple analysis (it includes stats on Commits Per\n\t Month/Day/Hour/Author and the Total of (merged) commits)"
   echo -e "   -a \tfor an advanced analysis (it could take more time! \n\tIt includes all plugins, see README.md for an exhaustive list)"
@@ -44,8 +44,8 @@ help()
   echo -e "   -t \tto run an interactive script (useful if you have differents analysis to do)"
   echo -e ""
   echo -e "Examples :"
-  echo -e "   ./run.sh -a  https://github.com/Homebrew/install \n\tto run an advanced analysis on homebrew-install repository"
-  echo -e "   ./run.sh -s . \n\tto run a simple analysis on this repository"
+  echo -e "   ./run -a  https://github.com/Homebrew/install \n\tto run an advanced analysis on homebrew-install repository"
+  echo -e "   ./run -s . \n\tto run a simple analysis on this repository"
   echo ""
   echo -e "Remarks :"
   echo -e "   Writting both -s and -a will automatically let Visulog choose the last one"
