@@ -1,7 +1,7 @@
 
-R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
-Copyright (C) 2016 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R est un logiciel libre livré sans AUCUNE GARANTIE.
 Vous pouvez le redistribuer sous certaines conditions.
@@ -22,7 +22,7 @@ Tapez 'q()' pour quitter R.
 > w <- getwd() 
 > #setwd("../")
 > w
-[1] "/Users/cyprien/visulog/cli"
+[1] "/Users/hu/visulog/cli"
 > #setwd("/Users/cyprien/visulog/cli/.visulogRTempFiles")
 > setwd(".visulogRTempFiles")
 > #z <- paste(w,".visulogRTempFiles",sep="/")
@@ -40,9 +40,6 @@ Tapez 'q()' pour quitter R.
 > Sys.getlocale("LC_TIME")
 [1] "C"
 > dt <- as.Date(Date, "%Y-%m-%d") # convert to Date
-Warning message:
-In strptime(x, format, tz = "GMT") :
-  unknown timezone 'zone/tz/2021a.3.0/zoneinfo/Europe/Paris'
 > 
 > setwd("../")
 > setwd(".graphs")
@@ -73,4 +70,4 @@ In strptime(x, format, tz = "GMT") :
 > 
 > proc.time()
 utilisateur     système      écoulé 
-      0.311       0.050       0.699 
+      0.459       0.096       0.867 
