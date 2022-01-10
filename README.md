@@ -100,10 +100,10 @@ Then, run through your terminal
 
 Then follow the command usage :
 ```
-[Visulog] Welcome JSB !
-[Visulog] Usage: ./run.sh [-a | -s] <link/path>
-                 ./run.sh [-t]
-                 ./run.sh [-h]
+[Visulog] Welcome User !
+[Visulog] Usage: ./run [-a | -s] <link/path>
+                 ./run [-t]
+                 ./run [-h]
 Options :
    -s   for a simple analysis (it includes stats on Commits Per
          Month/Day/Hour/Author and the Total of (merged) commits)
@@ -114,9 +114,9 @@ Options :
    -t   to run an interactive script (useful if you have differents analysis to do)
 
 Examples :
-   ./run.sh -a  https://github.com/Homebrew/install 
+   ./run -a  https://github.com/Homebrew/install 
         to run an advanced analysis on homebrew-install repository
-   ./run.sh -s . 
+   ./run -s . 
         to run a simple analysis on this repository
 
 Remarks :
@@ -130,10 +130,14 @@ Authors :
 
 
  
-####Errors
+#### Errors
+
 To properly run this tool, you should have :
 - make sure there is no space in the pathname of the visulog directory.
 - set a default browser
+- allow this application to write files
+- 
+  
+If you didn't already cloned the concerned git repository :
 - have an internet connexion
 - as wrote above, running this tool on a public github/gitlab project
-- allow this application to write files
