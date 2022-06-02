@@ -1,0 +1,64 @@
+body{
+    background-color: #DFD4E4;
+	font-family: monospace;
+}
+
+
+.title {
+  background-color: #B29DBA;
+  text-align: center;
+  height: 110px;
+}
+
+div{
+    background-color:#D9C9DF;
+    text-align: center;
+}
+
+table{
+    margin:auto;
+}
+h1
+{
+	font-size: 20px;
+	text-decoration: underline;
+}
+
+p
+{
+	text-decoration: underline;
+}
+
+td:not(#commitsPerAuthor td) {
+  text-align: center;
+  vertical-align: middle;
+  width:100px;
+}
+
+
+#commitsPerAuthor{
+    margin:auto;
+    table-layout:fixed;
+}
+
+#commitsPerAuthor td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+#commitsPerAuthorValue {
+    text-align: center;
+    width:120px;
+}
+
+tr:hover
+{
+	background-color : #C7BCCB;
+}
+#showDiv1, #showDiv2, #showDiv3, #showDiv4, #showDiv5, #showDiv6, #showDiv1SousPartie,#showDiv2SousPartie,#showDiv4SousPartie{
+    display: none
+
+}
+#err{
+    color: red;
+}
